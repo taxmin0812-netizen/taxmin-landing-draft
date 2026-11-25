@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<!-- 링크 미리보기(배너 원본 _도구/og_banner.html · 뽑기 _도구/render_og.py). 진짜 주소로 옮기면 아래 주소도 바꿀 것 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="택스민">
+<meta property="og:title" content="택스민 | 필요한 것만 고르는 기장 서비스">
+<meta property="og:description" content="자동차 옵션 고르듯, 필요한 것만 콕. 기본 4가지에 필요한 서비스만 더해 우리 가게 기장료를 바로 확인하세요.">
+<meta property="og:url" content="https://taxmin0812-netizen.github.io/taxmin-landing-draft/">
+<meta property="og:image" content="https://taxmin0812-netizen.github.io/taxmin-landing-draft/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TAXMIN 자동차 옵션 고르듯, 필요한 것만 콕. 견적서 예시 월 5만원">
+<meta name="twitter:card" content="summary_large_image">
 <title>택스민 | 필요한 것만 고르는 기장 서비스</title>
 <meta name="description" content="자동차 옵션 고르듯, 필요한 것만 콕. 쓰지 않는 서비스는 빼고 기장료를 정하는 택스민.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +81,7 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .quote{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
 .quote li{display:grid;grid-template-columns:1fr auto 34px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px}
 .quote li em{font:600 12px Manrope,var(--font);font-style:normal;color:#9DB4FF}
-.quote li:nth-child(-n+2) em{color:#6F7A8C}
+.quote li:first-child em{color:#6F7A8C}
 .quote li.cut span,.quote li.cut em{color:#5E6A7D;text-decoration:line-through}
 .quote .tg{width:30px;height:18px;border:0;border-radius:9px;background:#2554F0;position:relative;transition:background .25s}
 .quote .tg::after{content:"";position:absolute;top:2px;left:14px;width:14px;height:14px;border-radius:50%;background:#fff;transform:none;transition:left .25s}
@@ -132,10 +143,21 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .grid4 h3{font-size:20px;font-weight:600;line-height:1.35;letter-spacing:-.02em;color:var(--ink-2)}
 .grid4 p{font-size:15px;color:var(--sub);margin-top:12px;line-height:1.7}
 
-/* 4 견적 이야기(슬라이드) */
-.story{background:var(--black);color:#fff;padding:120px 0 112px;overflow:hidden}
-.st-in{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
-.board{touch-action:pan-y}
+/* 4 견적 이야기(옆으로 넘기는 카드) */
+.story{background:var(--black);color:#fff;padding:120px 0 96px;overflow:hidden;--edge:max(var(--pad),calc((100% - var(--w))/2 + var(--pad)))}
+.st-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px}
+.st-hd h2{font-size:clamp(30px,3.4vw,48px);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.st-hd p{color:var(--black-sub);font-size:14px;white-space:nowrap}
+.st-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:4px var(--edge) 24px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.28) transparent;cursor:grab;overscroll-behavior-x:contain}
+.st-track::after{content:"";flex:0 0 calc(100% - min(1040px,86%) - 24px)}
+.st-track.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.st-slide{flex:0 0 min(1040px,86%);scroll-snap-align:start;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center;border:1px solid var(--black-line);border-radius:16px;padding:40px 44px;background:rgba(255,255,255,.025);opacity:.4;transition:opacity .45s}
+.st-slide.on{opacity:1}
+.st-slide .board{border:0;padding:0;background:none;border-radius:0}
+.st-slide .cap small{display:block;font-size:15px;font-weight:600;color:var(--blue-on-dark);margin-bottom:12px}
+.st-slide .cap h3{font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.4;letter-spacing:-.02em}
+.st-slide .cap h3 em{font-style:normal;color:var(--blue-on-dark)}
+.st-slide .cap p{font-size:15px;color:var(--black-sub);line-height:1.75;margin-top:14px}
 .board{width:100%;border:1px solid var(--black-line);border-radius:14px;padding:22px 26px;background:rgba(255,255,255,.02);font-size:14px}
 .bd-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--black-line);color:var(--black-sub);font-size:13px}
 .bd-h b{color:#fff;font-size:15px;font-weight:600}
@@ -162,25 +184,6 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .saved{color:var(--save);font-weight:700;font-size:15px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s;text-align:right}
 .saved.on{opacity:1;transform:none}
 .saved i{display:block;font-style:normal;font-weight:500;font-size:12px;color:var(--black-sub)}
-.cap{min-height:236px}
-.cap-in{animation:capIn .55s cubic-bezier(.2,.7,.2,1)}
-.cap-in.back{animation-name:capBack}
-@keyframes capIn{from{opacity:0;transform:translateX(40px)}}
-@keyframes capBack{from{opacity:0;transform:translateX(-40px)}}
-.cap small{display:block;font-size:15px;font-weight:600;color:#fff;margin-bottom:10px}
-.cap h2{font-size:clamp(24px,2.2vw,32px);font-weight:600;line-height:1.4;letter-spacing:-.02em}
-.cap h2 em{font-style:normal;color:var(--blue-on-dark)}
-.cap p{font-size:15px;color:var(--black-sub);line-height:1.75;margin-top:16px}
-.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px}
-.peek button{text-align:left;font-size:13px;line-height:1.45;color:var(--black-sub);padding-top:10px;border-top:1px solid var(--black-line)}
-.peek button[aria-current=step]{color:#fff;border-top:2px solid var(--blue-on-dark);padding-top:9px}
-.ctl{display:flex;align-items:center;gap:12px;margin-top:32px}
-.arw{width:48px;height:48px;border-radius:50%;border:1px solid var(--black-line);display:grid;place-items:center;color:#fff;transition:background .2s,border-color .2s}
-.arw svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.arw.next{background:#fff;color:var(--ink);border-color:#fff}
-.pips{font:600 15px Manrope,sans-serif;color:var(--black-sub);margin:0 4px 0 8px;font-variant-numeric:tabular-nums}
-.pips b{color:#fff}
-.ctl .pz{margin-left:auto}
 
 /* 5 약속 3단 */
 .promise{padding:180px 0 160px}
@@ -193,7 +196,7 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .models-sec{padding:160px 0;background:#F6F7F9}
 .center{text-align:center}
 .center .lead{font-size:17px;color:var(--sub);margin:24px auto 0;max-width:560px}
-.tabs{display:flex;justify-content:center;gap:36px;margin-top:56px;flex-wrap:wrap}
+.tabs{display:flex;justify-content:center;gap:12px 32px;margin-top:56px;flex-wrap:wrap}
 .tabs button{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:var(--mute);padding:6px 0}
 .tabs button::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:transparent;transition:background .2s}
 .tabs button[aria-selected=true]{color:var(--ink)}
@@ -215,7 +218,7 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .slip ul{list-style:none;padding:6px 0}
 .slip li{display:flex;justify-content:space-between;gap:12px;font-size:16px;color:var(--sub);padding:12px 0}
 .slip li em{font-style:normal;color:var(--ink);font-weight:600;white-space:nowrap}
-.slip li.o em{color:var(--blue)}
+.slip li em{color:var(--blue)}
 .slip-t{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--ink);padding-top:16px;font-size:14px;color:var(--sub)}
 .slip-t b{font-family:Manrope,"Pretendard Variable",sans-serif;font-size:52px;font-weight:700;color:var(--ink);letter-spacing:-.03em;line-height:1;border-bottom:4px double var(--ink);padding-bottom:4px}
 .slip-t b small{font-family:var(--font);font-size:17px;font-weight:600;margin-left:3px}
@@ -233,21 +236,43 @@ summary::after{content:"";position:absolute;right:6px;top:24px;width:8px;height:
 details[open] summary::after{transform:rotate(-135deg);top:28px}
 details p{padding:0 0 18px;font-size:15px;color:var(--sub);line-height:1.75}
 
+/* 연락처 남기기 창 */
+.ldg{border:0;padding:0;margin:auto;width:min(440px,calc(100% - 32px));max-height:calc(100svh - 32px);border-radius:12px;background:#fff;color:#020617;box-shadow:0 24px 64px rgba(2,6,23,.22)}
+.ldg::backdrop{background:rgba(2,6,23,.5)}
+.ldg form{padding:28px 28px 24px;display:grid;gap:14px;font-family:"Manrope","Pretendard Variable",Pretendard,system-ui,sans-serif}
+.ldg h2{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.ldg .lead-s{font-size:14px;color:#5B6270;margin-top:-6px;line-height:1.6}
+.ldg label{display:grid;gap:6px;font-size:14px;font-weight:600;color:#191B1F}
+.ldg input:not([type=checkbox]),.ldg select{height:46px;border:1px solid #D5D9E0;border-radius:8px;padding:0 12px;font:inherit;font-weight:500;color:#020617;background:#fff}
+.ldg input:focus-visible,.ldg select:focus-visible{outline:2px solid #2554F0;outline-offset:1px;border-color:#2554F0}
+.ldg .agree{grid-template-columns:20px 1fr;align-items:start;font-weight:500;line-height:1.5}
+.ldg .agree input{width:18px;height:18px;margin-top:2px;accent-color:#2554F0}
+.ldg .agree small{display:block;font-size:12px;color:#646B77;margin-top:4px}
+.ldg .lead-sum{font-size:12px;color:#646B77;border-top:1px dashed #CDD2DA;padding-top:10px}
+.ldg .lead-sum:empty{display:none}
+.ldg .lead-msg{font-size:14px;font-weight:600;color:#C2410C;line-height:1.55}
+.ldg .lead-b{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:4px}
+.ldg .lead-b button,.ldg .lead-b a{height:48px;border-radius:6px;font:inherit;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.ldg .b-line{background:#fff;color:#020617;border:0;box-shadow:inset 0 0 0 1px #C9CED6}
+.ldg .b-fill{background:#2554F0;color:#fff;border:0}
+
 /* 8 바닥 */
 .end{background:var(--black);color:#fff;padding:140px 0 120px;text-align:center}
 .end h2{font-size:clamp(30px,3.4vw,48px);font-weight:600;letter-spacing:-.02em;line-height:1.3}
 .end h2 em{font-style:normal;color:var(--blue-on-dark)}
-.end .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700;margin-top:40px}
-.end .alt{display:block;margin-top:18px;font-size:14px;color:var(--black-sub);text-decoration:underline;text-underline-offset:3px}
+.end-b{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:40px}
+.end .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700}
+.end .go2{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);color:#fff;font-weight:700;transition:background .2s}
+.end .alt{margin-top:18px;font-size:14px;color:var(--black-sub)}
 footer{background:#020304;color:rgba(255,255,255,.55);font-size:13px;padding:32px 0}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a{text-decoration:underline}
 
 @media (hover:hover){
 .hero .go:hover{background:#1B44D6}
-.arw:hover{border-color:rgba(255,255,255,.5)}
-.arw.next:hover{background:#DDE3F0}
+.st-slide:not(.on):hover{opacity:.6}
 .panel .btn:hover{background:#1c2333}
+.end .go2:hover{background:rgba(255,255,255,.08)}
 }
 @media (max-width:1024px){
   :root{--pad:28px}
@@ -256,8 +281,7 @@ footer a{text-decoration:underline}
   .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
   .faq .wrap{grid-template-columns:1fr 1fr}
   .faq .intro{grid-column:1/-1}
-  .st-in{grid-template-columns:1fr;gap:40px}
-  .cap{min-height:0}
+  .st-slide{grid-template-columns:1fr;gap:28px}
 }
 @media (max-width:640px){
   :root{--pad:20px}
@@ -266,7 +290,11 @@ footer a{text-decoration:underline}
   .grid4{grid-template-columns:1fr;gap:40px}
   .board{padding:16px;font-size:13px}
   .bd-h span{display:none}
-  .story{padding:88px 0 80px}
+  .story{padding:88px 0 72px}
+  .st-hd{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:28px}
+  .st-slide{flex-basis:88%;padding:24px 20px}
+  .st-track{gap:12px}
+  .st-track::after{flex-basis:calc(12% - 12px)}
   .models{padding:12px 0}
   .models span{padding:8px 2px;font-size:12px}
   .models span i{display:none}
@@ -287,7 +315,7 @@ footer a{text-decoration:underline}
   .faq .wrap{grid-template-columns:1fr;gap:40px}
   .faq .big{font-size:44px}
 }
-@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}.cap-in{animation:none}}
+@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}}
 </style>
 </head>
 <body>
@@ -328,12 +356,11 @@ footer a{text-decoration:underline}
         <p class="pt">내 기장 견적<span>음식점·카페 · 개인</span></p>
         <ul>
           <li><span>기본 4가지 · 장부·부가세·담당자·세무사</span><em>4만원</em></li>
-          <li><span>사업 규모 · 일반 개인</span><em>+1만원</em></li>
           <li><span>월별 매출 보고서</span><em>0원</em><i class="tg"></i></li>
           <li id="cutrow2"><span>인건비 신고 (4대보험 포함)</span><em>+1만원</em><i class="tg" id="cuttg2"></i></li>
           <li id="cutrow"><span>공동사업장</span><em>+1만원</em><i class="tg" id="cuttg"></i></li>
         </ul>
-        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">7</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
+        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">6</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
       </div>
       <div class="pn bars">
         <p class="pt">월별 매출<span>2026년</span></p>
@@ -381,26 +408,10 @@ footer a{text-decoration:underline}
 </section>
 
 
-<!-- 4 견적 이야기(슬라이드) -->
+<!-- 4 견적 이야기(옆으로 넘기는 카드) -->
 <section class="story" id="story" aria-labelledby="st-h">
-  <h2 class="sr-only" id="st-h">택스민 견적이 정해지는 과정</h2>
-  <div class="wrap st-in">
-    <div class="board" id="board" aria-hidden="true">
-      <div class="bd-h"><b>우리 가게 기장 견적</b><span>음식점·카페 · 개인사업자</span></div>
-      <ul class="rows" id="rows"></ul>
-      <div class="bd-f"><div><p class="k">예상 월 기장료 · 부가세 별도</p><p class="total" id="total">5<small>만원</small></p></div><p class="saved" id="saved">같은 서비스, 월 2만원 줄었어요<i>예시 계산</i></p></div>
-    </div>
-    <div class="st-r">
-      <div class="cap" id="cap" aria-hidden="true"></div>
-      <div class="peek" id="peek"></div>
-      <div class="ctl">
-        <button type="button" class="arw" id="prev" aria-label="이전 장면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button type="button" class="arw next" id="next" aria-label="다음 장면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-        <p class="pips" id="pips" aria-hidden="true"></p>
-        <button type="button" class="pz" id="stpz" aria-label="자동 넘김 멈추기"></button>
-      </div>
-    </div>
-  </div>
+  <div class="wrap st-hd"><h2 id="st-h">기장료는 이렇게 정해져요.</h2><p aria-hidden="true">옆으로 밀어서 넘겨 보세요</p></div>
+  <div class="st-track" id="track" tabindex="0" role="region" aria-labelledby="st-h"></div>
 </section>
 
 <!-- 5 약속 -->
@@ -415,14 +426,14 @@ footer a{text-decoration:underline}
   </div>
 </section>
 
-<!-- 6 모델 -->
+<!-- 6 이런 사장님께 -->
 <section class="models-sec" aria-labelledby="m-h">
   <div class="wrap">
     <div class="center">
-      <h2 class="big" id="m-h">우리 가게에 맞는<br>모델을 고르세요.</h2>
-      <p class="lead">모든 모델은 기본 4만원에서 시작하고, 작년 매출과 사업자 형태에 따라 사업 규모 금액이 더해져요. 필요한 서비스만 더하면 됩니다.</p>
+      <h2 class="big" id="m-h">이런 사장님께<br>잘 맞아요.</h2>
+      <p class="lead">우리 가게 상황을 고르면, 무엇을 챙겨 드리고 견적에서 무엇을 고르면 되는지 보여 드려요.</p>
     </div>
-    <div class="tabs" role="tablist" aria-label="모델" id="tabs"></div>
+    <div class="tabs" role="tablist" aria-label="사장님 상황" id="tabs"></div>
     <div class="panel" role="tabpanel" id="panel"></div>
   </div>
 </section>
@@ -432,11 +443,12 @@ footer a{text-decoration:underline}
   <div class="wrap">
     <div class="intro"><h2 class="big" id="f-h">FAQ</h2><p>견적부터 시작까지,<br>자주 묻는 것만 모았어요.</p></div>
     <div>
-      <h3>기장료와 모델</h3>
+      <h3>기장료와 서비스</h3>
       <details><summary>견적 금액이 실제 기장료와 같나요?</summary><p>예상 금액이에요. 장부 양이나 업종 특성에 따라 상담 때 달라질 수 있고, 달라지면 까닭을 먼저 말씀드려요. 모든 금액은 부가세 별도예요.</p></details>
-      <details><summary>모델은 어떻게 정해지나요?</summary><p>모든 견적은 기본 4만원에서 시작해요. 개인사업자는 작년 매출이 업종 기본 구간 이하면 택스민 라이트(+1만원, 월 5만원부터), 넘으면 택스민(+3만원, 월 7만원부터)이에요. 법인은 택스민 법인(+6만원, 월 10만원부터)이에요.</p></details>
-      <details><summary>한 번 모델을 고르면 끝나나요?</summary><p>아니요. AI가 매달 매출을 모아 연말 매출을 예상하고, 복식부기 의무나 성실신고 확인 기준에 가까워지면 담당자가 먼저 확인해요. 달라지는 의무와 절세 방법, 법인 전환까지 세무사가 설명하고, 사장님이 동의하신 경우에만 서비스와 기장료를 바꿔요.</p></details>
+      <details><summary>기장료는 어떻게 정해지나요?</summary><p>기본은 월 4만원이에요(장부·부가세 신고·전담 담당자·세무사 상담). 작년 매출이 업종 기본 구간을 넘은 개인사업자는 3만원, 법인은 6만원이 더해지고, 월별 매출 보고서·인건비 신고 같은 서비스는 필요한 것만 더하면 돼요.</p></details>
+      <details><summary>한 번 정한 기장료로 끝나나요?</summary><p>아니요. AI가 매달 매출을 모아 연말 매출을 예상하고, 복식부기 의무나 성실신고 확인 기준에 가까워지면 담당자가 먼저 확인해요. 달라지는 의무와 절세 방법, 법인 전환까지 세무사가 설명하고, 사장님이 동의하신 경우에만 서비스와 기장료를 바꿔요.</p></details>
       <details><summary>종합소득세·법인세 신고도 해 주나요?</summary><p>네. 신고 수수료는 기장료와 따로이고, 신고 전에 금액을 먼저 알려 드려요.</p></details>
+      <details><summary>기장 말고 증여·상속, 법무·노무도 물어볼 수 있나요?</summary><p>네. 증여·상속은 세무사가 직접 상담하고, 등기·계약 같은 법무와 근로계약·분쟁 같은 노무는 법무사·변호사·노무사를 연결해 드려요. 비용은 일마다 따로이고, 상담 때 먼저 알려 드려요.</p></details>
       <details><summary>중간에 직원이 늘면 어떻게 되나요?</summary><p>인건비 신고(4대보험 포함)는 직원 5명까지 월 1만원이고, 6명부터는 상담 때 정해요. 바뀌는 달 전에 금액을 먼저 알려 드려요.</p></details>
     </div>
     <div>
@@ -452,55 +464,73 @@ footer a{text-decoration:underline}
 <section class="end" aria-labelledby="e-h">
   <div class="wrap">
     <h2 id="e-h">필요 없는 비용은 빼고,<br><em>필요한 관리</em>만 받으세요.</h2>
-    <a class="go" href="build.html">내 기장 견적 내기</a>
-    <a class="alt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡으로 먼저 물어보기 · 평일 10:00~17:30</a>
+    <div class="end-b">
+      <a class="go" href="build.html">내 기장 견적 내기</a>
+      <a class="go2" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡으로 상담받기</a>
+      <button type="button" class="go2" data-lead>연락처 남기기</button>
+    </div>
+    <p class="alt">상담은 평일 10:00~17:30, 카톡과 전화로 해요.</p>
   </div>
 </section>
 </main>
 
 <footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(대표세무사)</span><span>개인정보처리방침(준비 중)</span></div></footer>
 
+<!-- shortcut: 접수 연결 전 시안 — '남기기'를 눌러도 아무 곳에도 보내지 않고 안내만 함. 받는 곳(메일·구글 시트)이 정해지면 submit 에서 보내기 -->
+<dialog class="ldg" id="lead" aria-labelledby="lead-h">
+  <form id="leadf" novalidate>
+    <h2 id="lead-h">연락처 남기기</h2>
+    <p class="lead-s">남겨 주시면 평일 10:00~17:30 사이에 먼저 연락드려요.</p>
+    <label>이름 또는 상호<input name="name" autocomplete="name" required></label>
+    <label>연락처<input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required pattern="[0-9\- ]{9,14}"></label>
+    <label>편한 연락 시간<select name="when"><option>언제든 괜찮아요</option><option>오전(10~12시)</option><option>오후(13~17시)</option></select></label>
+    <label class="agree"><input type="checkbox" name="agree" required><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간 · 쓰는 곳: 상담 연락 · 보관: 상담이 끝나면 지움 · 동의하지 않으셔도 카톡으로 상담받을 수 있어요</small></span></label>
+    <p class="lead-sum"></p>
+    <p class="lead-msg" role="status" aria-live="polite"></p>
+    <div class="lead-b"><button type="button" class="b-line" data-close>닫기</button><button type="submit" class="b-fill">남기기</button></div>
+  </form>
+</dialog>
+
 <script>
 // 견적판 예시 — build.html 기준과 같은 숫자(만원/월, 부가세 별도):
-// 기본 4 + 사업 규모(일반 개인) 1 = 5 → 보고서 0 · 인건비 1 · 공동사업장 1 을 더하면 7 → 인건비·공동사업장을 빼면 5 (정확히 2만원)
+// 기본 4(일반 개인은 사업 규모 금액 없음) → 보고서 0 · 인건비 1 · 공동사업장 1 을 더하면 6 → 인건비·공동사업장을 빼면 4 (정확히 2만원)
 const ROWS = [
   {n:'기본 4가지 · 장부·부가세·담당자·세무사', v:4, lock:true, first:true},
-  {n:'사업 규모 · 일반 개인', v:1, lock:true},
   {n:'월별 매출 보고서', v:0},
   {n:'인건비 신고 (4대보험 포함)', v:1, cut:true},
   {n:'공동사업장', v:1, cut:true},
   {n:'종합소득세 신고', p:'수수료 별도', lock:true},
 ];
-const BASE = 5, FULL = ROWS.reduce((s,r)=>s+(r.v||0),0);
-console.assert(FULL===7 && FULL-2===BASE, '예시 7만원 → 5만원');
+const BASE = 4, FULL = ROWS.reduce((s,r)=>s+(r.v||0),0);
+console.assert(FULL===6 && FULL-2===BASE, '예시 6만원 → 4만원');
 const $ = id => document.getElementById(id);
-$('rows').innerHTML = ROWS.map(r=>`<li><span class="n">${r.n}</span><span class="tg ${r.lock?'lock':'on'}"></span><span class="p">${r.first ? r.v+'만원' : r.v ? '+'+r.v+'만원' : r.v===0 ? '0원' : r.p}</span></li>`).join('');
 
 const CAPS = [
-  {s:'기본 4만원에서 시작', h:'모든 견적은 <em>기본 4만원</em>에서 시작합니다.', p:'장부·부가세 신고·전담 담당자·세무사 상담 네 가지가 기본이에요. 음식점·카페 개인사업자로 작년 매출이 기본 구간 이하라면 사업 규모 1만원을 더해 월 5만원이에요.'},
+  {s:'기본 4만원에서 시작', h:'모든 견적은 <em>기본 4만원</em>에서 시작합니다.', p:'장부·부가세 신고·전담 담당자·세무사 상담 네 가지가 기본이에요. 작년 매출이 업종 기본 구간 이하인 개인사업자는 더 붙는 금액 없이 월 4만원이에요.'},
   {s:'옵션을 콕 고릅니다', h:'자동차 옵션처럼, <em>필요한 것만</em> 더합니다.', p:'월별 매출 보고서는 0원이에요. 직원이 있으면 인건비 신고(4대보험 포함), 대표가 둘 이상이면 공동사업장을 더해요.'},
   {s:'같은 서비스, 낮아진 기장료', h:'필요 없는 옵션을 뺐더니 <em>기장료가 2만원 줄었어요.</em>', p:'직원 없이 혼자 하는 가게라면 인건비·공동사업장은 빼면 돼요. 장부와 신고, 담당자와 세무사 검수는 그대로예요. 위 금액은 예시 계산이며 모든 금액은 부가세 별도입니다.'},
 ];
-$('st-h').insertAdjacentHTML('afterend', '<ol class="sr-only">' + CAPS.map((c,i)=>`<li><h3>0${i+1} · ${c.s}</h3><p>${c.h.replace(/<\/?em>/g,'')} ${c.p}</p></li>`).join('') + '</ol>');
-$('peek').innerHTML = CAPS.map((c,i)=>`<button type="button" data-i="${i}">0${i+1} ${c.s}</button>`).join('');
-const rowsEl = [...$('rows').children], peekEl = [...$('peek').children];
-const totalEl = $('total');
-function setStep(s){
+const boardHTML = () => `<div class="board" aria-hidden="true">
+  <div class="bd-h"><b>우리 가게 기장 견적</b><span>음식점·카페 · 개인사업자</span></div>
+  <ul class="rows">${ROWS.map(r=>`<li><span class="n">${r.n}</span><span class="tg ${r.lock?'lock':'on'}"></span><span class="p">${r.first ? r.v+'만원' : r.v ? '+'+r.v+'만원' : r.v===0 ? '0원' : r.p}</span></li>`).join('')}</ul>
+  <div class="bd-f"><div><p class="k">예상 월 기장료 · 부가세 별도</p><p class="total">${BASE}<small>만원</small></p></div><p class="saved">같은 서비스, 월 2만원 줄었어요<i>예시 계산</i></p></div></div>`;
+$('track').innerHTML = CAPS.map((c,i)=>`<article class="st-slide" aria-label="3장 가운데 ${i+1}장"><div class="cap"><small>${c.s}</small><h3>${c.h}</h3><p>${c.p}</p></div>${boardHTML()}</article>`).join('');
+// 카드 한 장의 견적판을 s 단계로 그림(0 기본만 · 1 옵션 켬 · 2 둘 끔)
+function setStep(card, s){
   const opt = s>=1, cut = s>=2;
-  rowsEl.forEach((li,i)=>{ const r = ROWS[i];
+  [...card.querySelectorAll('.rows li')].forEach((li,i)=>{ const r = ROWS[i];
     li.classList.toggle('dim', !r.lock && !opt);
     if (r.cut) li.classList.toggle('off', cut);
     if (!r.lock) li.querySelector('.tg').classList.toggle('on', opt && !(r.cut && cut)); });
-  const tv = (!opt ? BASE : cut ? FULL-2 : FULL) + '<small>만원</small>';
-  if (totalEl.innerHTML !== tv) totalEl.innerHTML = tv;
-  $('saved').classList.toggle('on', cut);
+  card.querySelector('.total').innerHTML = (!opt ? BASE : cut ? FULL-2 : FULL) + '<small>만원</small>';
+  card.querySelector('.saved').classList.toggle('on', cut);
 }
 
 const hd = $('hd');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (() => {
 // 첫 화면: 두 장면이 번갈아 나옴.
-// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 공동사업장·인건비를 꺼서 기장료 7→5만원)
+// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 공동사업장·인건비를 꺼서 기장료 6→4만원)
 // ② 뒤 = 상담 실사 영상(Pexels 7844855, 무료 사용 허락) 어둡게
 // 모든 움직임은 장면 시계(elapsed) 하나로 그림 — 멈춤 단추를 누르면 시계가 서서 다 같이 멈춤
 const hero = document.querySelector('.hero'), dash = $('dash'), vid = $('vid');
@@ -548,7 +578,7 @@ function drawDash(t){
   const cut = t > 4300;
   cutTg.classList.toggle('off', cut); cutRow.classList.toggle('cut', cut);
   cutTg2.classList.toggle('off', c2); cutRow2.classList.toggle('cut', c2);
-  const q = String(Math.round(7 - eo((t - 4350)/400) - eo((t - 5250)/400))); if (qn.textContent !== q) qn.textContent = q;
+  const q = String(Math.round(6 - eo((t - 4350)/400) - eo((t - 5250)/400))); if (qn.textContent !== q) qn.textContent = q;
   qsave.classList.toggle('on', t > 5700);
 }
 function frame(now){
@@ -589,75 +619,80 @@ layout();
 console.assert(eio(0) === 0 && eio(1) === 1 && eo(1) === 1, '모션 곡선 끝값');
 })();
 
-// 견적 이야기 슬라이드: 화살표·장면 이름·밀어 넘기기, 화면에 보이면 6초마다 저절로 넘어감(멈춤 단추로 끔)
+// 견적 이야기: 카드 세 장을 옆으로 밀어 넘김(손가락·트랙패드·마우스 끌기·키보드 화살표), 저절로 넘어가지 않음
 (() => {
-  let cur = -1, timer = 0, inView = false, stPaused = reduce, cutT = 0, hov = false, foc = false;
-  const pz = $('stpz');
-  function go(i, dir){
-    i = (i + 3) % 3; if (i === cur) return;
-    const back = dir < 0, from = cur; cur = i;
-    const c = CAPS[i];
-    $('cap').innerHTML = `<div class="cap-in${back ? ' back' : ''}"><small>0${i+1} · ${c.s}</small><h2>${c.h}</h2><p>${c.p}</p></div>`;
-    $('pips').innerHTML = `<b>0${i+1}</b> / 03`;
-    peekEl.forEach((b,j)=> b.setAttribute('aria-current', j===i ? 'step' : 'false'));
-    clearTimeout(cutT);
-    if (i === 2 && from === 1 && !reduce){ setStep(1); cutT = setTimeout(()=> setStep(2), 500); } // 켜진 옵션이 꺼지는 순간을 보여 줌
-    else setStep(i);
-    arm();
-  }
-  function arm(){ clearTimeout(timer); if (inView && !stPaused && !hov && !foc) timer = setTimeout(()=> go(cur + 1, 1), 6000); }
-  function setP(v){ stPaused = v; pz.classList.toggle('play', v); pz.setAttribute('aria-label', v ? '자동 넘김 다시 켜기' : '자동 넘김 멈추기'); arm(); }
-  $('prev').addEventListener('click', ()=> go(cur - 1, -1));
-  $('next').addEventListener('click', ()=> go(cur + 1, 1));
-  $('peek').addEventListener('click', e=>{ const b = e.target.closest('button'); if (b) go(+b.dataset.i, +b.dataset.i - cur); });
-  pz.addEventListener('click', ()=> setP(!stPaused));
-  pz.hidden = reduce;
-  // 손가락으로 밀어 넘기기
-  let x0 = null;
-  const bd = $('board');
-  bd.addEventListener('pointerdown', e=>{ x0 = e.clientX; });
-  bd.addEventListener('pointerup', e=>{ if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); });
-  // 마우스를 올리거나 키보드로 들어오면 잠깐 멈춤
-  const sec = $('story');
-  sec.addEventListener('pointerenter', e=>{ if (e.pointerType === 'mouse'){ hov = true; clearTimeout(timer); } });
-  sec.addEventListener('pointerleave', e=>{ if (e.pointerType === 'mouse'){ hov = false; arm(); } });
-  sec.addEventListener('focusin', ()=>{ foc = true; clearTimeout(timer); });
-  sec.addEventListener('focusout', e=>{ if (!sec.contains(e.relatedTarget)){ foc = false; arm(); } });
-  new IntersectionObserver(([e])=>{ inView = e.isIntersecting; if (inView) arm(); else clearTimeout(timer); }, {threshold:.45}).observe(sec);
-  setP(stPaused);
-  go(0, 1);
+  const track = $('track'), cards = [...track.children];
+  let cutT = 0;
+  cards.forEach((c,i)=> setStep(c, i===2 ? 1 : i));
+  const io = new IntersectionObserver(es=> es.forEach(e=>{
+    const c = e.target, i = cards.indexOf(c), on = e.intersectionRatio >= .6;
+    if (on === c.classList.contains('on')) return;
+    c.classList.toggle('on', on);
+    if (i === 2){ clearTimeout(cutT); setStep(c, 1); if (on) cutT = setTimeout(()=> setStep(c, 2), reduce ? 0 : 600); } // 켜진 옵션이 꺼지는 순간을 보여 줌
+  }), {root: track, threshold: [0, .6]});
+  cards.forEach(c=> io.observe(c));
+  const go = i => { const c = cards[Math.max(0, Math.min(cards.length - 1, i))]; track.scrollTo({left: c.offsetLeft - cards[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth'}); };
+  const nowIdx = () => Math.round(track.scrollLeft / (cards[1].offsetLeft - cards[0].offsetLeft));
+  // 마우스로 끌어 넘기기
+  let x0 = null, s0 = 0, moved = false;
+  track.addEventListener('pointerdown', e=>{ if (e.pointerType !== 'mouse' || e.button !== 0) return; x0 = e.clientX; s0 = track.scrollLeft; moved = false; });
+  addEventListener('pointermove', e=>{ if (x0 === null) return; const dx = e.clientX - x0; if (!moved && Math.abs(dx) > 5){ moved = true; track.classList.add('drag'); } if (moved) track.scrollLeft = s0 - dx; });
+  addEventListener('pointerup', e=>{ if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (!moved) return;
+    track.classList.remove('drag'); const base = Math.round(s0 / (cards[1].offsetLeft - cards[0].offsetLeft));
+    go(Math.abs(dx) > 60 ? base + (dx < 0 ? 1 : -1) : base); });
+  // 끌고 난 뒤의 클릭은 무시, 옆 카드를 누르면 그 카드로
+  track.addEventListener('click', e=>{ if (moved){ e.preventDefault(); moved = false; return; } const c = e.target.closest('.st-slide'); if (c && !c.classList.contains('on')) go(cards.indexOf(c)); });
 })();
 
-// 모델 탭
-const BASIC4 = [['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['전담 담당자','기본'],['세무사 직접 상담·답변 검수','기본']];
-const ADDS = co => [['월별 매출 보고서','0원 · 선택'],['인건비 신고 (4대보험 포함)','+1만원 · 5명까지'], ...(co ? [['공동사업장','+1만원 · 선택']] : [])];
-const MODELS = [
-  {k:'lite', name:'택스민 라이트', tag:'BEST · 많이 선택한 통합형 기장 서비스', who:'작년 매출이 업종 기본 구간 이하인 개인사업자', size:['일반 개인',1],
-   inc:[...BASIC4, ...ADDS(true), ['종합소득세 신고','수수료 별도',1]]},
-  {k:'std', name:'택스민', tag:'매출이 커진 가게', who:'작년 매출이 업종 기본 구간을 넘은 개인사업자', size:['매출 큰 개인',3],
-   inc:[...BASIC4, ...ADDS(true), ['종합소득세 신고','수수료 별도',1]]},
-  {k:'corp', name:'택스민 법인', tag:'법인사업자', who:'법인사업자 · 장부와 거래량을 보고 상담 때 확정', size:['법인',6],
-   inc:[['법인 장부','기본'], ...BASIC4.slice(1), ...ADDS(false), ['법인세 신고','수수료 별도',1]]},
+// 이런 사장님께(탭) — 금액 대신 누구에게 맞는지, 견적에서 무엇을 고르면 되는지
+const FITS = [
+  {k:'new', tab:'새로 연 가게', tag:'올해 시작 · 혼자 운영', h:'이제 막 문을 연 사장님', who:'장부도 신고도 처음이라 무엇부터 챙길지 막막하다면, 기본 4가지로 시작하세요. 첫 부가세 신고부터 담당자가 함께 챙겨요.',
+   inc:[['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['전담 담당자 · 세무사 상담','기본'],['월별 매출 보고서','선택']],
+   pick:[['사업자 형태','개인'],['작년 매출','올해 시작'],['서비스 추가','월별 매출 보고서']]},
+  {k:'staff', tab:'직원이 있는 가게', tag:'알바·직원 1~5명', h:'직원 월급 신고까지 맡기고 싶은 사장님', who:'매달 월급 신고와 4대보험 신고를 장부와 함께 챙겨요. 직원이 들어오고 나갈 때도 담당자가 먼저 챙겨요.',
+   inc:[['기본 4가지 (장부·부가세·담당자·세무사)','기본'],['인건비 신고 (4대보험 포함)','선택'],['월별 매출 보고서','선택']],
+   pick:[['사업자 형태','개인'],['작년 매출','1억~3억'],['서비스 추가','인건비 신고 · 5명까지']]},
+  {k:'big', tab:'매출이 커진 가게', tag:'매출이 업종 기본 구간을 넘은 개인', h:'장부 양이 늘고 신고가 복잡해진 사장님', who:'AI가 매달 매출을 지켜보고, 복식부기나 성실신고 같은 의무가 바뀌기 전에 먼저 알려 드려요. 법인 전환이 필요한지도 세무사가 설명해요.',
+   inc:[['기본 4가지 (장부·부가세·담당자·세무사)','기본'],['AI 매출 모니터링 · 구간 알림','기본'],['세무사 직접 담당','선택']],
+   pick:[['사업자 형태','개인'],['작년 매출','5억~10억'],['서비스 추가','세무사 직접 담당']]},
+  {k:'corp', tab:'법인 대표님', tag:'법인사업자', h:'법인 장부와 법인세를 챙겨야 하는 대표님', who:'법인 장부·부가세·직원 신고를 한 담당자가 챙기고, 법인세 신고는 신고 전에 금액을 먼저 알려 드려요.',
+   inc:[['법인 장부','기본'],['부가가치세 신고','기본'],['인건비 신고 (4대보험 포함)','선택'],['법인세 신고','신고 전 안내',1]],
+   pick:[['사업자 형태','법인'],['업종 · 작년 매출','우리 가게에 맞게'],['서비스 추가','필요한 것만']]},
+  {k:'help', tab:'기장 밖의 일까지', tag:'증여·상속 · 법무 · 노무', h:'세금 말고도 물어볼 곳이 필요한 사장님', who:'가족에게 재산을 넘기는 일, 계약·등기, 직원과의 노무 문제까지 한 곳에서 시작하세요. 증여·상속은 세무사가 직접, 법무·노무는 법무사·변호사·노무사를 연결해 드려요.',
+   inc:[['증여·상속','세무사 직접'],['법무 (등기·계약)','전문가 연결'],['노무 (근로계약·분쟁)','전문가 연결'],['비용','일마다 따로 안내',1]],
+   pick:[['함께 상담','증여·상속'],['함께 상담','법무'],['함께 상담','노무']]},
 ];
-console.assert(MODELS.map(m=>4+m.size[1]).join()==='5,7,10', '기본 4 + 사업 규모 = 5·7·10');
 const tabs = $('tabs'), panel = $('panel');
-tabs.innerHTML = MODELS.map((m,i)=>`<button role="tab" id="tab-${m.k}" aria-controls="panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${m.name}</button>`).join('');
+tabs.innerHTML = FITS.map((m,i)=>`<button role="tab" id="tab-${m.k}" aria-controls="panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${m.tab}</button>`).join('');
 function showModel(i){
-  const m = MODELS[i];
+  const m = FITS[i];
   [...tabs.children].forEach((b,j)=>{ b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1; });
   panel.setAttribute('aria-labelledby', 'tab-'+m.k);
-  panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.name}</h3><p class="who">${m.who}</p>
-    <p class="price"><b>${4 + m.size[1]}</b>만원부터 / 월 · 부가세 별도</p>
+  panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.h}</h3><p class="who">${m.who}</p>
     <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
-    <a class="btn" href="build.html?model=${m.k}">${m.name} 견적 내기</a></div>
-    <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>예상 견적 · 월 · 부가세 별도</span></p>
-      <ul><li>기본 4가지<em>4만원</em></li><li>사업 규모 · ${m.size[0]}<em>+${m.size[1]}만원</em></li><li class="o">서비스 추가<em>필요한 것만</em></li></ul>
-      <p class="slip-t"><span>월 기장료</span><b>${4 + m.size[1]}<small>만원부터</small></b></p></div>`;
+    <a class="btn" href="build.html?p=${m.k}">이 상황으로 견적 내기</a></div>
+    <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>견적에서 이렇게 골라요</span></p>
+      <ul>${m.pick.map(p=>`<li>${p[0]}<em>${p[1]}</em></li>`).join('')}</ul></div>`;
 }
 tabs.addEventListener('click', e=>{ const b=e.target.closest('[role=tab]'); if(b) showModel(+b.dataset.i); });
-tabs.addEventListener('keydown', e=>{ const i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
-  const n = e.key==='ArrowRight' ? (i+1)%3 : e.key==='ArrowLeft' ? (i+2)%3 : -1; if(n<0) return; e.preventDefault(); showModel(n); tabs.children[n].focus(); });
+tabs.addEventListener('keydown', e=>{ const n0 = FITS.length, i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
+  const n = e.key==='ArrowRight' ? (i+1)%n0 : e.key==='ArrowLeft' ? (i+n0-1)%n0 : e.key==='Home' ? 0 : e.key==='End' ? n0-1 : -1; if(n<0) return; e.preventDefault(); showModel(n); tabs.children[n].focus(); });
 showModel(0);
+// 연락처 남기기 창
+(() => {
+  const d = document.getElementById('lead'), f = document.getElementById('leadf'), msg = f.querySelector('.lead-msg');
+  let from = null;
+  document.querySelectorAll('[data-lead]').forEach(b=> b.addEventListener('click', ()=>{ from = b; msg.textContent = '';  d.showModal(); f.elements.name.focus(); }));
+  f.querySelector('[data-close]').addEventListener('click', ()=> d.close());
+  d.addEventListener('close', ()=>{ if (from) from.focus(); });
+  d.addEventListener('click', e=>{ if (e.target === d) d.close(); }); // 바깥을 누르면 닫힘
+  f.addEventListener('submit', e=>{
+    e.preventDefault();
+    const bad = [...f.elements].find(el=> el.willValidate && !el.checkValidity());
+    if (bad){ msg.textContent = bad.name==='agree' ? '동의에 체크해 주세요.' : bad.name==='tel' ? '연락처를 숫자로 적어 주세요.' : '이름 또는 상호를 적어 주세요.'; bad.focus(); return; }
+    msg.textContent = '시안이라 아직 접수되지 않아요. 지금은 카톡으로 상담받아 주세요.';
+  });
+})();
 </script>
 </body>
 </html>
