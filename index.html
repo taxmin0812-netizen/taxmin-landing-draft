@@ -66,6 +66,15 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .bg video{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.62);animation:heroPush 20s ease-in-out infinite alternate}
 @keyframes heroPush{from{transform:scale(1.08)}to{transform:scale(1)}}
 .hero.still .bg video{animation-play-state:paused}
+/* 휴대폰: 가로 영상을 자르지 않고 위쪽에 통째로, 빈 곳은 같은 장면을 흐리게 */
+@media (max-width:700px){
+  .hero .bg{background:#06080B url(img/hero_meet.jpg) center/cover no-repeat}
+  .hero .bg::before{content:"";position:absolute;inset:0;backdrop-filter:blur(22px) brightness(.45);-webkit-backdrop-filter:blur(22px) brightness(.45)}
+  .hero .bg video{position:relative;object-fit:contain;object-position:center 7%;animation:none;filter:saturate(.95) brightness(.8)}
+  .hero{place-items:end center}
+  .hero .in{padding-bottom:64px}
+  .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,11,0) 26%,rgba(6,8,11,.82) 40%,rgba(6,8,11,.82))}
+}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 52% 36% at 50% 52%,rgba(5,6,8,.9),rgba(5,6,8,0)),linear-gradient(180deg,rgba(5,6,8,0) 60%,rgba(5,6,8,.75))}
 .hero .in{position:relative;z-index:2;padding:0 20px;display:grid;justify-items:center}
 .stack{display:grid}
