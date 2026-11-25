@@ -13,7 +13,7 @@
 <meta property="og:image" content="https://taxmin0812-netizen.github.io/taxmin-landing-draft/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="TAXMIN 자동차 옵션 고르듯, 필요한 것만 콕. 견적서 예시 월 5만원">
+<meta property="og:image:alt" content="TAXMIN 나에게 맞는 서비스만 골라, 기장료를 커스텀하세요. 견적서 예시 월 5만원">
 <meta name="twitter:card" content="summary_large_image">
 <title>내 기장 견적 | 택스민</title>
 <meta name="description" content="사업자 형태·업종·작년 매출을 고르고 필요한 서비스만 더해 월 기장료를 바로 확인하세요. 모든 견적은 기본 4만원에서 시작해요.">
@@ -407,7 +407,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 <script>
 // ★ 기준표(초안) — 숫자·품목만 바꾸면 화면 전체가 따라 바뀜. 단위 만원/월, 부가세 별도.
 //   사용자 11/25: 모든 견적은 기본 4만원에서 시작 → 일반 개인 5 · 매출 큰 개인 7 · 법인 10.
-//   서비스 추가: 월별 매출 보고서 0원 · 인건비(4대보험 포함) 5명까지 1만원, 6명부터 상담 · 공동사업장 1만원.
+//   서비스 추가: 월별 매출 보고서 0원 · 인건비(4대보험 포함) 3명까지 1만원, 4명부터 상담 · 공동사업장 1만원.
 //   종합소득세·법인세 신고는 기본 포함이 아니라 '수수료 별도 · 신고 전 안내'.
 const START = 4;
 const BASICS = {개인:'월 매출·매입 관리 · 부가세 신고 · 전담 담당자 · 세무사 상담', 법인:'법인 장부 · 부가세 신고 · 전담 담당자 · 세무사 상담'};
@@ -433,7 +433,7 @@ function calc(sel){
   if (SIZE[m][1]) lines.push(['사업 규모 · ' + SIZE[m][0], SIZE[m][1]]);
   const up = m==='corp' ? [0,2,4,4][sc] : m==='std' ? [0,0,2,2][sc] : 0;
   if (up) lines.push(['작년 매출 ' + SALES[sel.sales][0], up]);
-  OPTS.forEach(o=>{ if (sel.opt[o.k] && (!o.only || o.only===sel.type)) lines.push([o.t + (o.k==='pay' ? (sel.big ? ' · 6명 이상' : ' · 5명까지') : ''), o.p]); });
+  OPTS.forEach(o=>{ if (sel.opt[o.k] && (!o.only || o.only===sel.type)) lines.push([o.t + (o.k==='pay' ? (sel.big ? ' · 4명 이상' : ' · 3명까지') : ''), o.p]); });
   return {m, sc, up, lines, total: lines.reduce((s,l)=>s+l[1],0), ask: (m!=='lite' && (sc===3 || !!SALES[sel.sales][2])) || (!!sel.opt.pay && sel.big)};
 }
 // self-check
@@ -442,7 +442,7 @@ const S = o=>Object.assign({type:'개인',biz:0,sales:2,opt:{},big:false,help:{}
 console.assert(calc(S()).total===4 && calc(S({sales:0})).total===4 && calc(S({type:'법인'})).total===10 && calc(S({sales:4})).total===7, '일반 개인 4 · 법인 10 · 매출 큰 개인 7');
 console.assert(calc(S({opt:{rep:1,pay:1}})).total===5 && calc(S({opt:{rep:1,pay:1,co:1}})).total===6 && calc(S({opt:{cpa:1}})).total===7, 'BEST 둘 = 5 · 공동사업장 1 · 세무사 직접 담당 3');
 console.assert(calc(S({type:'법인',opt:{co:1}})).total===10, '법인은 공동사업장 없음');
-console.assert(calc(S({opt:{pay:1},big:true})).ask && !calc(S({opt:{pay:1}})).ask, '인건비 6명 이상은 상담');
+console.assert(calc(S({opt:{pay:1},big:true})).ask && !calc(S({opt:{pay:1}})).ask, '인건비 4명 이상은 상담');
 console.assert(calc(S({sales:5})).total===9 && calc(S({sales:5})).ask && calc(S({type:'법인',biz:1,sales:5})).total===14 && !calc(S({sales:4})).ask, '10억 이상은 만원부터');
 console.assert(calc(S({biz:1,sales:3})).total===4 && calc(S({biz:1,sales:4})).total===7, '도소매 3~5억은 기본 구간 안, 5~10억은 넘음');
 console.assert(calc(S()).lines.length===1, '일반 개인은 사업 규모 줄 없음');
@@ -459,7 +459,7 @@ $('biz').innerHTML = BIZ.map((b,i)=>chip('biz', i, b[0], b[2])).join('');
 $('sales').innerHTML = SALES.map((s,i)=>chip('sales', i, s[0])).join('');
 $('help').innerHTML = HELP.map((h,i)=>chip('help', i, h[1])).join('');
 $('opts').innerHTML = OPTS.map(o=>`<li data-k="${o.k}"><button type="button" class="opt" data-k="${o.k}" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#${o.ic}"/></svg><span><b>${o.t}</b>${o.best ? '<em class="best">BEST</em>' : ''}<small>${o.d}</small></span><span class="pr${o.p?'':' zero'}">${price(o.p)}</span><i class="sw" aria-hidden="true"></i></button>`
-  + (o.k==='pay' ? `<div class="subq" id="paysub" role="group" aria-label="직원 수">직원 수 <button type="button" class="ch" data-g="big" data-i="0" aria-pressed="false">5명까지</button><button type="button" class="ch" data-g="big" data-i="1" aria-pressed="false">6명 이상 · 상담</button></div>` : '') + '</li>').join('');
+  + (o.k==='pay' ? `<div class="subq" id="paysub" role="group" aria-label="직원 수">직원 수 <button type="button" class="ch" data-g="big" data-i="0" aria-pressed="false">3명까지</button><button type="button" class="ch" data-g="big" data-i="1" aria-pressed="false">4명 이상 · 상담</button></div>` : '') + '</li>').join('');
 
 document.querySelector('.form').addEventListener('click', e=>{
   const c = e.target.closest('.ch'), o = e.target.closest('.opt');
