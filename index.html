@@ -393,7 +393,7 @@ footer a{text-decoration:underline}
 <!-- 1 첫 화면 -->
 <section class="hero" aria-labelledby="h1">
   <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 우리 가게에 필요한 만큼만, 기장료도 딱 그만큼만. 이제, 기장도 필요한 것만 골라 쓸 차례입니다.</h1>
-  <div class="bg on" aria-hidden="true"><video id="vid" src="img/hero_ai.mp4" poster="img/hero_ai.jpg" muted loop playsinline preload="auto"></video></div>
+  <div class="bg on" aria-hidden="true"><video id="vid" src="img/hero_meet.mp4" poster="img/hero_meet.jpg" muted loop playsinline preload="auto"></video></div>
   <div class="in">
     <div class="stack" aria-hidden="true">
       <div class="slide on">
@@ -621,7 +621,7 @@ function setStep(card, s){
 const hd = $('hd');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (() => {
-// 첫 화면: 실사 AI 영상(힉스필드 Seedance 2.0 Mini 로 만듦, 이음매 없이 반복) 위에서 두 문구가 7초마다 번갈아 나옴.
+// 첫 화면: 실사 AI 영상(제미나이 Veo — 한국인 세무사·법인 대표 상의 장면, 이음매 없이 반복. 옛 판 img/hero_ai.mp4) 위에서 두 문구가 7초마다 번갈아 나옴.
 // 멈춤 단추를 누르면 영상과 문구 넘김이 함께 멈춤. 움직임 줄임 설정이면 영상은 첫 장면 그림만.
 const hero = document.querySelector('.hero'), vid = $('vid'), slides = [...hero.querySelectorAll('.slide')], pz = $('pz');
 const DUR = 7000;
