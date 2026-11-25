@@ -52,6 +52,9 @@ header.on{background:rgba(255,255,255,.96);box-shadow:0 1px 0 var(--line)}
 header.on .logo{color:var(--ink);--mk:var(--blue)}
 .hd-r{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;color:rgba(255,255,255,.8)}
 header.on .hd-r{color:var(--sub)}
+.hd-nav{display:flex;gap:22px;padding-right:22px;border-right:1px solid var(--line)}
+.hd-nav a:hover{color:var(--ink)}
+html{scroll-padding-top:72px}
 .hd-btn{height:36px;padding:0 16px;border-radius:6px;display:inline-flex;align-items:center;background:#fff;color:var(--ink);font-weight:700}
 header.on .hd-btn{background:var(--ink);color:#fff}
 
@@ -59,45 +62,9 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .hero{position:relative;height:calc(100svh - 64px);margin-top:64px;min-height:580px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#06080B}
 .bg{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
 .bg.on{opacity:1}
-.bg0{background:#070A10;overflow:hidden}
-.bg1 video{width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.42);transform:scale(1.06);transition:transform 8s linear}
-.bg1.on video{transform:scale(1)}
-.dash{position:absolute;left:50%;top:50%;width:1280px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform-origin:50% 40%;opacity:.7;font-family:var(--font);color:#C9D1DD;will-change:transform}
-.pn{background:#0D121B;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px}
-.pn small{display:block;font-size:13px;color:#7C8799}
-.k b{display:block;font:700 28px Manrope,sans-serif;color:#fff;margin:8px 0 6px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-.k b::after{content:"원";font:500 15px var(--font);color:#7C8799;margin-left:3px}
-.k i{font-style:normal;font-size:12px;color:#5E6A7D}
-.k.hl b{color:#9DB4FF}
-.pt{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:#E6EAF0;margin-bottom:12px}
-.pt span{font-size:12px;font-weight:500;color:#6F7A8C}
-.tbl{grid-column:span 2;grid-row:span 2}
-.tbl ul,.quote ul{list-style:none}
-.tbl li{display:grid;grid-template-columns:52px 1fr 92px 84px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px;opacity:0}
-.tbl time{font:600 12px Manrope,sans-serif;color:#6F7A8C}
-.tbl em{font:600 13px Manrope,sans-serif;font-style:normal;text-align:right;color:#E6EAF0;font-variant-numeric:tabular-nums}
-.tbl b{justify-self:end;font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:#6F7A8C;white-space:nowrap}
-.tbl b.ok{background:rgba(125,155,255,.14);color:#AFC2FF}
-.quote{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
-.quote li{display:grid;grid-template-columns:1fr auto 34px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px}
-.quote li em{font:600 12px Manrope,var(--font);font-style:normal;color:#9DB4FF}
-.quote li:first-child em{color:#6F7A8C}
-.quote li.cut span,.quote li.cut em{color:#5E6A7D;text-decoration:line-through}
-.quote .tg{width:30px;height:18px;border:0;border-radius:9px;background:#2554F0;position:relative;transition:background .25s}
-.quote .tg::after{content:"";position:absolute;top:2px;left:14px;width:14px;height:14px;border-radius:50%;background:#fff;transform:none;transition:left .25s}
-.quote .tg.off{background:#2A3140}
-.quote .tg.off::after{left:2px}
-.qt{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
-.qt b{display:block;font:700 34px Manrope,var(--font);color:#fff;margin-top:4px}
-.qt b span{font-variant-numeric:tabular-nums}
-.qt p{font-size:13px;font-weight:600;color:var(--save);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
-.qt p.on{opacity:1;transform:none}
-.bars{grid-column:span 4}
-.bw{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;align-items:end;height:96px}
-.bw i{display:block;height:calc(var(--h)*100%);background:#2B3A5C;border-radius:3px 3px 0 0;transform-origin:bottom;transform:scaleY(0)}
-.bw i.now{background:#7D9BFF}
-.cur{position:absolute;left:0;top:0;width:26px;height:26px;opacity:0;pointer-events:none}
-.ring{position:absolute;left:0;top:0;width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid #9DB4FF;border-radius:50%;opacity:0;pointer-events:none}
+.bg video{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.62);animation:heroPush 20s ease-in-out infinite alternate}
+@keyframes heroPush{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero.still .bg video{animation-play-state:paused}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 52% 36% at 50% 52%,rgba(5,6,8,.9),rgba(5,6,8,0)),linear-gradient(180deg,rgba(5,6,8,0) 60%,rgba(5,6,8,.75))}
 .hero .in{position:relative;z-index:2;padding:0 20px;display:grid;justify-items:center}
 .stack{display:grid}
@@ -185,12 +152,32 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .saved.on{opacity:1;transform:none}
 .saved i{display:block;font-style:normal;font-weight:500;font-size:12px;color:var(--black-sub)}
 
-/* 5 약속 3단 */
-.promise{padding:180px 0 160px}
-.promise .head{max-width:760px}
-.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:88px}
-.cols3 h3{font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-.02em;color:var(--ink)}
-.cols3 p{font-size:15px;color:var(--sub);margin-top:16px;line-height:1.75}
+/* 3 회사 소개 */
+.about{padding:180px 0;background:#F6F7F9}
+.about .wrap{display:grid;grid-template-columns:5fr 7fr;gap:40px 72px}
+.about .hook{font-size:22px;font-weight:600;color:var(--blue);margin-top:28px;line-height:1.55;letter-spacing:-.01em}
+.a-r p{font-size:16px;color:var(--sub);line-height:1.85}
+.a-r p + p{margin-top:36px}
+.a-r b{display:block;font-size:21px;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.45;margin-bottom:10px}
+.facts{grid-column:1/-1;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);margin-top:40px}
+.facts li{padding:30px 24px 0 0}
+.facts li + li{padding-left:28px;border-left:1px solid #DDE1E7}
+.facts b{display:block;font-family:Manrope,"Pretendard Variable",sans-serif;font-size:56px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.facts b small{font-family:var(--font);font-size:20px;font-weight:600;margin-left:3px}
+.facts span{display:block;margin-top:14px;font-size:15px;color:var(--sub);line-height:1.65}
+
+/* 5 서비스 소개 */
+.svc{padding:180px 0 160px}
+.svc .head{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:end}
+.svc .head .lead{font-size:17px;color:var(--sub);line-height:1.75;max-width:560px}
+.svc-g{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:72px}
+.svc-g h3{font-size:19px;font-weight:700;color:var(--ink);padding-bottom:16px;border-bottom:1px solid var(--ink)}
+.svc-g ul{list-style:none}
+.svc-g li{padding:18px 0;border-bottom:1px solid var(--line)}
+.svc-g li b{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:16px;font-weight:600;color:var(--ink)}
+.svc-g li b em{font-style:normal;font-size:13px;font-weight:700;color:var(--blue);white-space:nowrap}
+.svc-g li p{font-size:14px;color:var(--sub);margin-top:6px;line-height:1.65}
+.svc-g .best{font-style:normal;font-family:Manrope,sans-serif;font-size:11px;font-weight:800;color:var(--blue);margin-left:6px;vertical-align:1px}
 
 /* 6 모델(탭) */
 .models-sec{padding:160px 0;background:#F6F7F9}
@@ -276,8 +263,10 @@ footer a{text-decoration:underline}
 }
 @media (max-width:1024px){
   :root{--pad:28px}
+  .hd-nav{gap:16px;padding-right:16px}
   .worry .wrap{grid-template-columns:1fr;gap:56px}
-  .cols3{grid-template-columns:1fr;gap:44px;margin-top:56px}
+  .about .wrap,.svc .head{grid-template-columns:1fr;gap:28px}
+  .svc-g{grid-template-columns:1fr;gap:44px;margin-top:48px}
   .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
   .faq .wrap{grid-template-columns:1fr 1fr}
   .faq .intro{grid-column:1/-1}
@@ -286,7 +275,13 @@ footer a{text-decoration:underline}
 @media (max-width:640px){
   :root{--pad:20px}
   .hd-r .txt{display:none}
-  .worry,.promise,.models-sec,.faq{padding:104px 0}
+  .hd-nav{display:none}
+  .worry,.about,.svc,.models-sec,.faq{padding:104px 0}
+  .facts{grid-template-columns:1fr}
+  .facts li,.facts li + li{padding:24px 0;border-left:0;border-bottom:1px solid #DDE1E7}
+  .facts b{font-size:44px}
+  .about .hook{font-size:19px}
+  .a-r b{font-size:19px}
   .grid4{grid-template-columns:1fr;gap:40px}
   .board{padding:16px;font-size:13px}
   .bd-h span{display:none}
@@ -326,58 +321,22 @@ footer a{text-decoration:underline}
 <header id="hd" class="on">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="TAXMIN 처음으로"><b>TAX<span>MIN</span></b></a>
-    <div class="hd-r"><a class="txt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡 상담</a><a class="hd-btn" href="build.html">견적 내기</a></div>
+    <div class="hd-r"><nav class="hd-nav" aria-label="바로가기"><a href="#about">회사 소개</a><a href="#svc">서비스</a><a href="#faq">자주 묻는 질문</a></nav><a class="txt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡 상담</a><a class="hd-btn" href="build.html">견적 내기</a></div>
   </div>
 </header>
 
 <main id="top">
 <!-- 1 첫 화면 -->
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 자동차 옵션 고르듯, 필요한 것만 콕. 이제, 기장도 필요한 것만 골라 쓸 차례입니다.</h1>
-  <div class="bg bg0 on" aria-hidden="true">
-    <div class="dash" id="dash">
-      <div class="pn k"><small>이번 달 카드 매출</small><b data-n="18420000">0</b><i>홈택스 자동 수집</i></div>
-      <div class="pn k"><small>현금영수증 매출</small><b data-n="2315000">0</b><i>홈택스 자동 수집</i></div>
-      <div class="pn k"><small>세금계산서 매입</small><b data-n="6780000">0</b><i>공제 가능 6,120,000</i></div>
-      <div class="pn k hl"><small>부가세 예상</small><b data-n="1284600">0</b><i>신고 1월 25일까지</i></div>
-      <div class="pn tbl">
-        <p class="pt">거래 분류<span>AI 분류 · 담당자 검토</span></p>
-        <ul id="tx">
-          <li><time>11.03</time><span>카드 매출 정산</span><em>1,240,000</em><b data-c="매출">분류 중</b></li>
-          <li><time>11.05</time><span>식자재 도매 매입</span><em>482,000</em><b data-c="원재료비">분류 중</b></li>
-          <li><time>11.08</time><span>배달앱 수수료</span><em>96,500</em><b data-c="지급수수료">분류 중</b></li>
-          <li><time>11.12</time><span>사무용품 구입</span><em>38,200</em><b data-c="소모품비">분류 중</b></li>
-          <li><time>11.15</time><span>직원 식대</span><em>64,000</em><b data-c="복리후생비">분류 중</b></li>
-          <li><time>11.20</time><span>현금영수증 매출</span><em>310,000</em><b data-c="매출">분류 중</b></li>
-          <li><time>11.25</time><span>아르바이트 급여</span><em>1,150,000</em><b data-c="인건비">분류 중</b></li>
-        </ul>
-      </div>
-      <div class="pn quote">
-        <p class="pt">내 기장 견적<span>음식점·카페 · 개인</span></p>
-        <ul>
-          <li><span>기본 4가지 · 장부·부가세·담당자·세무사</span><em>4만원</em></li>
-          <li><span>월별 매출 보고서</span><em>0원</em><i class="tg"></i></li>
-          <li id="cutrow2"><span>인건비 신고 (4대보험 포함)</span><em>+1만원</em><i class="tg" id="cuttg2"></i></li>
-          <li id="cutrow"><span>공동사업장</span><em>+1만원</em><i class="tg" id="cuttg"></i></li>
-        </ul>
-        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">6</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
-      </div>
-      <div class="pn bars">
-        <p class="pt">월별 매출<span>2026년</span></p>
-        <div class="bw" id="bars"><i style="--h:.42"></i><i style="--h:.48"></i><i style="--h:.55"></i><i style="--h:.5"></i><i style="--h:.62"></i><i style="--h:.66"></i><i style="--h:.72"></i><i style="--h:.69"></i><i style="--h:.78"></i><i style="--h:.84"></i><i style="--h:.92"></i><i style="--h:.3" class="now"></i></div>
-      </div>
-      <svg class="cur" id="cur" viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.6L9.6 19z" fill="#fff" stroke="#0B0F17" stroke-width="1.4" stroke-linejoin="round"/></svg>
-      <i class="ring" id="ring"></i>
-    </div>
-  </div>
-  <div class="bg bg1" aria-hidden="true"><video id="vid" src="img/hero_consult.mp4" poster="img/hero_consult.jpg" muted loop playsinline preload="metadata"></video></div>
+  <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 나에게 맞는 서비스만 골라 기장료를 커스텀해 보세요. 이제, 기장도 필요한 것만 골라 쓸 차례입니다.</h1>
+  <div class="bg on" aria-hidden="true"><video id="vid" src="img/hero_ai.mp4" poster="img/hero_ai.jpg" muted loop playsinline preload="auto"></video></div>
   <div class="in">
     <div class="stack" aria-hidden="true">
       <div class="slide on">
         <p class="kicker ln"><i>필요한 것만 고르는 신개념 기장 서비스</i></p>
         <p class="name ln" aria-hidden="true"><i><svg class="nm" viewBox="70 4 460 104"><defs><linearGradient id="nmg" x1="0" x2="1"><stop offset="0" stop-color="#7D9BFF" stop-opacity="0"/><stop offset=".5" stop-color="#6F8FFF"/><stop offset="1" stop-color="#7D9BFF" stop-opacity="0"/></linearGradient><clipPath id="nmc"><text x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text></clipPath></defs><text class="t" x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text><g clip-path="url(#nmc)"><rect class="sh" x="-220" y="0" width="180" height="124" fill="url(#nmg)"/></g></svg></i></p>
-        <p class="h1"><span class="ln"><i>자동차 옵션 고르듯,</i></span><span class="ln"><i>필요한 것만 콕.</i></span></p>
-        <p class="sub"><span class="ln"><i>나에게 맞는 옵션만 골라 필요 없는 비용을 줄여요.</i></span><span class="ln"><i>장부와 신고는 경력 담당자가, 상담과 검수는 세무사가 합니다.</i></span></p>
+        <p class="h1"><span class="ln"><i>나에게 맞는 서비스만 골라,</i></span><span class="ln"><i>기장료를 커스텀해 보세요.</i></span></p>
+        <p class="sub"><span class="ln"><i>자동차 옵션 고르듯, 필요한 것만 콕.</i></span><span class="ln"><i>장부와 신고는 경력 담당자가, 상담과 검수는 세무사가 합니다.</i></span></p>
       </div>
       <div class="slide">
         <p class="big2"><span class="ln"><i>이제, 기장도</i></span><span class="ln"><i><span class="ink" data-text="필요한 것만 골라">필요한 것만 골라</span> 쓸 차례입니다.</i></span></p>
@@ -408,20 +367,55 @@ footer a{text-decoration:underline}
 </section>
 
 
+<!-- 3 회사 소개 -->
+<section class="about" id="about" aria-labelledby="a-h">
+  <div class="wrap">
+    <div class="a-l">
+      <h2 class="big" id="a-h">가내수공업<br>세무사무소.</h2>
+      <p class="hook">가격은 낮게, 서비스는 높게.<br>맛집처럼, 하루 정량만 받습니다.</p>
+    </div>
+    <div class="a-r">
+      <p><b>세무사 2명, 직원 2명. 1:1로 짝을 이룬 작은 특공대예요.</b>보통 세무사무소는 세무사 한 명이 직원 여러 명을 거느리고, 장부는 직원 선에서 끝나기 쉬워요. 택스민은 담당자 한 명마다 세무사 한 명이 짝을 이뤄, 장부 한 권 한 권을 손으로 보고 세무사가 직접 검증해요.</p>
+      <p><b>그래서 아무나 받지 않아요.</b>담당자 한 명이 맡는 거래처 수를 정해 두고, 그 수가 차면 더 받지 않아요. 줄 서는 맛집이 하루 정량만 파는 것과 같은 까닭이에요. 많이 받는 것보다 제대로 보는 게 먼저예요.</p>
+      <p><b>AI는 거들고, 판단은 사람이 해요.</b>홈택스 자료를 모으고 나누는 반복 일은 AI가 먼저 하고, 담당자가 확인한 뒤 세무사가 한 번 더 봐요. 그 덕에 작은 가게도 부담 없는 기장료로, 원래 하던 꼼꼼한 방식 그대로 관리받을 수 있게 됐어요.</p>
+    </div>
+    <ul class="facts">
+      <li><b>1:1</b><span>세무사 한 명과 담당자 한 명이 짝<br>세무사 2 · 직원 2, 네 명이 직접 해요</span></li>
+      <li><b>3<small>단계</small></b><span>AI 정리 → 담당자 확인<br>→ 세무사 직접 검증</span></li>
+      <li><b>정량</b><span>담당자 한 명이 맡는 거래처 수를 지키고<br>차면 더 받지 않아요</span></li>
+    </ul>
+  </div>
+</section>
+
 <!-- 4 견적 이야기(옆으로 넘기는 카드) -->
 <section class="story" id="story" aria-labelledby="st-h">
   <div class="wrap st-hd"><h2 id="st-h">기장료는 이렇게 정해져요.</h2><p aria-hidden="true">옆으로 밀어서 넘겨 보세요</p></div>
   <div class="st-track" id="track" tabindex="0" role="region" aria-labelledby="st-h"></div>
 </section>
 
-<!-- 5 약속 -->
-<section class="promise" aria-labelledby="p-h">
+<!-- 5 서비스 소개 -->
+<section class="svc" id="svc" aria-labelledby="s-h">
   <div class="wrap">
-    <div class="head"><h2 class="big" id="p-h">기장료는 고르고,<br>관리는 그대로 받으세요.</h2></div>
-    <div class="cols3">
-      <div><small>담당자</small><h3>담당자가 바뀌지 않아요.</h3><p>개업 후 지금까지 그만둔 직원이 없어요. 처음 만난 담당자가 우리 가게를 계속 맡아요.</p></div>
-      <div><small>세무사</small><h3>세무사가 직접 상담하고, 답변을 검수해요.</h3><p>세무 판단이 필요한 질문은 세무사가 직접 답하고, 담당자 답변도 세무사가 한 번 더 확인해요.</p></div>
-      <div><small>소통</small><h3>카톡으로 바로 묻고, 일정은 먼저 받아요.</h3><p>자료는 카톡으로 주고받고, 신고 일정은 마감 전에 저희가 먼저 알려 드려요.</p></div>
+    <div class="head"><h2 class="big" id="s-h">작은 팀이 하는 일,<br>빠짐없이 적어 둘게요.</h2><p class="lead">기본 4가지는 늘 들어 있고, 나머지는 필요한 것만 고르면 돼요. 기장 밖의 일도 한 곳에서 시작할 수 있어요.</p></div>
+    <div class="svc-g">
+      <div><h3>기본으로 들어 있어요</h3><ul>
+        <li><b>월 매출·매입 관리<em>기본</em></b><p>홈택스의 카드·현금영수증·세금계산서를 모아 장부로 정리해요.</p></li>
+        <li><b>부가가치세 신고<em>기본</em></b><p>신고부터 납부서 안내까지, 마감 전에 먼저 챙겨요.</p></li>
+        <li><b>전담 담당자<em>기본</em></b><p>처음 만난 담당자가 계속 맡고, 카톡으로 바로 물어보면 돼요.</p></li>
+        <li><b>세무사 상담·검수<em>기본</em></b><p>세무 판단은 세무사가 직접 답하고, 담당자 답변도 세무사가 확인해요.</p></li>
+        <li><b>AI 매출 모니터링<em>기본</em></b><p>매달 매출을 지켜보고, 신고 의무가 바뀌기 전에 먼저 알려 드려요.</p></li>
+      </ul></div>
+      <div><h3>골라서 더해요</h3><ul>
+        <li><b><span>월별 매출 보고서<i class="best">BEST</i></span><em>0원</em></b><p>매달 매출·매입 흐름을 한 장으로 받아 봐요.</p></li>
+        <li><b><span>인건비 신고 (4대보험 포함)<i class="best">BEST</i></span><em>+1만원</em></b><p>직원 월급 신고와 4대보험 신고를 함께 해요. 5명까지, 6명부터는 상담 때 정해요.</p></li>
+        <li><b>공동사업장<em>+1만원</em></b><p>대표가 둘 이상인 사업장이라면 더해요.</p></li>
+        <li><b>세무사 직접 담당<em>+3만원</em></b><p>담당자 대신 세무사가 장부와 신고를 직접 맡아요.</p></li>
+      </ul></div>
+      <div><h3>함께 상담해요</h3><ul>
+        <li><b>종합소득세·법인세 신고<em>신고 전 안내</em></b><p>수수료는 기장료와 따로이고, 신고 전에 금액을 먼저 알려 드려요.</p></li>
+        <li><b>증여·상속<em>세무사 직접</em></b><p>가족에게 재산을 넘기는 일, 세무사가 직접 상담해요.</p></li>
+        <li><b>법무 · 노무<em>전문가 연결</em></b><p>등기·계약은 법무사·변호사, 근로계약·분쟁은 노무사를 연결해 드려요.</p></li>
+      </ul></div>
     </div>
   </div>
 </section>
@@ -439,7 +433,7 @@ footer a{text-decoration:underline}
 </section>
 
 <!-- 7 FAQ -->
-<section class="faq" aria-labelledby="f-h">
+<section class="faq" id="faq" aria-labelledby="f-h">
   <div class="wrap">
     <div class="intro"><h2 class="big" id="f-h">FAQ</h2><p>견적부터 시작까지,<br>자주 묻는 것만 모았어요.</p></div>
     <div>
@@ -529,94 +523,27 @@ function setStep(card, s){
 const hd = $('hd');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (() => {
-// 첫 화면: 두 장면이 번갈아 나옴.
-// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 공동사업장·인건비를 꺼서 기장료 6→4만원)
-// ② 뒤 = 상담 실사 영상(Pexels 7844855, 무료 사용 허락) 어둡게
-// 모든 움직임은 장면 시계(elapsed) 하나로 그림 — 멈춤 단추를 누르면 시계가 서서 다 같이 멈춤
-const hero = document.querySelector('.hero'), dash = $('dash'), vid = $('vid');
-const bgs = [...hero.querySelectorAll('.bg')], slides = [...hero.querySelectorAll('.slide')];
-const pz = $('pz');
+// 첫 화면: 실사 AI 영상(힉스필드 Seedance 2.0 Mini 로 만듦, 이음매 없이 반복) 위에서 두 문구가 7초마다 번갈아 나옴.
+// 멈춤 단추를 누르면 영상과 문구 넘김이 함께 멈춤. 움직임 줄임 설정이면 영상은 첫 장면 그림만.
+const hero = document.querySelector('.hero'), vid = $('vid'), slides = [...hero.querySelectorAll('.slide')], pz = $('pz');
 const DUR = 7000;
-const clamp = x => Math.max(0, Math.min(1, x));
-const eo = x => 1 - Math.pow(1 - clamp(x), 3);
-const eio = x => { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2; };
-const won = n => Math.round(n).toLocaleString('ko-KR');
-const nums = [...dash.querySelectorAll('.k b')], rows = [...dash.querySelectorAll('#tx li')], bars = [...dash.querySelectorAll('#bars i')];
-const cutRow = $('cutrow'), cutTg = $('cuttg'), cutRow2 = $('cutrow2'), cutTg2 = $('cuttg2'), qn = $('qn'), qsave = $('qsave'), cur = $('cur'), ring = $('ring');
-let cur0 = [0, 0], cur1 = [0, 0], cur2 = [0, 0], ds = 1, dx = 0, raf = 0, seen = true, last = 0, elapsed = 0, curSlide = 0, paused = reduce;
-
-const off = (el) => { let x = 0, y = 0; while (el && el !== dash) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; };
-function layout(){
-  const w = hero.clientWidth, h = hero.clientHeight;
-  const dh = dash.offsetHeight, qd = dash.querySelector('.quote');
-  if (w >= 700) { ds = Math.min(w*.94/1280, h*.92/dh); dx = 0; }
-  else { ds = h*.78/dh; dx = -(qd.offsetLeft + qd.offsetWidth/2 - 640); } // 휴대폰: 견적 칸을 가운데로
-  const t = off(cutTg); cur1 = [t[0] + 15, t[1] + 9];
-  const t2 = off(cutTg2); cur2 = [t2[0] + 15, t2[1] + 9];
-  const q = off(dash.querySelector('.quote')); cur0 = [q[0] + 60, q[1] + 40];
-  drawDash(reduce ? 1e5 : elapsed);
-}
-// t(ms) 시점의 화면을 그림
-function drawDash(t){
-  const k = t/DUR;
-  dash.style.transform = `translate(-50%,-50%) scale(${ds}) translateX(${dx}px) perspective(1800px) rotateX(${14 - 5*eio(k)}deg) translateY(${-20*eio(k)}px)`;
-  nums.forEach((b, i) => { const v = +b.dataset.n*eo((t - 150 - i*120)/1500); const s = won(v); if (b.textContent !== s) b.textContent = s; });
-  rows.forEach((li, i) => {
-    const a = clamp((t - 500 - i*380)/350); li.style.opacity = a; li.style.transform = `translateY(${(1 - a)*8}px)`;
-    const c = li.querySelector('b'), done = t > 1000 + i*380;
-    if (c.classList.contains('ok') !== done) { c.classList.toggle('ok', done); c.textContent = done ? c.dataset.c : '분류 중'; }
-  });
-  bars.forEach((b, i) => b.style.transform = `scaleY(${eo((t - 900 - i*60)/700)})`);
-  // 커서: 3.4초부터 공동사업장 스위치로 가서 4.3초에 끄고, 인건비 스위치로 올라가 5.2초에 끔
-  const m1 = eio((t - 3400)/800), m2 = eio((t - 4550)/550), on = t > 3200 && t < 6400;
-  const px = cur0[0] + (cur1[0] - cur0[0])*m1 + (cur2[0] - cur1[0])*m2, py = cur0[1] + (cur1[1] - cur0[1])*m1 + (cur2[1] - cur1[1])*m2;
-  cur.style.opacity = on ? 1 : 0;
-  cur.style.transform = `translate(${px}px,${py}px)`;
-  const c2 = t > 5200, k2 = clamp(((c2 ? t - 5200 : t - 4300))/450), rp = c2 ? cur2 : cur1;
-  ring.style.opacity = t > 4300 && k2 < 1 ? 1 - k2 : 0;
-  ring.style.transform = `translate(${rp[0]}px,${rp[1]}px) scale(${.4 + k2})`;
-  const cut = t > 4300;
-  cutTg.classList.toggle('off', cut); cutRow.classList.toggle('cut', cut);
-  cutTg2.classList.toggle('off', c2); cutRow2.classList.toggle('cut', c2);
-  const q = String(Math.round(6 - eo((t - 4350)/400) - eo((t - 5250)/400))); if (qn.textContent !== q) qn.textContent = q;
-  qsave.classList.toggle('on', t > 5700);
-}
-function frame(now){
-  raf = 0;
-  const dt = last ? Math.min(50, now - last) : 0; last = now;
-  if (!paused) { elapsed += dt; if (elapsed >= DUR) show((curSlide + 1) % 2); }
-  if (curSlide === 0) drawDash(elapsed);
-  if (seen && !reduce) raf = requestAnimationFrame(frame);
-}
+let cur = 0, paused = reduce, seen = true, timer = 0;
 function stagger(sl, base){ sl.querySelectorAll('.ln').forEach((l, k) => l.style.setProperty('--d', (base + k*.08).toFixed(2) + 's')); }
 function show(i){
-  elapsed = 0;
-  if (i === curSlide) return;
-  const old = slides[curSlide]; old.classList.remove('on'); old.classList.add('out');
+  if (i === cur) return;
+  const old = slides[cur]; old.classList.remove('on'); old.classList.add('out');
   clearTimeout(old._t); old._t = setTimeout(() => old.classList.remove('out'), 700);
   const nw = slides[i]; clearTimeout(nw._t); nw.classList.remove('out');
-  bgs[curSlide].classList.remove('on'); bgs[i].classList.add('on');
-  curSlide = i; stagger(nw, .45); nw.classList.add('on');
-  if (i === 1) { vid.currentTime = 0; if (!paused) vid.play().catch(() => {}); }
-  else { setTimeout(() => { if (curSlide === 0) vid.pause(); }, 1300); drawDash(reduce ? 1e5 : 0); }
+  cur = i; stagger(nw, .45); nw.classList.add('on');
 }
-function setPaused(v){
-  paused = v; pz.setAttribute('aria-label', v ? '움직임 다시 재생' : '움직임 멈추기'); pz.classList.toggle('play', v);
-  if (curSlide === 1) { if (v) vid.pause(); else vid.play().catch(() => {}); }
-}
+function arm(){ clearTimeout(timer); if (!paused && seen) timer = setTimeout(() => { show((cur + 1) % slides.length); arm(); }, DUR); }
+function play(){ if (!paused && seen) vid.play().catch(() => {}); else vid.pause(); }
+function setPaused(v){ paused = v; pz.setAttribute('aria-label', v ? '움직임 다시 재생' : '움직임 멈추기'); pz.classList.toggle('play', v); hero.classList.toggle('still', v); play(); arm(); }
 pz.addEventListener('click', () => setPaused(!paused));
-setPaused(paused);
-pz.hidden = reduce; // 줄임 설정이면 움직이는 것이 없으니 단추도 숨김
+pz.hidden = reduce;
 stagger(slides[0], .15);
-new IntersectionObserver(([e]) => {
-  seen = e.isIntersecting;
-  if (!seen) vid.pause(); else if (curSlide === 1 && !paused) vid.play().catch(() => {});
-  if (seen && !raf && !reduce) { last = 0; raf = requestAnimationFrame(frame); }
-}).observe(hero);
-let rz = 0; addEventListener('resize', () => { if (!rz) rz = requestAnimationFrame(() => { rz = 0; layout(); }); });
-document.fonts.ready.then(() => { layout(); if (!raf && !reduce) raf = requestAnimationFrame(frame); });
-layout();
-console.assert(eio(0) === 0 && eio(1) === 1 && eo(1) === 1, '모션 곡선 끝값');
+new IntersectionObserver(([e]) => { seen = e.isIntersecting; play(); arm(); }).observe(hero);
+setPaused(paused);
 })();
 
 // 견적 이야기: 카드 세 장을 옆으로 밀어 넘김(손가락·트랙패드·마우스 끌기·키보드 화살표), 저절로 넘어가지 않음
