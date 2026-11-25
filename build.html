@@ -59,7 +59,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 .row > h2{font-size:16px;font-weight:700;padding-top:10px;display:flex;gap:10px;color:var(--ink)}
 .row > h2 b{font-family:Manrope,sans-serif;color:var(--blue);font-weight:700}
 .seg{display:grid;gap:8px}
-.seg.c2{grid-template-columns:repeat(2,minmax(0,1fr))} .seg.c4{grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))} .seg.c3{grid-template-columns:repeat(auto-fit,minmax(min(100%,110px),1fr))} .seg.c6{grid-template-columns:repeat(auto-fit,minmax(min(100%,84px),1fr))}
+.seg.c2{grid-template-columns:repeat(2,minmax(0,1fr))} .seg.c4{grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr))} .seg.c3{grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr))} .seg.c6{grid-template-columns:repeat(auto-fit,minmax(min(100%,84px),1fr))}
 .ch{height:46px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--line);font-size:15px;font-weight:600;color:var(--sub);display:flex;align-items:center;justify-content:center;gap:8px;padding:0 10px;min-width:0;text-align:center;line-height:1.25;transition:box-shadow .15s,color .15s}
 .ch svg.i{color:var(--mute);transition:color .15s}
 .ch[aria-pressed=true]{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
@@ -295,7 +295,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
       <div class="row"><h2 id="h-opt"><b>4</b>서비스 추가</h2>
         <ul class="opts" id="opts" aria-labelledby="h-opt"></ul></div>
       <div class="row"><h2 id="h-help"><b>5</b>함께 상담</h2>
-        <div><div class="seg c3" id="help" role="group" aria-labelledby="h-help"></div><p class="note">증여·상속은 세무사가 직접, 법무·노무는 법무사·변호사·노무사를 연결해 드려요. 비용은 상담 때 먼저 알려 드려요.</p></div></div>
+        <div><div class="seg c3" id="help" role="group" aria-labelledby="h-help"></div><p class="note">증여·상속은 세무사가 직접, 법무·노무는 법무사·변호사·노무사를 연결해 드려요. 청약·대출·정책자금은 받을 수 있는지 함께 알아봐 드려요(중개는 하지 않아요). 비용은 상담 때 먼저 알려 드려요.</p></div></div>
     </div>
   </div>
   <aside class="rc" aria-label="예상 견적서">
@@ -422,7 +422,7 @@ const OPTS = [
   {k:'co',  t:'공동사업장', d:'대표가 둘 이상인 사업장', p:1, ic:'o-co', only:'개인'},
   {k:'cpa', t:'세무사 직접 담당', d:'담당자 대신 세무사가 장부·신고를 직접 맡아요', p:3, ic:'o-cpa'},
 ];
-const HELP = [['inh','증여·상속'],['law','법무'],['lab','노무']]; // 함께 상담(금액 따로, 상담 때 안내)
+const HELP = [['inh','증여·상속'],['law','법무'],['lab','노무'],['loan','청약·대출·정책자금']]; // 함께 상담(금액 따로, 상담 때 안내)
 
 // 사업 규모·금액 계산
 function scale(sel){ const r = SALES[sel.sales][1] / BIZ[sel.biz][1]; return r<=1?0 : r<=2?1 : r<=4?2 : 3; } // 0 기본 구간, 1 2배, 2 4배, 3 넘음
