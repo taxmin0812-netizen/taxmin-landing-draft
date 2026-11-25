@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>택스민 | 필요한 것만 고르는 기장 서비스</title>
+<meta name="description" content="자동차 옵션 고르듯, 필요한 것만 콕. 쓰지 않는 서비스는 빼고 기장료를 정하는 택스민.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#020617; --ink-2:#191B1F; --sub:#5B6270; --mute:#646B77; --line:#E6E8EC;
+  --black:#050608; --black-line:rgba(255,255,255,.14); --black-sub:rgba(255,255,255,.6);
+  --blue:#2554F0; --blue-on-dark:#7D9BFF; --warn:#E5484D; --save:#2FBF71;
+  --w:1280px; --pad:40px;
+  --font:"Manrope","Pretendard Variable",Pretendard,"Apple SD Gothic Neo",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+body{font-family:var(--font);color:var(--ink);background:#fff;font-size:16px;line-height:1.6;word-break:keep-all;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 var(--pad)}
+.draft{position:fixed;left:16px;top:76px;z-index:60;font-size:12px;font-weight:700;color:#fff;background:#C2410C;padding:5px 9px;border-radius:5px}
+
+/* 머리 */
+header{position:fixed;inset:0 0 auto;z-index:50;height:64px;transition:background .3s,box-shadow .3s}
+header .wrap{height:100%;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-family:Manrope,sans-serif;font-weight:800;font-size:21px;letter-spacing:-.01em;color:#fff;--mk:var(--blue-on-dark)}
+.logo b{font-weight:800}.logo span{font-weight:300}
+.logo::before{content:"";width:10px;height:10px;background:var(--mk);transform:rotate(45deg)}
+header.on{background:rgba(255,255,255,.96);box-shadow:0 1px 0 var(--line)}
+header.on .logo{color:var(--ink);--mk:var(--blue)}
+.hd-r{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;color:rgba(255,255,255,.8)}
+header.on .hd-r{color:var(--sub)}
+.hd-btn{height:36px;padding:0 16px;border-radius:6px;display:inline-flex;align-items:center;background:#fff;color:var(--ink);font-weight:700}
+header.on .hd-btn{background:var(--ink);color:#fff}
+
+/* 1 첫 화면 */
+.hero{position:relative;height:calc(100svh - 64px);margin-top:64px;min-height:580px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#06080B}
+.bg{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.bg.on{opacity:1}
+.bg0{background:#070A10;overflow:hidden}
+.bg1 video{width:100%;height:100%;object-fit:cover;filter:saturate(.7) brightness(.42);transform:scale(1.06);transition:transform 8s linear}
+.bg1.on video{transform:scale(1)}
+.dash{position:absolute;left:50%;top:50%;width:1280px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform-origin:50% 40%;opacity:.7;font-family:var(--font);color:#C9D1DD;will-change:transform}
+.pn{background:#0D121B;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px 20px}
+.pn small{display:block;font-size:13px;color:#7C8799}
+.k b{display:block;font:700 28px Manrope,sans-serif;color:#fff;margin:8px 0 6px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.k b::after{content:"원";font:500 15px var(--font);color:#7C8799;margin-left:3px}
+.k i{font-style:normal;font-size:12px;color:#5E6A7D}
+.k.hl b{color:#9DB4FF}
+.pt{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:#E6EAF0;margin-bottom:12px}
+.pt span{font-size:12px;font-weight:500;color:#6F7A8C}
+.tbl{grid-column:span 2;grid-row:span 2}
+.tbl ul,.quote ul{list-style:none}
+.tbl li{display:grid;grid-template-columns:52px 1fr 92px 84px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px;opacity:0}
+.tbl time{font:600 12px Manrope,sans-serif;color:#6F7A8C}
+.tbl em{font:600 13px Manrope,sans-serif;font-style:normal;text-align:right;color:#E6EAF0;font-variant-numeric:tabular-nums}
+.tbl b{justify-self:end;font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.05);color:#6F7A8C;white-space:nowrap}
+.tbl b.ok{background:rgba(125,155,255,.14);color:#AFC2FF}
+.quote{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+.quote li{display:grid;grid-template-columns:1fr auto 34px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.06);font-size:13px}
+.quote li em{font:600 12px Manrope,var(--font);font-style:normal;color:#9DB4FF}
+.quote li:nth-child(-n+2) em{color:#6F7A8C}
+.quote li.cut span,.quote li.cut em{color:#5E6A7D;text-decoration:line-through}
+.tg{width:30px;height:18px;border-radius:9px;background:#2554F0;position:relative;transition:background .25s}
+.tg::after{content:"";position:absolute;top:2px;left:14px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .25s}
+.tg.off{background:#2A3140}
+.tg.off::after{left:2px}
+.qt{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
+.qt b{display:block;font:700 34px Manrope,var(--font);color:#fff;margin-top:4px}
+.qt b span{font-variant-numeric:tabular-nums}
+.qt p{font-size:13px;font-weight:600;color:#9DB4FF;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.qt p.on{opacity:1;transform:none}
+.bars{grid-column:span 4}
+.bw{display:grid;grid-template-columns:repeat(12,1fr);gap:10px;align-items:end;height:96px}
+.bw i{display:block;height:calc(var(--h)*100%);background:#2B3A5C;border-radius:3px 3px 0 0;transform-origin:bottom;transform:scaleY(0)}
+.bw i.now{background:#7D9BFF}
+.cur{position:absolute;left:0;top:0;width:26px;height:26px;opacity:0;pointer-events:none}
+.ring{position:absolute;left:0;top:0;width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid #9DB4FF;border-radius:50%;opacity:0;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 52% 36% at 50% 52%,rgba(5,6,8,.9),rgba(5,6,8,0)),linear-gradient(180deg,rgba(5,6,8,0) 60%,rgba(5,6,8,.75))}
+.hero .in{position:relative;z-index:2;padding:0 20px;display:grid;justify-items:center}
+.stack{display:grid}
+.slide{grid-area:1/1;align-self:end;visibility:hidden}
+.slide.on,.slide.out{visibility:visible}
+.ln{display:block;overflow:hidden;padding-bottom:.1em}
+.ln>i{display:block;font-style:normal;transform:translateY(110%);opacity:0}
+.on .ln>i{transform:none;opacity:1;transition:transform 1s cubic-bezier(.16,1,.3,1) var(--d,0s),opacity .7s ease var(--d,0s)}
+.out .ln>i{transform:translateY(-110%);opacity:0;transition:transform .55s cubic-bezier(.7,0,.84,0),opacity .45s ease}
+.hero .kicker{font-size:18px;font-weight:600;color:var(--blue-on-dark)}
+.hero .name{font-family:Manrope,sans-serif;font-size:clamp(56px,7vw,96px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:10px 0 18px}
+.nm{display:block;margin:0 auto;height:clamp(50px,6.4vw,88px);width:auto;overflow:visible}
+.nm text{font-family:Manrope,sans-serif;font-size:124px;letter-spacing:-2px}
+.nm .t{fill:#fff;stroke:#fff;stroke-width:2.6;stroke-dasharray:520}
+.on .nm .t{animation:nmDraw 1.8s cubic-bezier(.65,0,.35,1) var(--d,0s) both}
+@keyframes nmDraw{0%{stroke-dashoffset:520;fill-opacity:0;stroke-opacity:1}30%{fill-opacity:0}100%{stroke-dashoffset:0;fill-opacity:1;stroke-opacity:0}}
+.on .nm .sh{animation:nmSh 1.3s cubic-bezier(.45,0,.2,1) calc(var(--d,0s) + 1.6s) both}
+@keyframes nmSh{from{transform:translateX(0)}to{transform:translateX(860px)}}
+.hero .h1{font-size:clamp(28px,3.4vw,44px);font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.hero .big2{font-size:clamp(34px,4.6vw,66px);font-weight:600;line-height:1.28;letter-spacing:-.03em}
+.hero .sub{font-size:16px;color:rgba(255,255,255,.72);margin-top:22px;line-height:1.7}
+.hero .sub i{text-wrap:balance}
+.slide .ink{position:relative;display:inline-block;white-space:nowrap}
+.slide .ink::after{content:attr(data-text);position:absolute;inset:0;color:transparent;background:linear-gradient(90deg,#7D9BFF,#4FD1FF);-webkit-background-clip:text;background-clip:text;clip-path:inset(0 100% 0 0)}
+.on .ink::after{animation:ink 1.3s cubic-bezier(.65,0,.35,1) calc(var(--d,0s) + .8s) forwards}
+@keyframes ink{to{clip-path:inset(0 0 0 0)}}
+.hero .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;margin-top:40px;transition:background .2s}
+.hero .go:hover{background:#1B44D6}
+.pg{position:absolute;z-index:2;left:0;right:0;bottom:34px;display:flex;justify-content:center;align-items:center;gap:22px}
+.pg [data-i]{display:flex;align-items:center;gap:12px;padding:10px 0;font:700 13px Manrope,sans-serif;color:rgba(255,255,255,.55);transition:color .3s}
+.pg [data-i][aria-current="true"]{color:#fff}
+.pg [data-i] i{width:56px;height:2px;background:rgba(255,255,255,.2);position:relative;overflow:hidden}
+.pg [data-i] i::after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(var(--p,0))}
+.pz[hidden]{display:none}
+.pz{width:34px;height:34px;border:1px solid rgba(255,255,255,.3);border-radius:50%;display:grid;place-items:center}
+.pz::before{content:"";width:8px;height:10px;border-left:2px solid #fff;border-right:2px solid #fff}
+.pz.play::before{width:0;height:0;border:0;border-left:9px solid #fff;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px}
+
+/* 2 걱정 */
+.worry{padding:180px 0}
+.worry .wrap{display:grid;grid-template-columns:5fr 6fr;gap:80px}
+.big{font-size:clamp(36px,3.75vw,54px);font-weight:600;line-height:1.25;letter-spacing:-.02em;color:#021A2C}
+.big em{font-style:normal;color:var(--warn)}
+.worry .lead{font-size:17px;color:var(--sub);margin-top:28px;max-width:440px}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:64px 56px;align-content:start;padding-top:8px}
+.grid4 small,.cols3 small{display:block;font-size:13px;font-weight:600;color:var(--mute);margin-bottom:12px}
+.grid4 h3{font-size:20px;font-weight:600;line-height:1.35;letter-spacing:-.02em;color:var(--ink-2)}
+.grid4 p{font-size:15px;color:var(--sub);margin-top:12px;line-height:1.7}
+
+/* 4 견적 이야기(스크롤) */
+.story{height:340vh;background:var(--black);color:#fff}
+.story .stick{position:sticky;top:0;height:100svh;display:grid;grid-template-rows:1fr auto;padding-top:64px}
+.stage{display:grid;place-items:center;padding:24px var(--pad) 8px;min-height:0}
+.board{width:min(760px,100%);border:1px solid var(--black-line);border-radius:14px;padding:22px 26px;background:rgba(255,255,255,.02);font-size:14px}
+.bd-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--black-line);color:var(--black-sub);font-size:13px}
+.bd-h b{color:#fff;font-size:15px;font-weight:600}
+.models{display:flex;gap:8px;padding:18px 0;border-bottom:1px solid var(--black-line)}
+.models span{flex:1;text-align:center;padding:10px 6px;border:1px solid var(--black-line);border-radius:8px;color:var(--black-sub);font-weight:600;transition:border-color .4s,color .4s,background .4s}
+.models span.on{border-color:var(--blue-on-dark);color:#fff;background:rgba(125,155,255,.1)}
+.models span i{font-style:normal;display:block;font-size:12px;font-weight:500;color:var(--black-sub)}
+.rows{list-style:none}
+.rows li{display:grid;grid-template-columns:1fr auto 84px;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:opacity .4s}
+.rows li .p{text-align:right;font-variant-numeric:tabular-nums;color:var(--black-sub);white-space:nowrap}
+.rows li.off{opacity:.35}
+.rows li.off .n{text-decoration:line-through}
+.rows li.dim{opacity:.22}
+.tg{width:38px;height:22px;border-radius:11px;border:1px solid rgba(255,255,255,.35);position:relative;transition:background .3s,border-color .3s}
+.tg::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.55);transition:transform .3s,background .3s}
+.tg.on{background:var(--blue);border-color:var(--blue)}
+.tg.on::after{transform:translateX(16px);background:#fff}
+.tg.lock{border-style:dashed}
+.tg.lock::after{display:none}
+.bd-f{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-top:18px}
+.bd-f .k{color:var(--black-sub);font-size:13px}
+.total{font-family:Manrope,"Pretendard Variable",sans-serif;font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;margin-top:6px}
+.total small{font-size:18px;font-weight:600;margin-left:3px}
+.saved{color:var(--save);font-weight:700;font-size:15px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s;text-align:right}
+.saved.on{opacity:1;transform:none}
+.saved i{display:block;font-style:normal;font-weight:500;font-size:12px;color:var(--black-sub)}
+.prog{padding:0 var(--pad) 48px;max-width:var(--w);margin:0 auto;width:100%}
+.track{position:relative;height:40px;margin-bottom:24px}
+.track::before{content:"";position:absolute;left:0;right:0;top:20px;height:1px;background:var(--black-line)}
+.track .fill{position:absolute;left:0;top:20px;height:1px;background:var(--blue-on-dark);width:100%;transform-origin:left;transform:scaleX(0)}
+.dots{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center}
+.dots span{width:9px;height:9px;transform:rotate(45deg);background:#3a3d44;transition:background .3s}
+.dots span.on{background:var(--blue-on-dark)}
+.dots b{font-family:Manrope,sans-serif;font-size:40px;font-weight:300;color:var(--blue-on-dark);line-height:1;background:var(--black);padding:0 12px}
+.cap{display:grid;grid-template-columns:6fr 5fr;gap:60px;align-items:end;min-height:120px}
+.cap small{display:block;font-size:15px;font-weight:600;color:#fff;margin-bottom:8px}
+.cap h2{font-size:clamp(22px,2.2vw,32px);font-weight:600;line-height:1.4;letter-spacing:-.02em}
+.cap h2 em{font-style:normal;color:var(--blue-on-dark)}
+.cap p{font-size:14px;color:var(--black-sub);line-height:1.75}
+
+/* 5 약속 3단 */
+.promise{padding:180px 0 160px}
+.promise .head{max-width:760px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:88px}
+.cols3 h3{font-size:24px;font-weight:600;line-height:1.3;letter-spacing:-.02em;color:var(--ink)}
+.cols3 p{font-size:15px;color:var(--sub);margin-top:16px;line-height:1.75}
+
+/* 6 모델(탭) */
+.models-sec{padding:160px 0;background:#F6F7F9}
+.center{text-align:center}
+.center .lead{font-size:17px;color:var(--sub);margin:24px auto 0;max-width:560px}
+.tabs{display:flex;justify-content:center;gap:36px;margin-top:56px;flex-wrap:wrap}
+.tabs button{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:var(--mute);padding:6px 0}
+.tabs button::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:transparent;transition:background .2s}
+.tabs button[aria-selected=true]{color:var(--ink)}
+.tabs button[aria-selected=true]::before{background:var(--blue)}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:48px;background:#fff;border-radius:16px;padding:56px 64px}
+.panel .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px}
+.panel h3{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.panel .who{color:var(--sub);margin-top:10px}
+.panel .price{margin-top:28px;font-size:15px;color:var(--sub)}
+.panel .price b{font-family:Manrope,sans-serif;font-size:40px;font-weight:700;color:var(--ink);letter-spacing:-.03em;margin-right:4px}
+.inc{list-style:none;margin-top:28px;border-top:1px solid var(--line)}
+.inc li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.inc li span{color:var(--blue);font-weight:600;font-size:13px;white-space:nowrap}
+.inc li.x{color:var(--mute)} .inc li.x span{color:var(--mute)}
+.panel .btn{display:inline-flex;align-items:center;height:50px;padding:0 26px;border-radius:6px;background:var(--ink);color:#fff;font-weight:700;margin-top:32px;transition:background .2s}
+.panel .btn:hover{background:#1c2333}
+.panel .pic{background:#EEF1F5;border-radius:12px;aspect-ratio:4/3;overflow:hidden}
+.panel .pic img{width:100%;height:100%;object-fit:cover}
+
+/* 7 FAQ */
+.faq{padding:160px 0}
+.faq .wrap{display:grid;grid-template-columns:4fr 4fr 4fr;gap:56px}
+.faq .big{font-family:Manrope,sans-serif;font-size:54px}
+.faq .intro p{color:var(--sub);margin-top:20px;font-size:15px}
+.faq h3{font-size:20px;font-weight:700;color:#384F5E;margin-bottom:12px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:18px 32px 18px 0;font-size:15px;font-weight:500;position:relative;color:var(--ink-2)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:24px;width:8px;height:8px;border-right:1.5px solid var(--mute);border-bottom:1.5px solid var(--mute);transform:rotate(45deg);transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg);top:28px}
+details p{padding:0 0 18px;font-size:14px;color:var(--sub);line-height:1.75}
+
+/* 8 바닥 */
+.end{background:var(--black);color:#fff;padding:140px 0 120px;text-align:center}
+.end h2{font-size:clamp(30px,3.4vw,48px);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.end h2 em{font-style:normal;color:var(--blue-on-dark)}
+.end .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700;margin-top:40px}
+.end .alt{display:block;margin-top:18px;font-size:14px;color:var(--black-sub);text-decoration:underline;text-underline-offset:3px}
+footer{background:#020304;color:rgba(255,255,255,.55);font-size:13px;padding:32px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{text-decoration:underline}
+
+@media (max-width:1024px){
+  :root{--pad:28px}
+  .worry .wrap{grid-template-columns:1fr;gap:56px}
+  .cols3{grid-template-columns:1fr;gap:44px;margin-top:56px}
+  .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
+  .panel .pic{order:-1}
+  .faq .wrap{grid-template-columns:1fr 1fr}
+  .faq .intro{grid-column:1/-1}
+  .cap{grid-template-columns:1fr;gap:12px}
+}
+@media (max-width:640px){
+  :root{--pad:20px}
+  .hd-r .txt{display:none}
+  .worry,.promise,.models-sec,.faq{padding:104px 0}
+  .grid4{grid-template-columns:1fr;gap:40px}
+  .board{padding:16px;font-size:13px}
+  .bd-h span{display:none}
+  .stage{padding:8px var(--pad) 0;place-items:start center}
+  .models{padding:12px 0}
+  .models span{padding:8px 2px;font-size:12px}
+  .models span i{display:none}
+  .rows li{grid-template-columns:1fr auto 60px;gap:10px;padding:7px 0}
+  .rows li:nth-child(2){display:none}
+  .tg{width:32px;height:19px}
+  .tg::after{width:11px;height:11px}
+  .tg.on::after{transform:translateX(13px)}
+  .bd-f{padding-top:12px}
+  .bd-f .k{font-size:12px}
+  .saved{font-size:13px}
+  .total{font-size:30px}
+  .dots b{font-size:28px}
+  .prog{padding-bottom:28px}
+  .cap{min-height:150px}
+  .cap p{display:none}
+  .tabs{gap:18px}
+  .tabs button{font-size:15px}
+  .panel{padding:28px 20px}
+  .panel h3{font-size:28px}
+  .faq .wrap{grid-template-columns:1fr;gap:40px}
+  .faq .big{font-size:44px}
+}
+@media (max-height:720px) and (max-width:640px){
+  .bd-h,.models,.rows li:first-child,.rows li:last-child{display:none}
+  .cap small{display:none}
+  .models{padding:10px 0}
+  .rows li{padding:6px 0}
+  .bd-f{padding-top:10px}
+  .total{font-size:28px}
+  .cap h2{font-size:19px}
+  .cap{min-height:120px}
+  .track{margin-bottom:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}}
+</style>
+</head>
+<body>
+<!-- shortcut: 시안 표시. 금액 확정되면 이 줄을 지움 -->
+<div class="draft" aria-hidden="true">시안 · 금액은 초안</div>
+
+
+<header id="hd" class="on">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="TAXMIN 처음으로"><b>TAX<span>MIN</span></b></a>
+    <div class="hd-r"><a class="txt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡 상담</a><a class="hd-btn" href="build.html">견적 내기</a></div>
+  </div>
+</header>
+
+<main id="top">
+<!-- 1 첫 화면 -->
+<section class="hero" aria-labelledby="h1">
+  <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 자동차 옵션 고르듯, 필요한 것만 콕. 이제, 기장도 필요한 것만 골라 쓸 차례입니다.</h1>
+  <div class="bg bg0 on" aria-hidden="true">
+    <div class="dash" id="dash">
+      <div class="pn k"><small>이번 달 카드 매출</small><b data-n="18420000">0</b><i>홈택스 자동 수집</i></div>
+      <div class="pn k"><small>현금영수증 매출</small><b data-n="2315000">0</b><i>홈택스 자동 수집</i></div>
+      <div class="pn k"><small>세금계산서 매입</small><b data-n="6780000">0</b><i>공제 가능 6,120,000</i></div>
+      <div class="pn k hl"><small>부가세 예상</small><b data-n="1284600">0</b><i>신고 1월 25일까지</i></div>
+      <div class="pn tbl">
+        <p class="pt">거래 분류<span>AI 분류 · 담당자 검토</span></p>
+        <ul id="tx">
+          <li><time>11.03</time><span>카드 매출 정산</span><em>1,240,000</em><b data-c="매출">분류 중</b></li>
+          <li><time>11.05</time><span>식자재 도매 매입</span><em>482,000</em><b data-c="원재료비">분류 중</b></li>
+          <li><time>11.08</time><span>배달앱 수수료</span><em>96,500</em><b data-c="지급수수료">분류 중</b></li>
+          <li><time>11.12</time><span>사무용품 구입</span><em>38,200</em><b data-c="소모품비">분류 중</b></li>
+          <li><time>11.15</time><span>직원 식대</span><em>64,000</em><b data-c="복리후생비">분류 중</b></li>
+          <li><time>11.20</time><span>현금영수증 매출</span><em>310,000</em><b data-c="매출">분류 중</b></li>
+          <li><time>11.25</time><span>아르바이트 급여</span><em>1,150,000</em><b data-c="인건비">분류 중</b></li>
+        </ul>
+      </div>
+      <div class="pn quote">
+        <p class="pt">내 기장 견적<span>택스민 라이트</span></p>
+        <ul>
+          <li><span>월 매출·매입 관리 · 부가세 신고</span><em>기본</em></li>
+          <li><span>전담 담당자 · 세무사 상담·검수</span><em>기본</em></li>
+          <li><span>인건비 신고 4~5명</span><em>+1만원</em><i class="tg"></i></li>
+          <li><span>일용직·프리랜서 신고</span><em>+1만원</em><i class="tg"></i></li>
+          <li id="cutrow"><span>매달 손익 리포트</span><em>+2만원</em><i class="tg" id="cuttg"></i></li>
+        </ul>
+        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">9</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
+      </div>
+      <div class="pn bars">
+        <p class="pt">월별 매출<span>2026년</span></p>
+        <div class="bw" id="bars"><i style="--h:.42"></i><i style="--h:.48"></i><i style="--h:.55"></i><i style="--h:.5"></i><i style="--h:.62"></i><i style="--h:.66"></i><i style="--h:.72"></i><i style="--h:.69"></i><i style="--h:.78"></i><i style="--h:.84"></i><i style="--h:.92"></i><i style="--h:.3" class="now"></i></div>
+      </div>
+      <svg class="cur" id="cur" viewBox="0 0 24 24"><path d="M4 2l15 9-6.5 1.6L9.6 19z" fill="#fff" stroke="#0B0F17" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <i class="ring" id="ring"></i>
+    </div>
+  </div>
+  <div class="bg bg1" aria-hidden="true"><video id="vid" src="img/hero_consult.mp4" poster="img/hero_consult.jpg" muted loop playsinline preload="metadata"></video></div>
+  <div class="in">
+    <div class="stack" aria-hidden="true">
+      <div class="slide on">
+        <p class="kicker ln"><i>필요한 것만 고르는 신개념 기장 서비스</i></p>
+        <p class="name ln" aria-hidden="true"><i><svg class="nm" viewBox="70 4 460 104"><defs><linearGradient id="nmg" x1="0" x2="1"><stop offset="0" stop-color="#7D9BFF" stop-opacity="0"/><stop offset=".5" stop-color="#6F8FFF"/><stop offset="1" stop-color="#7D9BFF" stop-opacity="0"/></linearGradient><clipPath id="nmc"><text x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text></clipPath></defs><text class="t" x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text><g clip-path="url(#nmc)"><rect class="sh" x="-220" y="0" width="180" height="124" fill="url(#nmg)"/></g></svg></i></p>
+        <p class="h1"><span class="ln"><i>자동차 옵션 고르듯,</i></span><span class="ln"><i>필요한 것만 콕.</i></span></p>
+        <p class="sub"><span class="ln"><i>나에게 맞는 옵션만 골라 필요 없는 비용을 줄여요.</i></span><span class="ln"><i>장부와 신고는 경력 담당자가, 상담과 검수는 세무사가 합니다.</i></span></p>
+      </div>
+      <div class="slide">
+        <p class="big2"><span class="ln"><i>이제, 기장도</i></span><span class="ln"><i><span class="ink" data-text="필요한 것만 골라">필요한 것만 골라</span> 쓸 차례입니다.</i></span></p>
+        <p class="sub"><span class="ln"><i>쓰지 않는 서비스는 빼고,</i></span><span class="ln"><i>꼭 필요한 관리는 그대로 받으세요.</i></span></p>
+      </div>
+    </div>
+    <a class="go" href="build.html">내 기장 견적 내기</a>
+  </div>
+  <div class="pg" role="group" aria-label="첫 화면 장면 고르기">
+    <button type="button" data-i="0" aria-current="true" aria-label="01 장면: 필요한 것만 콕"><b>01</b><i></i></button>
+    <button type="button" data-i="1" aria-current="false" aria-label="02 장면: 필요한 것만 골라 쓸 차례"><b>02</b><i></i></button>
+    <button type="button" class="pz" id="pz" aria-label="움직임 멈추기"></button>
+  </div>
+</section>
+
+<!-- 2 걱정 -->
+<section class="worry" aria-labelledby="w-h">
+  <div class="wrap">
+    <div>
+      <h2 class="big" id="w-h">기장료가 낮으면,<br>관리도 <em>낮아질까</em><br>걱정되시죠.</h2>
+      <p class="lead">기장료를 낮춘 곳에서 흔히 듣는 이야기들이에요. 택스민은 이 걱정에서 출발했습니다.</p>
+    </div>
+    <div class="grid4">
+      <div><small>담당자</small><h3>담당자가 또 바뀌었대요.<br>처음부터 다시 설명해야 해요.</h3><p>사람이 자주 바뀌면 우리 가게 사정을 아는 사람이 없어져요.</p></div>
+      <div><small>답변</small><h3>물어보면 답이<br>믿음직하지 않아요.</h3><p>세법은 가게마다 적용이 달라서, 대충 한 답은 나중에 비용이 돼요.</p></div>
+      <div><small>소통</small><h3>연락이 잘 안 되고,<br>신고는 늘 급하게 해요.</h3><p>마감 직전에 자료를 찾느라 장사에 집중하기 어려워요.</p></div>
+      <div><small>비용</small><h3>쓰지도 않는 서비스까지<br>한꺼번에 내고 있어요.</h3><p>직원이 없는데 인건비 신고 값까지 묶여 있는 경우도 있어요.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 4 견적 이야기 -->
+<section class="story" id="story" aria-label="택스민 견적이 정해지는 과정">
+  <div class="stick">
+    <div class="stage">
+      <div class="board" id="board" aria-hidden="true">
+        <div class="bd-h"><b>우리 가게 기장 견적</b><span>음식점·카페 · 개인사업자</span></div>
+        <div class="models" id="mods"><span data-m="lite">택스민 라이트<i>월 5만원</i></span><span data-m="std">택스민<i>월 7만원부터</i></span><span data-m="corp">택스민 법인<i>월 10만원부터</i></span></div>
+        <ul class="rows" id="rows"></ul>
+        <div class="bd-f"><div><p class="k">예상 월 기장료 · 부가세 별도</p><p class="total" id="total">5<small>만원</small></p></div><p class="saved" id="saved">같은 서비스, 월 2만원 줄었어요<i>예시 계산</i></p></div>
+      </div>
+    </div>
+    <div class="prog">
+      <div class="track"><span class="fill" id="fill"></span><div class="dots" id="dots"></div></div>
+      <div class="cap" id="cap" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 약속 -->
+<section class="promise" aria-labelledby="p-h">
+  <div class="wrap">
+    <div class="head"><h2 class="big" id="p-h">기장료는 고르고,<br>관리는 그대로 받으세요.</h2></div>
+    <div class="cols3">
+      <div><small>담당자</small><h3>담당자가 바뀌지 않아요.</h3><p>개업 후 지금까지 그만둔 직원이 없어요. 처음 만난 담당자가 우리 가게를 계속 맡아요.</p></div>
+      <div><small>세무사</small><h3>세무사가 직접 상담하고, 답변을 검수해요.</h3><p>세무 판단이 필요한 질문은 세무사가 직접 답하고, 담당자 답변도 세무사가 한 번 더 확인해요.</p></div>
+      <div><small>소통</small><h3>카톡으로 바로 묻고, 일정은 먼저 받아요.</h3><p>자료는 카톡으로 주고받고, 신고 일정은 마감 전에 저희가 먼저 알려 드려요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 모델 -->
+<section class="models-sec" aria-labelledby="m-h">
+  <div class="wrap">
+    <div class="center">
+      <h2 class="big" id="m-h">우리 가게에 맞는<br>모델을 고르세요.</h2>
+      <p class="lead">작년 매출과 사업자 형태에 따라 해야 할 일이 달라요. 모델을 고른 뒤 필요한 옵션만 더하면 됩니다.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="모델" id="tabs"></div>
+    <div class="panel" role="tabpanel" id="panel"></div>
+  </div>
+</section>
+
+<!-- 7 FAQ -->
+<section class="faq" aria-labelledby="f-h">
+  <div class="wrap">
+    <div class="intro"><h2 class="big" id="f-h">FAQ</h2><p>견적부터 시작까지,<br>자주 묻는 것만 모았어요.</p></div>
+    <div>
+      <h3>기장료와 모델</h3>
+      <details><summary>견적 금액이 실제 기장료와 같나요?</summary><p>예상 금액이에요. 장부 양이나 업종 특성에 따라 상담 때 달라질 수 있고, 달라지면 까닭을 먼저 말씀드려요. 모든 금액은 부가세 별도예요.</p></details>
+      <details><summary>모델은 어떻게 정해지나요?</summary><p>개인사업자는 작년 매출이 업종 기본 구간 이하면 택스민 라이트, 넘으면 택스민이에요. 법인은 택스민 법인이에요.</p></details>
+      <details><summary>한 번 모델을 고르면 끝나나요?</summary><p>아니요. AI가 매달 매출을 모아 연말 매출을 예상하고, 복식부기 의무나 성실신고 확인 기준에 가까워지면 담당자가 먼저 확인해요. 달라지는 의무와 절세 방법, 법인 전환까지 세무사가 설명하고, 사장님이 동의하신 경우에만 서비스와 기장료를 바꿔요.</p></details>
+      <details><summary>종합소득세·법인세 신고도 해 주나요?</summary><p>네. 신고 수수료는 기장료와 따로이고, 신고 전에 금액을 먼저 알려 드려요.</p></details>
+      <details><summary>중간에 직원이 늘면 어떻게 되나요?</summary><p>옵션만 바뀌어요. 바뀌는 달 전에 금액을 먼저 알려 드려요.</p></details>
+    </div>
+    <div>
+      <h3>담당자와 상담</h3>
+      <details><summary>담당자는 어떤 사람이 맡나요?</summary><p>기장 경력이 있는 담당자가 맡고, 세무 판단이 필요한 질문은 세무사가 직접 답해요. 담당자 답변도 세무사가 검수해요.</p></details>
+      <details><summary>담당자가 중간에 바뀌지 않나요?</summary><p>개업 후 지금까지 그만둔 직원이 없어요. 처음 담당자가 계속 맡아요.</p></details>
+      <details><summary>사무실에 가야 하나요?</summary><p>아니요. 상담부터 자료 주고받기까지 카톡과 전화로 끝나요.</p></details>
+      <details><summary>다른 곳에서 옮겨 오기 어렵지 않나요?</summary><p>홈택스 수임 동의만 다시 해 주시면 돼요. 지난 장부를 받아 오는 일은 저희가 안내해 드려요.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="end" aria-labelledby="e-h">
+  <div class="wrap">
+    <h2 id="e-h">필요 없는 비용은 빼고,<br><em>필요한 관리</em>만 받으세요.</h2>
+    <a class="go" href="build.html">내 기장 견적 내기</a>
+    <a class="alt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡으로 먼저 물어보기 · 평일 10:00~17:30</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(세무사)</span><a href="#">개인정보처리방침</a></div></footer>
+
+<script>
+// 견적판 예시 — build.html 기준과 같은 숫자(만원/월, 부가세 별도):
+// 택스민 라이트 5 + 인건비 4~5명 1 + 일용직·프리랜서 1 + 매달 손익 리포트 2 = 9 → 손익 리포트를 빼면 7 (정확히 2만원)
+const ROWS = [
+  {n:'월 매출·매입 관리 · 부가세 신고', p:'기본', lock:true},
+  {n:'전담 담당자 · 세무사 상담·검수', p:'기본', lock:true},
+  {n:'인건비 신고 4~5명', v:1},
+  {n:'일용직·프리랜서 신고', v:1},
+  {n:'매달 손익 리포트', v:2, cut:true},
+  {n:'종합소득세 신고', p:'수수료 별도', lock:true},
+];
+const BASE = 5, FULL = BASE + ROWS.reduce((s,r)=>s+(r.v||0),0);
+console.assert(FULL===9 && FULL-2===7, '예시 9만원 → 7만원');
+const $ = id => document.getElementById(id);
+$('rows').innerHTML = ROWS.map((r,i)=>`<li><span class="n">${r.n}</span><span class="tg ${r.lock?'lock':'on'}"></span><span class="p">${r.v?'+'+r.v+'만원':r.p}</span></li>`).join('');
+
+const CAPS = [
+  {s:'모델을 고릅니다', h:'작년 매출과 사업자 형태로 <em>우리 가게 모델</em>이 정해집니다.', p:'음식점·카페 개인사업자, 작년 매출이 기본 구간 이하라면 택스민 라이트. 장부·부가세 신고·인건비 신고(3명까지)·전담 담당자·세무사 상담이 기본으로 들어 있어요.'},
+  {s:'옵션을 콕 고릅니다', h:'자동차 옵션처럼, <em>필요한 것만</em> 더하고 나머지는 뺍니다.', p:'직원이 4~5명이면 인건비 신고, 일용직이 있으면 일용직·프리랜서 신고를 더해요. 매달 손익 리포트처럼 당장 필요 없는 건 빼면 됩니다.'},
+  {s:'같은 서비스, 낮아진 기장료', h:'필요 없는 옵션을 뺐더니 <em>기장료가 2만원 줄었어요.</em>', p:'장부와 신고, 담당자와 세무사 검수는 그대로예요. 쓰지 않는 옵션 값만 빠졌어요. 위 금액은 예시 계산이며 모든 금액은 부가세 별도입니다.'},
+];
+const rowsEl = [...$('rows').children], modsEl = [...$('mods').children];
+let step = -1;
+function drawDots(s){ $('dots').innerHTML = CAPS.map((_,i)=> i===s ? `<b>0${i+1}</b>` : `<span class="${i<s?'on':''}"></span>`).join(''); }
+const totalEl = $('total'), fillEl = $('fill'), endEl = document.querySelector('.end');
+function setStep(s, t){
+  modsEl.forEach(m=> m.classList.toggle('on', m.dataset.m==='lite'));
+  const opt = s>=1, cut = s>=2 || (s===1 && t>.6);
+  rowsEl.forEach((li,i)=>{ const r = ROWS[i];
+    li.classList.toggle('dim', !r.lock && !opt);
+    if (r.cut){ li.classList.toggle('off', cut); li.querySelector('.tg').classList.toggle('on', !cut); } });
+  const tv = (!opt ? BASE : cut ? FULL-2 : FULL) + '<small>만원</small>';
+  if (totalEl.innerHTML !== tv) totalEl.innerHTML = tv;
+  $('saved').classList.toggle('on', s>=2);
+  if (s!==step){
+    step = s; drawDots(s);
+    const c = CAPS[s];
+    $('cap').innerHTML = `<div><small>0${s+1} · ${c.s}</small><h2>${c.h}</h2></div><div><p>${c.p}</p></div>`;
+  }
+}
+
+const story = $('story'), hd = $('hd');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(() => {
+// 첫 화면: 두 장면이 번갈아 나옴.
+// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 손익 리포트를 꺼서 기장료 9→7만원)
+// ② 뒤 = 상담 실사 영상(Pexels 7844855, 무료 사용 허락) 어둡게
+// 모든 움직임은 장면 시계(elapsed) 하나로 그림 — 멈춤 단추를 누르면 시계가 서서 다 같이 멈춤
+const hero = document.querySelector('.hero'), dash = $('dash'), vid = $('vid');
+const bgs = [...hero.querySelectorAll('.bg')], slides = [...hero.querySelectorAll('.slide')];
+const pgBtns = [...hero.querySelectorAll('.pg [data-i]')], pz = $('pz');
+const DUR = 7000;
+const clamp = x => Math.max(0, Math.min(1, x));
+const eo = x => 1 - Math.pow(1 - clamp(x), 3);
+const eio = x => { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2; };
+const won = n => Math.round(n).toLocaleString('ko-KR');
+const nums = [...dash.querySelectorAll('.k b')], rows = [...dash.querySelectorAll('#tx li')], bars = [...dash.querySelectorAll('#bars i')];
+const cutRow = $('cutrow'), cutTg = $('cuttg'), qn = $('qn'), qsave = $('qsave'), cur = $('cur'), ring = $('ring');
+let cur0 = [0, 0], cur1 = [0, 0], ds = 1, dx = 0, raf = 0, seen = true, last = 0, elapsed = 0, curSlide = 0, paused = reduce;
+
+const off = (el) => { let x = 0, y = 0; while (el && el !== dash) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; };
+function layout(){
+  const w = hero.clientWidth, h = hero.clientHeight;
+  const dh = dash.offsetHeight, qd = dash.querySelector('.quote');
+  if (w >= 700) { ds = Math.min(w*.94/1280, h*.92/dh); dx = 0; }
+  else { ds = h*.78/dh; dx = -(qd.offsetLeft + qd.offsetWidth/2 - 640); } // 휴대폰: 견적 칸을 가운데로
+  const t = off(cutTg); cur1 = [t[0] + 15, t[1] + 9];
+  const q = off(dash.querySelector('.quote')); cur0 = [q[0] + 60, q[1] + 40];
+  drawDash(reduce ? 1e5 : elapsed);
+}
+// t(ms) 시점의 화면을 그림
+function drawDash(t){
+  const k = t/DUR;
+  dash.style.transform = `translate(-50%,-50%) scale(${ds}) translateX(${dx}px) perspective(1800px) rotateX(${14 - 5*eio(k)}deg) translateY(${-20*eio(k)}px)`;
+  nums.forEach((b, i) => { const v = +b.dataset.n*eo((t - 150 - i*120)/1500); const s = won(v); if (b.textContent !== s) b.textContent = s; });
+  rows.forEach((li, i) => {
+    const a = clamp((t - 500 - i*380)/350); li.style.opacity = a; li.style.transform = `translateY(${(1 - a)*8}px)`;
+    const c = li.querySelector('b'), done = t > 1000 + i*380;
+    if (c.classList.contains('ok') !== done) { c.classList.toggle('ok', done); c.textContent = done ? c.dataset.c : '분류 중'; }
+  });
+  bars.forEach((b, i) => b.style.transform = `scaleY(${eo((t - 900 - i*60)/700)})`);
+  // 커서: 3.4초부터 손익 리포트 칸으로 가서 4.4초에 누름
+  const m = eio((t - 3400)/1000), on = t > 3200 && t < 6400;
+  cur.style.opacity = on ? 1 : 0;
+  cur.style.transform = `translate(${cur0[0] + (cur1[0] - cur0[0])*m}px,${cur0[1] + (cur1[1] - cur0[1])*m}px)`;
+  const r = clamp((t - 4400)/450);
+  ring.style.opacity = t > 4400 && r < 1 ? 1 - r : 0;
+  ring.style.transform = `translate(${cur1[0]}px,${cur1[1]}px) scale(${.4 + r})`;
+  const cut = t > 4400;
+  cutTg.classList.toggle('off', cut); cutRow.classList.toggle('cut', cut);
+  const q = String(Math.round(9 - 2*eo((t - 4450)/600))); if (qn.textContent !== q) qn.textContent = q;
+  qsave.classList.toggle('on', t > 4900);
+}
+function frame(now){
+  raf = 0;
+  const dt = last ? Math.min(50, now - last) : 0; last = now;
+  if (!paused) { elapsed += dt; if (elapsed >= DUR) show((curSlide + 1) % 2); }
+  pgBtns.forEach((b, i) => b.style.setProperty('--p', i === curSlide ? clamp(elapsed/DUR).toFixed(3) : 0));
+  if (curSlide === 0) drawDash(elapsed);
+  if (seen && !reduce) raf = requestAnimationFrame(frame);
+}
+function stagger(sl, base){ sl.querySelectorAll('.ln').forEach((l, k) => l.style.setProperty('--d', (base + k*.08).toFixed(2) + 's')); }
+function show(i){
+  elapsed = 0;
+  if (i === curSlide) return;
+  const old = slides[curSlide]; old.classList.remove('on'); old.classList.add('out');
+  clearTimeout(old._t); old._t = setTimeout(() => old.classList.remove('out'), 700);
+  const nw = slides[i]; clearTimeout(nw._t); nw.classList.remove('out');
+  bgs[curSlide].classList.remove('on'); bgs[i].classList.add('on');
+  curSlide = i; stagger(nw, .45); nw.classList.add('on');
+  pgBtns.forEach((b, k) => b.setAttribute('aria-current', k === i));
+  if (i === 1) { vid.currentTime = 0; if (!paused) vid.play().catch(() => {}); }
+  else { setTimeout(() => { if (curSlide === 0) vid.pause(); }, 1300); drawDash(reduce ? 1e5 : 0); }
+}
+pgBtns.forEach(b => b.addEventListener('click', () => show(+b.dataset.i)));
+function setPaused(v){
+  paused = v; pz.setAttribute('aria-label', v ? '움직임 다시 재생' : '움직임 멈추기'); pz.classList.toggle('play', v);
+  if (curSlide === 1) { if (v) vid.pause(); else vid.play().catch(() => {}); }
+}
+pz.addEventListener('click', () => setPaused(!paused));
+setPaused(paused);
+pz.hidden = reduce; // 줄임 설정이면 움직이는 것이 없으니 단추도 숨김
+stagger(slides[0], .15);
+new IntersectionObserver(([e]) => {
+  seen = e.isIntersecting;
+  if (!seen) vid.pause(); else if (curSlide === 1 && !paused) vid.play().catch(() => {});
+  if (seen && !raf && !reduce) { last = 0; raf = requestAnimationFrame(frame); }
+}).observe(hero);
+let rz = 0; addEventListener('resize', () => { if (!rz) rz = requestAnimationFrame(() => { rz = 0; layout(); }); });
+document.fonts.ready.then(() => { layout(); if (!raf && !reduce) raf = requestAnimationFrame(frame); });
+layout();
+console.assert(eio(0) === 0 && eio(1) === 1 && eo(1) === 1, '모션 곡선 끝값');
+})();
+
+function onScroll(){
+  // 머리: 첫 화면·검은 칸 위에서는 투명, 흰 칸 위에서는 흰 바탕
+  const r = story.getBoundingClientRect();
+  const p = Math.min(.999, Math.max(0, -r.top / (r.height - innerHeight)));
+  const s = Math.floor(p*3);
+  setStep(s, p*3 - s);
+  fillEl.style.transform = `scaleX(${p})`;
+}
+let sq = 0; const queue = () => { if (!sq) sq = requestAnimationFrame(() => { sq = 0; onScroll(); }); };
+addEventListener('scroll', queue, {passive:true}); addEventListener('resize', queue);
+onScroll();
+
+// 모델 탭
+const MODELS = [
+  {k:'lite', name:'택스민 라이트', tag:'BEST · 많이 선택한 통합형 기장 서비스', who:'작년 매출이 업종 기본 구간 이하인 개인사업자', price:'5', unit:'만원 / 월', img:'ledger_lite',
+   inc:[['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['전담 담당자','기본'],['세무사 직접 상담·답변 검수','기본'],['종합소득세 신고','수수료 별도',1]]},
+  {k:'std', name:'택스민', tag:'매출이 커진 가게', who:'작년 매출이 업종 기본 구간을 넘은 개인사업자', price:'7', unit:'만원부터 / 월', img:'ledger_std',
+   inc:[['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['매달 매출 보고서','기본'],['전담 담당자 · 세무사 상담·검수','기본'],['종합소득세 신고','수수료 별도',1]]},
+  {k:'corp', name:'택스민 법인', tag:'법인사업자', who:'법인사업자 · 장부와 거래량을 보고 상담 때 확정', price:'10', unit:'만원부터 / 월', img:'ledger_corp',
+   inc:[['법인 장부','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['매달 매출 보고서','기본'],['전담 담당자 · 세무사 상담·검수','기본'],['법인세 신고','수수료 별도',1]]},
+];
+const tabs = $('tabs'), panel = $('panel');
+tabs.innerHTML = MODELS.map((m,i)=>`<button role="tab" id="tab-${m.k}" aria-controls="panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${m.name}</button>`).join('');
+function showModel(i){
+  const m = MODELS[i];
+  [...tabs.children].forEach((b,j)=>{ b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1; });
+  panel.setAttribute('aria-labelledby', 'tab-'+m.k);
+  panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.name}</h3><p class="who">${m.who}</p>
+    <p class="price"><b>${m.price}</b>${m.unit} · 부가세 별도</p>
+    <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
+    <a class="btn" href="build.html?model=${m.k}#making">${m.name} 견적 내기</a></div>
+    <div class="pic"><img src="img/${m.img}.jpg" alt="${m.name} 장부 그림" loading="lazy"></div>`;
+}
+tabs.addEventListener('click', e=>{ const b=e.target.closest('[role=tab]'); if(b) showModel(+b.dataset.i); });
+tabs.addEventListener('keydown', e=>{ const i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
+  const n = e.key==='ArrowRight' ? (i+1)%3 : e.key==='ArrowLeft' ? (i+2)%3 : -1; if(n<0) return; e.preventDefault(); showModel(n); tabs.children[n].focus(); });
+showModel(0);
+</script>
+</body>
+</html>
