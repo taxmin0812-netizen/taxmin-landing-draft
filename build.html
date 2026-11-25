@@ -160,6 +160,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 .ask label{display:flex;align-items:center;gap:8px;min-height:40px;padding:6px 10px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;font-weight:600;color:var(--sub);cursor:pointer}
 .ask label:has(input:checked){box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
 .ask input{width:16px;height:16px;flex:none;accent-color:var(--blue)}
+.ask .hi{position:relative}.ask .hi label{padding-right:36px}.ask .hi .qi{position:absolute;right:10px;top:50%;margin:-9px 0 0}
 .ask .note{line-height:1.6}
 
 /* 아래 설계 띠 */
@@ -499,18 +500,18 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
         <div><div class="seg c6" id="sales" role="group" aria-labelledby="h-sales"></div><p class="note" id="snote"></p></div></div>
       <div class="row" id="r-sit"><h2 id="h-sit"><b aria-hidden="true"></b><span id="h-sit-t">우리 가게 상황</span><span class="sr done-t">, 답함</span></h2>
         <div class="qs">
-          <div class="q"><h3 id="q-staff">직원이 있으세요?</h3>
+          <div class="q"><h3><span id="q-staff">직원이 있으세요?</span><button type="button" class="qi" data-qi="pay"></button></h3>
             <div class="seg st" role="group" aria-labelledby="q-staff">
               <button type="button" class="ch" data-g="staff" data-v="none" aria-pressed="false">없어요</button>
               <div class="step" id="stepper"><button type="button" class="pm" data-g="staff" data-v="dec" aria-label="직원 한 명 줄이기">−</button><button type="button" class="n" data-g="staff" data-v="pick" aria-pressed="false" id="stepn">직원 있어요</button><button type="button" class="pm" data-g="staff" data-v="inc" aria-label="직원 한 명 늘리기">+</button></div>
             </div>
             <p class="note" id="staffnote"></p></div>
-          <div class="q" id="q-co-wrap"><h3 id="q-co">대표가 둘 이상인가요?</h3>
+          <div class="q" id="q-co-wrap"><h3><span id="q-co">대표가 둘 이상인가요?</span><button type="button" class="qi" data-qi="co"></button></h3>
             <div class="seg c2" role="group" aria-labelledby="q-co">
               <button type="button" class="ch" data-g="co" data-i="0" aria-pressed="false">아니요, 혼자예요</button>
               <button type="button" class="ch" data-g="co" data-i="1" aria-pressed="false" id="co-yes"></button>
             </div></div>
-          <div class="q"><h3 id="q-cpa">장부를 누가 볼까요?</h3>
+          <div class="q"><h3><span id="q-cpa">장부를 누가 볼까요?</span><button type="button" class="qi" data-qi="cpa"></button></h3>
             <div class="seg c2" role="group" aria-labelledby="q-cpa">
               <button type="button" class="ch" data-g="cpa" data-i="0" aria-pressed="false">전담 담당자 + 세무사 검토</button>
               <button type="button" class="ch" data-g="cpa" data-i="1" aria-pressed="false" id="cpa-yes"></button>
@@ -652,6 +653,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
   </form>
 </dialog>
 
+<script src="js/svc-help.js"></script>
 <script>
 // ★ 기준표(초안) — 숫자·품목만 바꾸면 화면 전체가 따라 바뀜. 단위 만원/월, 부가세 별도.
 //   사용자 11/25: 모든 견적은 기본 4만원에서 시작 → 일반 개인 5 · 매출 큰 개인 7 · 법인 10.
@@ -748,7 +750,7 @@ const chip = (g, i, label, ic) => `<button type="button" class="ch" data-g="${g}
 $('type').innerHTML = TYPES.map((t,i)=>chip('type', i, t[1], t[2])).join('');
 $('biz').innerHTML = BIZ.map((b,i)=>chip('biz', i, b[0], b[2])).join('');
 $('sales').innerHTML = SALES.map((s,i)=>chip('sales', i, s[0])).join('');
-$('help').innerHTML = HELP.map(h=>`<label><input type="checkbox" value="${h[0]}">${h[1]}</label>`).join('');
+$('help').innerHTML = HELP.map(h=>`<div class="hi"><label><input type="checkbox" value="${h[0]}">${h[1]}</label>${QI.btn(h[0])}</div>`).join('');
 $('co-yes').innerHTML = `예, 공동사업장 <small>+${P('co')}만원</small>`;
 $('cpa-yes').innerHTML = `세무사가 직접 <small>+${P('cpa')}만원</small>`;
 
@@ -823,8 +825,9 @@ function stack(r, R){
   console.assert(B.reduce((s,b)=>s+(b.p||0),0)===r.total, '기장료 쌓기 합계 = 월 기장료');
   return B;
 }
+const QK = {base:'base', pay:'pay', payoff:'pay', co:'co', cooff:'co', cpa:'cpa', cpa0:'review'}; // 쌓기 줄 → '?' 설명(js/svc-help.js)
 const stackHTML = (B, prev) => B.map(b=> b.hint ? `<li class="hint">${b.hint}</li>`
-  : `<li class="${[b.q && 'q', b.off && 'off', prev && !prev.has(b.k) && 'new'].filter(Boolean).join(' ')}"><b class="a">${b.p ? (b.k==='base' ? '' : '+') + b.p + '만원' : '–'}</b><span><span class="l">${b.l}</span><span class="w">${b.w}</span></span></li>`).join('');
+  : `<li class="${[b.q && 'q', b.off && 'off', prev && !prev.has(b.k) && 'new'].filter(Boolean).join(' ')}"><b class="a">${b.p ? (b.k==='base' ? '' : '+') + b.p + '만원' : '–'}</b><span><span class="l">${b.l}${QI.btn(QK[b.k] || '')}</span><span class="w">${b.w}</span></span></li>`).join('');
 // 한 줄 요약: 월 8만원 = 기본 4 + 매출 3 + 직원 1
 const lineHTML = (B, prev) => { const c = B.filter(b=>b.p);
   return `<b class="sl-t">월 <span class="js-tot"></span></b><span class="sl-eq">=</span><span class="sl-c">`
@@ -909,6 +912,9 @@ function showTotal(to, unit, from){
   put(from); countRaf = requestAnimationFrame(tick);
 }
 
+// 설계를 처음 마치면 전환 신호 한 번(js/track.js 의 TM_TRACK 이 있을 때만 — 없으면 아무것도 안 함)
+var calcSent = false;
+function calcDone(){ if (calcSent || typeof window.TM_TRACK !== 'function') return; calcSent = true; const r = est(sel); window.TM_TRACK('calc_complete', {tier: r.open ? '-' : SIZE[r.m][0], price: $('bt').textContent}); }
 function draw(what){
   const r = est(sel), corp = T(sel)==='법인';
   // 고른 칸 표시
@@ -927,6 +933,7 @@ function draw(what){
   // 답한 단계 체크(넓은 화면 동그라미 · 휴대폰 단계 막대)
   const done = [!!sel.type, sel.biz!=null, sel.sales!=null, sel.staff!=null && sel.cpa!=null && (corp || sel.co!=null)];
   ['r-type','r-biz','r-sales','r-sit'].forEach((id,i)=> $(id).classList.toggle('done', done[i]));
+  if (what && done[0] && done[1] && done[2] && !matchMedia('(max-width:720px)').matches) calcDone();
   document.querySelectorAll('#wzs [data-step]').forEach((b,i)=> b.classList.toggle('done', !!done[i]));
   // 매출 아래 한 줄
   const b = sel.biz!=null ? [bizName(sel.biz), BIZ[sel.biz][1]] : null, upT = r.up ? ` · 매출 구간 +${r.up}만원` : '', askT = r.m!=='lite' && (r.sc===3 || (sel.sales!=null && SALES[sel.sales][2])) ? ' · 상담 때 확정' : '';
@@ -1001,6 +1008,7 @@ function go(n, still){
   mk.style.transform = on ? `translateX(${-step*100}%)` : '';
   panes.forEach((p,i)=> p.inert = on && i!==step); // 안 보이는 단계는 눌리거나 읽히지 않게
   document.body.classList.toggle('wz-last', on && step===panes.length-1);
+  if (on && !still && step===panes.length-1) calcDone();
   $('wzback').disabled = step===0;
   stepBtns.forEach((b,i)=> i===step ? b.setAttribute('aria-current','step') : b.removeAttribute('aria-current'));
   fit();

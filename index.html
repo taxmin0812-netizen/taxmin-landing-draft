@@ -67,7 +67,7 @@ header.on .hd-tel{color:var(--ink)}
 .hero{position:relative;height:calc(100svh - 64px);margin-top:64px;min-height:580px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#06080B}
 .bg{position:absolute;inset:0;opacity:0;transition:opacity .4s ease}
 .bg.on{opacity:1;transition-delay:.4s}
-.bg video{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.42);animation:heroPush 20s ease-in-out infinite alternate}
+.bg video{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.6);animation:heroPush 20s ease-in-out infinite alternate}
 @keyframes heroPush{from{transform:scale(1.08)}to{transform:scale(1)}}
 .hero.still .bg video{animation-play-state:paused}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 58% 44% at 50% 52%,rgba(5,6,8,.82),rgba(5,6,8,.25) 75%,rgba(5,6,8,.15)),linear-gradient(180deg,rgba(5,6,8,.25),rgba(5,6,8,0) 25%,rgba(5,6,8,0) 60%,rgba(5,6,8,.8))}
@@ -85,11 +85,6 @@ header.on .hd-tel{color:var(--ink)}
 .hero .sub b{color:#fff;font-weight:600}
 .hero .sub span{display:inline-block}
 .hero .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;margin-top:36px;transition:background .2s}
-.pg{position:absolute;z-index:2;right:24px;bottom:24px}
-.pz[hidden]{display:none}
-.pz{width:32px;height:32px;border:1px solid rgba(255,255,255,.25);opacity:.7;border-radius:50%;display:grid;place-items:center}
-.pz::before{content:"";width:8px;height:10px;border-left:2px solid #fff;border-right:2px solid #fff}
-.pz.play::before{width:0;height:0;border:0;border-left:9px solid #fff;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px}
 /* 휴대폰(11/25 2차): 영상을 4:3으로 크게 위에, 그 아래는 검정 대신 '지금 장면' 그림을 흐리고 어둡게 깔아 한 장의 그림처럼.
    흐린 바탕은 .bg 안에 있어 장면과 함께 바뀜(앞 장면이 사라진 뒤 다음 장면 — 겹침 없음). 장면마다 --pos 로 사람·손이 안 잘리게. */
 @media (max-width:700px){
@@ -103,8 +98,6 @@ header.on .hd-tel{color:var(--ink)}
   .hero .in{padding:8px 20px 52px;text-shadow:0 1px 14px rgba(0,0,0,.35)}
   .hero .kicker{font-size:16px}
   .nm{margin:8px auto 14px}
-  .pg{top:12px;bottom:auto;right:12px}
-  .pz{background:rgba(6,8,11,.35)}
 }
 
 /* 2 걱정 */
@@ -341,6 +334,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a{text-decoration:underline}
 footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
 
+/* 휴대폰 아래 고정 단추: 첫 화면을 지나면 올라오고, 맨 위로 돌아가면 내려감 */
+.mcta{display:none}
+@media (max-width:720px){
+  .mcta{display:block;position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -1px 0 #E6E8EC;transform:translateY(100%);visibility:hidden;transition:transform .3s ease,visibility 0s .3s}
+  .mcta.on{transform:none;visibility:visible;transition:transform .3s ease}
+  .mcta a{display:flex;align-items:center;justify-content:center;height:52px;border-radius:8px;background:var(--blue);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
+  body.mcta-on{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){.mcta,.mcta.on{transition:none}}
+
 @media (hover:hover){
 .hero .go:hover{background:#1B44D6}
 .st-slide:not(.on):hover{opacity:.6}
@@ -442,9 +445,6 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
       <p class="sub"><span>기장 문의 상담은 대표세무사가 직접 응대하고,</span><br><span>시작부터 방향을 확실하게 잡아드려요.</span></p></div>
     </div>
     <a class="go" href="build.html">내 기장 설계하기</a>
-  </div>
-  <div class="pg">
-    <button type="button" class="pz" id="pz" aria-label="움직임 멈추기"></button>
   </div>
 </section>
 
@@ -624,6 +624,8 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
 
 <footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(대표세무사) · 주소 서울시 강서구 공항대로 194, 7층 717~718</span><span>전화 <a class="tel" href="tel:050714457729">0507-1445-7729</a> · <a href="privacy.html">개인정보처리방침</a></span><!-- 공개 전에 꼭: [등록번호] 세무사 등록번호 --><!-- shortcut: 시안 표시. 금액 확정되면 이 줄을 지움 --><small class="draft">시안 · 금액은 초안</small></div></footer>
 
+<div class="mcta" id="mcta"><a href="build.html" data-pos="sticky">기장료 설계해 보기</a></div>
+
 <!-- 접수: js/lead.js(taxminlp.com 전화 상담 예약과 같은 구글 Apps Script 접수처·같은 칸 이름)로 보냄. 시트의 '시안' 칸에 custom-main 으로 남음 -->
 <dialog class="ldg" id="lead" aria-labelledby="lead-h">
   <form id="leadf" novalidate>
@@ -641,6 +643,7 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
   </form>
 </dialog>
 
+<script src="js/svc-help.js"></script>
 <script src="js/lead.js"></script>
 <script>
 // 견적판 예시 — build.html 기준과 같은 숫자(만원/월, 부가세 별도):
@@ -683,8 +686,8 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // 첫 화면: 장면 1(미팅룸 영상 + '필요한 것만 고르는' 문구) ↔ 장면 2(계획도 영상 + '대표세무사 직접' 문구) 7초마다(11/25 사용자 요청 1→2→1→2).
 // TAXMIN 글자와 단추는 고정이라 글 없는 순간이 없음.
 // 잔상 금지(11/25 사용자): 앞 영상이 먼저 어두워진 뒤(.4s) 다음 영상이 나옴 — 겹치는 순간 없음.
-// 멈춤 단추를 누르면 영상이 멈춤. 움직임 줄임 설정이면 첫 장면 그림만.
-const hero = document.querySelector('.hero'), bgs = [...hero.querySelectorAll('.bg')], vids = bgs.map(b => b.querySelector('video')), alts = [...hero.querySelectorAll('[data-alt]')], pz = $('pz');
+// 멈춤 단추는 없앰(11/26 사용자). 움직임 줄임 설정이면 첫 장면 그림만(영상 재생·장면 넘김 없음).
+const hero = document.querySelector('.hero'), bgs = [...hero.querySelectorAll('.bg')], vids = bgs.map(b => b.querySelector('video')), alts = [...hero.querySelectorAll('[data-alt]')];
 const DUR = 7000;
 let cur = 0, paused = reduce, seen = true, timer = 0;
 function show(i){
@@ -695,11 +698,8 @@ function show(i){
 }
 function arm(){ clearTimeout(timer); if (!paused && seen) timer = setTimeout(() => { show((cur + 1) % bgs.length); arm(); }, DUR); }
 function play(){ const v = vids[cur]; if (!paused && seen) v.play().catch(() => {}); else v.pause(); }
-function setPaused(v){ paused = v; pz.setAttribute('aria-label', v ? '움직임 다시 재생' : '움직임 멈추기'); pz.classList.toggle('play', v); hero.classList.toggle('still', v); play(); arm(); }
-pz.addEventListener('click', () => setPaused(!paused));
-pz.hidden = reduce;
 new IntersectionObserver(([e]) => { seen = e.isIntersecting; play(); arm(); }).observe(hero);
-setPaused(paused);
+hero.classList.toggle('still', paused); play(); arm();
 })();
 
 // 견적 이야기: 카드 세 장을 옆으로 밀어 넘김(손가락·트랙패드·마우스 끌기·키보드 화살표), 저절로 넘어가지 않음
@@ -754,7 +754,7 @@ function showModel(i){
   [...tabs.children].forEach((b,j)=>{ b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1; });
   panel.setAttribute('aria-labelledby', 'tab-'+m.k);
   panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.h}</h3><p class="who">${m.who}</p>
-    <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
+    <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}"><div class="inc-n">${x[0]}${QI.btn(QI.key(x[0]))}</div><span>${x[1]}</span></li>`).join('')}</ul>
     <a class="btn" href="build.html?p=${m.k}">이 상황으로 설계하기</a></div>
     <div class="fit-pic">${m.img ? `<img src="${m.img}" alt="" loading="lazy">` : `<video class="lv" src="img/v_${m.k}.mp4" poster="img/v_${m.k}.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>`}</div>`;
 }
@@ -794,6 +794,12 @@ function slideNext(track){
 autoAdvance($('track'), 5000, () => slideNext($('track')));
 autoAdvance($('pftrack'), 3500, () => slideNext($('pftrack')));
 FITS.forEach(m=>{ const im = new Image(); im.src = m.img || `img/v_${m.k}.jpg`; }); // 탭 바꿀 때 첫 장면이 바로 뜨게 미리 받음
+// 휴대폰 아래 고정 단추: 첫 화면이 화면에서 위로 벗어나면 보임(넓은 화면은 CSS 로 숨김)
+(() => {
+  const bar = $('mcta'), hero = document.querySelector('.hero');
+  if (!bar || !hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([e]) => { const on = !e.isIntersecting && e.boundingClientRect.top < 0; bar.classList.toggle('on', on); document.body.classList.toggle('mcta-on', on); }).observe(hero);
+})();
 // 연락처 남기기 창
 (() => {
   const d = document.getElementById('lead'), f = document.getElementById('leadf'), msg = f.querySelector('.lead-msg');
