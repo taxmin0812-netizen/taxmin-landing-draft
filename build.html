@@ -18,6 +18,7 @@
 <title>내 기장 설계 | 택스민</title>
 <meta name="description" content="사업자 형태·업종·작년 매출과 우리 가게 상황에 답하면 내 기장 설계안과 월 기장료가 바로 나와요. 모든 설계는 기본 4만원에서 시작해요.">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<script src="js/lead.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
@@ -166,17 +167,8 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 /* 고를 때마다 알림: 화면 읽기 프로그램에만 읽힘. 눈에 보이는 알림은 띠 안의 요약 자리에 2초(본문을 가리지 않게) */
 .toast{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
-/* 휴대폰: 아래에서 올라오는 설계안 */
-.sheet{border:0;padding:0;margin:auto auto 0;width:100%;max-width:100%;max-height:88svh;border-radius:16px 16px 0 0;background:#fff;color:var(--ink);overflow:auto;overscroll-behavior:contain}
-.sheet::backdrop{background:rgba(2,6,23,.45)}
-.sheet[open]{animation:sheetIn .25s ease}
-@keyframes sheetIn{from{transform:translateY(24px);opacity:.6}}
-.sheet-hd{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px;background:#fff}
-.sheet-hd h2{font-size:17px;font-weight:700}
-.sheet-hd button{height:36px;padding:0 12px;border-radius:6px;box-shadow:inset 0 0 0 1px #C9CED6;font-size:14px;font-weight:600}
-.sheet .rc{box-shadow:none;padding:0 20px 8px}
-.sheet-ft{position:sticky;bottom:0;padding:12px 20px 16px;background:#fff;box-shadow:0 -1px 0 var(--line)}
-.sheet-ft button{width:100%;height:48px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700}
+/* 휴대폰 전용(내 상황 띠·단계 이동) — 넓은 화면에서는 숨김. 휴대폰 배치는 맨 아래 @media (max-width:720px) */
+.me-wrap,.wz-next{display:none}
 
 /* 설계서 보내기 창 */
 .ldg{border:0;padding:0;margin:auto;width:min(460px,calc(100% - 32px));max-height:calc(100svh - 32px);overflow:auto;border-radius:12px;background:#fff;color:#020617;box-shadow:0 24px 64px rgba(2,6,23,.22)}
@@ -295,6 +287,8 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 .care-steps p{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.7}
 .care-sec .care{margin-top:0;border-top:0}
 .foot{font-size:12px;color:var(--mute);padding:28px 0 8px;border-top:1px solid #DDE1E7;margin-top:56px}
+.foot a,.ldg .agree a{text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.ldg .lead-msg.ok{color:#1B7F4B}
 
 @media (hover:hover){
 .ch:hover,.ask label:hover{box-shadow:inset 0 0 0 1px #B9BFC8}
@@ -320,10 +314,6 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 }
 /* 화면 높이가 넉넉하면 고르는 칸이 따라오고 긴 설계안만 내려감 */
 @media (min-width:1025px) and (min-height:880px){.mk > div:first-child{position:sticky;top:72px}}
-@media (max-width:720px){
-  .bar .t{cursor:pointer}
-  .bar .t .cv{display:block}
-}
 @media (max-width:640px){
   :root{--pad:20px}
   .hd .sep,.hd .cur{display:none}
@@ -355,12 +345,73 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 }
 @media (max-width:400px){.bar .go .lg{display:none}.bar .go .sm{display:inline}.bar .wrap{gap:8px}.bar .go{padding:0 12px}.ldg .two{grid-template-columns:1fr}}
 @media (max-width:360px){.seg.c2 .ch,.seg.c3 .ch{font-size:14px;gap:6px;padding:4px 6px}.ch svg.i{width:20px;height:20px}.seg.st{grid-template-columns:1fr}.ask .chk{grid-template-columns:1fr}}
+/* ── 휴대폰(720px 이하): 한 화면에 한 단계씩 옆으로 넘기는 설계. 위 '내 상황' 띠는 늘 보임 ── */
+@media (max-width:720px){
+  body{padding-bottom:0}
+  body.wz-last{padding-bottom:var(--bar)}
+  header{height:56px}
+  .me-wrap{display:block;position:sticky;top:56px;z-index:45;background:#fff;box-shadow:0 1px 0 var(--line)}
+  .me{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 14px;width:100%;padding:10px var(--pad) 8px;text-align:left}
+  .me-c{display:flex;flex-wrap:wrap;font-size:14px;font-weight:700;color:var(--ink);line-height:1.4}
+  .me-c span:not(:last-child)::after{content:"·";margin:0 5px;color:#9AA1AC;font-weight:400}
+  .me-c .emp{color:var(--mute);font-weight:600}
+  .me-s{grid-column:1/-1;font-size:12.5px;color:var(--sub);line-height:1.45}
+  .me-p{grid-column:2;grid-row:1;align-self:start;display:flex;align-items:center;gap:2px}
+  .me-p b{display:block;font-family:Manrope,"Pretendard Variable",sans-serif;font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .me-p b small{font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:0;margin-left:1px}
+  .me-p svg.i{width:16px;height:16px;stroke-width:2;color:var(--blue);transform:rotate(90deg);margin-right:-3px}
+  .me-c{min-height:28px;align-items:center}
+  .wz-steps{display:grid;grid-template-columns:auto repeat(5,minmax(0,1fr));gap:6px;padding:0 var(--pad) 6px}
+  .wz-steps button{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;min-height:36px;padding-bottom:3px;font-size:12px;font-weight:600;color:var(--mute);white-space:nowrap}
+  .wz-steps button::before{content:"";height:3px;border-radius:2px;background:var(--line);transition:background-color .25s}
+  .wz-steps button.done{color:var(--ink-2)}
+  .wz-steps button.done::before{background:#9AA1AC}
+  .wz-steps button[aria-current=step]{color:var(--blue);font-weight:700}
+  .wz-steps button[aria-current=step]::before{background:var(--blue)}
+  .wz-steps .back{flex-direction:row;align-items:center;justify-content:flex-start;gap:0;padding:0 6px 0 0;margin-left:-4px;font-size:13px;color:var(--ink-2)}
+  .wz-steps .back::before{display:none}
+  .wz-steps .back svg.i{width:18px;height:18px;stroke-width:2;transform:rotate(-90deg)}
+  .wz-steps .back:disabled{color:#C5CAD3}
+  .rc{box-shadow:0 0 0 1px var(--line)}
+  /* 단계 화면: 옆으로 늘어선 칸을 밀어서 하나만 보여 줌(높이는 지금 단계에 맞춤) */
+  .wzv{overflow:hidden;transition:height .25s ease}
+  .mk{display:flex;align-items:flex-start;gap:0;max-width:none;padding:0;transition:transform .25s ease}
+  .wzv.still,.wzv.still .mk{transition:none}
+  .mk > div:first-child,.form{display:contents}
+  .mk h1,.mk .lead{display:none}
+  .row,.side{flex:0 0 100%;min-width:0;padding:24px var(--pad) 32px}
+  .row{display:block;border:0}
+  .row > h2{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.3;padding:0;margin-bottom:16px;outline-offset:4px}
+  .row > h2 b{display:none}
+  .ch{min-height:56px;border-radius:10px;font-size:16px}
+  #type{grid-template-columns:1fr}
+  #type .ch{min-height:72px;justify-content:flex-start;gap:14px;padding:0 20px;font-size:17px}
+  #type .ch svg.i{width:28px;height:28px}
+  #biz,#sales{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #biz .ch{min-height:64px;justify-content:flex-start;padding:6px 14px;text-align:left}
+  #sales .ch{min-height:56px;font-size:16px}
+  .qs{gap:24px}
+  .q h3{font-size:16px;margin-bottom:10px}
+  .step{min-height:56px;border-radius:10px}
+  .wz-next{display:block;width:100%;height:54px;margin-top:28px;border-radius:10px;background:var(--blue);color:#fff;font-size:16px;font-weight:700}
+  .own .send{display:none}
+  .bar{display:none}
+  body.wz-last .bar{display:block}
+  .bar .m,.bar .t{display:none}
+  .bar .wrap{gap:8px}
+  .bar .go{flex:1;justify-content:center;height:50px;padding:0 12px;font-size:15px}
+  .bar .go .lg{display:none}.bar .go .sm{display:inline}
+  .bar .go.line{flex:1.7;background:var(--blue);color:#fff;box-shadow:none}
+  .bar a.go{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px #C9CED6}
+  body:not(.wz-last) .care-sec{display:none}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.toast{transform:none}}
 /* 종이로 저장: 설계안 종이만 */
 @media print{
   @page{margin:14mm}
   body{padding:0;background:#fff}
-  header,.bar,.toast,.care-sec,.mk > div:first-child,.side > :not(.rc),dialog{display:none!important}
+  header,.bar,.toast,.care-sec,.me-wrap,.mk > div:first-child,.side > :not(.rc),dialog{display:none!important}
+  .wzv{height:auto!important;overflow:visible!important}.mk{transform:none!important}
   .mk{display:block;padding:0;max-width:none}
   .side{max-width:520px;margin:0 auto}
   .rc{box-shadow:0 0 0 1px #CDD2DA;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
@@ -389,7 +440,21 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
   <a class="x" href="index.html">나가기</a>
 </div></header>
 
+<!-- 휴대폰에서만 보임: 고른 것·월 기장료·사장님 상황 한 줄(누르면 설계안) + 단계 이름 막대 -->
+<div class="me-wrap">
+  <button type="button" class="me" id="me">
+    <span class="me-c" id="mec"></span>
+    <span class="me-s" id="mes"></span>
+    <span class="me-p"><b id="mep"></b><span class="sr">, 내 설계안 보기</span><svg class="i" aria-hidden="true"><use href="#i-up"/></svg></span>
+  </button>
+  <nav class="wz-steps" id="wzs" aria-label="설계 단계">
+    <button type="button" class="back" id="wzback"><svg class="i" aria-hidden="true"><use href="#i-up"/></svg>이전</button>
+    <button type="button" data-step="0">형태</button><button type="button" data-step="1">업종</button><button type="button" data-step="2">매출</button><button type="button" data-step="3">상황</button><button type="button" data-step="4">설계안</button>
+  </nav>
+</div>
+
 <main>
+<div class="wzv" id="wzv">
 <section class="wrap mk" aria-labelledby="mh1">
   <div>
     <h1 id="mh1">우리 가게 기장, 직접 설계해 보세요.</h1>
@@ -420,6 +485,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
               <button type="button" class="ch" data-g="cpa" data-i="0" aria-pressed="false">전담 담당자 + 세무사 검토</button>
               <button type="button" class="ch" data-g="cpa" data-i="1" aria-pressed="false" id="cpa-yes"></button>
             </div></div>
+          <button type="button" class="wz-next" id="wznext">다음</button>
         </div></div>
     </div>
   </div>
@@ -444,6 +510,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
     </fieldset>
   </aside>
 </section>
+</div>
 
 <section class="care-sec" aria-labelledby="care-h">
   <div class="wrap">
@@ -517,7 +584,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
     </ol>
   </div>
   <!-- shortcut: 시안 표시. 금액·품목 확정되면 이 줄을 지움 -->
-  <p class="foot">시안 · 금액은 초안이에요.</p>
+  <p class="foot">시안 · 금액은 초안이에요. · 전화 상담 <a href="tel:050714286446">0507-1428-6446</a> · <a href="privacy.html">개인정보처리방침</a></p>
   </div>
 </section>
 </main>
@@ -526,18 +593,11 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
 <div class="bar"><div class="wrap">
   <p class="m"><span>내 설계</span><b id="bm"></b></p>
   <button type="button" class="t" id="bprice" aria-haspopup="dialog"><span class="lb">예상 월 기장료<i> · 부가세 별도</i></span><span class="ms" id="bms"></span><b><span id="bt"></span><svg class="i cv" aria-hidden="true"><use href="#i-up"/></svg></b></button>
-  <button type="button" class="go line" data-lead><span class="lg">설계안 보내기</span><span class="sm">설계안 보내기</span></button>
-  <a class="go" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener"><span class="lg">카톡으로 상담받기</span><span class="sm">카톡</span></a>
+  <button type="button" class="go line" data-lead><span class="lg">설계안 보내기</span><span class="sm">이 설계안 보내기</span></button>
+  <a class="go" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener"><span class="lg">카톡으로 상담받기</span><span class="sm">카톡 상담</span></a>
 </div></div>
 
-<!-- 휴대폰에서 띠의 금액을 누르면 여는 설계안(같은 #rc 를 잠시 옮겨 보여 줌) -->
-<dialog class="sheet" id="sheet" aria-labelledby="sheet-h">
-  <div class="sheet-hd"><h2 id="sheet-h">내 설계안</h2><button type="button" data-close-sheet>닫기</button></div>
-  <div id="sheetbody"></div>
-  <div class="sheet-ft"><button type="button" data-lead>이 설계안 보내기</button></div>
-</dialog>
-
-<!-- shortcut: 접수 연결 전 시안 — '상담 요청'을 눌러도 아무 곳에도 보내지 않고 안내만 함. 받는 곳(메일·구글 시트)이 정해지면 submit 에서 보내기 -->
+<!-- 접수: js/lead.js 의 window.TaxminLead.send() 가 있으면 그것으로 보냄. 없으면 예전처럼 '시안이라 아직 접수되지 않아요' 안내만 함 -->
 <dialog class="ldg" id="lead" aria-labelledby="lead-h">
   <form id="leadf" novalidate>
     <h2 id="lead-h">설계안 보내기</h2>
@@ -553,7 +613,8 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
     </div>
     <label><span>꼭 물어볼 것 <small>(선택)</small></span><textarea name="ask" rows="2" maxlength="300" placeholder="예: 직원 4대보험을 처음 신고해요"></textarea></label>
     </div></details>
-    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간(적으신 경우 시작 희망 달·맡긴 곳 여부·물어볼 것과 이 설계안) · 쓰는 곳: 상담 연락 · 보관: 상담이 끝나면 지움 · 동의하지 않으셔도 카톡으로 상담받을 수 있어요</small></span></label>
+    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간(적으신 경우 시작 희망 달·맡긴 곳 여부·물어볼 것과 이 설계안) · 쓰는 곳: 상담 연락 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 카톡이나 전화(<a href="tel:050714286446">0507-1428-6446</a>)로 상담받을 수 있어요 · <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a></small></span></label>
+    <label class="agree ad"><input type="checkbox" name="adConsent"><span>들어온 경로(광고·검색어)를 광고 효과 확인에 쓰는 데 동의해요 (선택)<small>받는 것: 들어온 경로·광고 이름 · 쓰는 곳: 광고 효과 확인 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 상담에는 아무 차이가 없어요</small></span></label>
     <small class="err" id="e-agree"></small>
     <p class="lead-msg" role="status" aria-live="polite"></p>
     <div class="lead-b"><button type="button" class="b-line" data-close>닫기</button><button type="submit" class="b-fill">이 설계안으로 상담 요청</button></div>
@@ -673,6 +734,9 @@ document.querySelector('.form').addEventListener('click', e=>{
   else if (g==='co'){ sel.co = i===1; what = sel.co ? '공동사업장' : '대표 혼자'; }
   else if (g==='cpa'){ sel.cpa = i===1; what = sel.cpa ? '세무사가 직접' : '담당자 + 세무사 검토'; }
   draw(what);
+  // 휴대폰: 하나만 고르는 단계는 고르고 잠깐 뒤 다음 단계로
+  const at = ['type','biz','sales'].indexOf(g);
+  if (at>=0 && phone.matches){ clearTimeout(advT); advT = setTimeout(()=> go(at+1), 250); }
 });
 $('help').addEventListener('change', e=>{ sel.help[e.target.value] = e.target.checked; });
 $('shop').addEventListener('input', ()=> draw());
@@ -723,6 +787,23 @@ function situation(){
   if (sel.biz===5) L.push('업종은 상담 때 확인해요 · 지금은 음식·제조 기준으로 보여 드려요');
   return L;
 }
+// 휴대폰 위 '내 상황' 띠: 고른 것 + 한 줄 상황(위 situation() 과 같은 법정 기준)
+function chips(s){
+  const c = [s.type || ((s.biz!=null || s.sales!=null || s.staff!=null || s.co!=null || s.cpa!=null) && '개인'), s.biz!=null && bizName(s.biz), s.sales!=null && SALES[s.sales][0], s.staff!=null && (s.staff ? `직원 ${s.staff}명${s.staff>=10?' 이상':''}` : '직원 없음'), T(s)==='개인' && s.co && '공동사업장', s.cpa && '세무사 직접'].filter(Boolean);
+  return c.length ? c.map(t=>`<span>${t}</span>`).join('') : '<span class="emp">아직 고른 게 없어요</span>';
+}
+function shortSit(s){
+  if (T(s)==='법인') return '복식부기 장부 · 부가세 1년 4번 · 법인세 3월';
+  if (s.biz==null || s.sales==null) return s.type || s.biz!=null || s.sales!=null || s.staff!=null || s.co!=null || s.cpa!=null ?'업종과 매출을 고르면 장부 기준이 보여요' : '하나씩 고르면 여기에 내 상황이 쌓여요';
+  if (s.sales===0) return '올해 시작 · 장부 종류는 상담 때 확인해요';
+  const g = LAW[BIZ[s.biz][3]], lo = SALES_LO[s.sales], hi = SALES[s.sales][2] ? Infinity : SALES[s.sales][1];
+  return (hi<=g.book ? '간편장부 대상' : lo>=g.book ? '복식부기 대상' : '복식부기 기준이 이 구간 안')
+    + ' · ' + (hi<g.sure ? `성실신고 기준까지 최소 ${eok(g.sure-hi)}` : hi===g.sure ? '성실신고 기준 바로 아래' : lo>=g.sure ? '성실신고 확인 대상 구간' : '성실신고 기준이 이 구간 안');
+}
+console.assert(shortSit(Object.assign(blank(),{biz:0,sales:3}))==='복식부기 대상 · 성실신고 기준까지 최소 2억 5천만원'
+  && shortSit(Object.assign(blank(),{biz:1,sales:2}))==='간편장부 대상 · 성실신고 기준까지 최소 12억원'
+  && shortSit(Object.assign(blank(),{biz:2,sales:4}))==='복식부기 대상 · 성실신고 확인 대상 구간'
+  && shortSit(Object.assign(blank(),{biz:0,sales:4})).endsWith('성실신고 기준이 이 구간 안'), '휴대폰 한 줄 상황');
 
 function title(){
   const shop = $('shop').value.trim();
@@ -773,11 +854,10 @@ function draw(what){
   $('staffnote').textContent = sel.staff>=4 ? '4명부터는 인원에 따라 상담 때 금액을 정해요.' : `있으면 인건비 신고(4대보험 포함) +${P('pay')}만원 · 3명까지 같은 금액이에요.`;
   $('q-co-wrap').hidden = corp;
   $('tnote').hidden = !!sel.type;
-  // 답한 단계 체크
-  $('r-type').classList.toggle('done', !!sel.type);
-  $('r-biz').classList.toggle('done', sel.biz!=null);
-  $('r-sales').classList.toggle('done', sel.sales!=null);
-  $('r-sit').classList.toggle('done', sel.staff!=null && sel.cpa!=null && (corp || sel.co!=null));
+  // 답한 단계 체크(넓은 화면 동그라미 · 휴대폰 단계 막대)
+  const done = [!!sel.type, sel.biz!=null, sel.sales!=null, sel.staff!=null && sel.cpa!=null && (corp || sel.co!=null)];
+  ['r-type','r-biz','r-sales','r-sit'].forEach((id,i)=> $(id).classList.toggle('done', done[i]));
+  document.querySelectorAll('#wzs [data-step]').forEach((b,i)=> b.classList.toggle('done', !!done[i]));
   // 매출 아래 한 줄
   const b = sel.biz!=null ? [bizName(sel.biz), BIZ[sel.biz][1]] : null, upT = r.up ? ` · 매출 구간 +${r.up}만원` : '', askT = r.m!=='lite' && (r.sc===3 || (sel.sales!=null && SALES[sel.sales][2])) ? ' · 상담 때 확정' : '';
   $('snote').innerHTML = r.open ? (corp ? `법인은 <b>사업 규모 +${SIZE.corp[1]}만원</b>부터예요 · 업종과 매출을 고르면 구간이 정해져요` : '업종과 매출을 고르면 어느 구간인지 바로 알려 드려요')
@@ -818,7 +898,9 @@ function draw(what){
   // 아래 띠
   barText();
   $('bt').textContent = r.total + unit;
-  if (lastTotal!==null && lastTotal!==r.total){ bump($('bt')); bump($('rct')); }
+  $('mec').innerHTML = chips(sel); $('mes').textContent = shortSit(sel);
+  $('mep').innerHTML = `월 ${r.total}<small>${unit}</small>`;
+  if (lastTotal!==null && lastTotal!==r.total){ bump($('bt')); bump($('rct')); bump($('mep')); }
   lastTotal = r.total;
   drawMon();
   if (what){
@@ -840,28 +922,60 @@ restore(q, sel);                                     // '이 설계 링크 복�
 document.querySelectorAll('#help input').forEach(i=> i.checked = !!sel.help[i.value]);
 draw();
 
+// 휴대폰(720px 이하): 한 화면에 한 단계씩 — 형태 → 업종 → 매출 → 상황 → 설계안. 넓은 화면에서는 아무것도 안 함
+const phone = matchMedia('(max-width:720px)'), wzv = $('wzv'), mk = wzv.firstElementChild;
+const panes = [$('r-type'), $('r-biz'), $('r-sales'), $('r-sit'), document.querySelector('.side')];
+const stepBtns = [...document.querySelectorAll('#wzs [data-step]')];
+let step = 0, advT;
+const fit = () => { wzv.style.height = phone.matches ? panes[step].offsetHeight + 'px' : ''; };
+function go(n, still){
+  const on = phone.matches, moved = n!==step;
+  step = Math.max(0, Math.min(panes.length-1, n)); clearTimeout(advT);
+  wzv.classList.toggle('still', !!still);
+  mk.style.transform = on ? `translateX(${-step*100}%)` : '';
+  panes.forEach((p,i)=> p.inert = on && i!==step); // 안 보이는 단계는 눌리거나 읽히지 않게
+  document.body.classList.toggle('wz-last', on && step===panes.length-1);
+  $('wzback').disabled = step===0;
+  stepBtns.forEach((b,i)=> i===step ? b.setAttribute('aria-current','step') : b.removeAttribute('aria-current'));
+  fit();
+  if (on && !still && moved){
+    if (window.scrollY > 0) window.scrollTo({top:0});
+    const h = panes[step].querySelector('h2'); h.tabIndex = -1; h.focus({preventScroll:true});
+  }
+  if (still) requestAnimationFrame(()=> requestAnimationFrame(()=> wzv.classList.remove('still')));
+}
+const ro = new ResizeObserver(fit); panes.forEach(p=> ro.observe(p));
+phone.addEventListener('change', ()=> go(step, true));
+$('wzback').addEventListener('click', ()=> go(step-1));
+stepBtns.forEach((b,i)=> b.addEventListener('click', ()=> go(i)));
+$('wznext').addEventListener('click', ()=> go(4));
+$('me').addEventListener('click', ()=> go(4));
+// 옆으로 밀어도 넘어감(세로 스크롤과 헷갈리지 않게 가로로 충분히 밀었을 때만)
+let tx = null, ty = 0;
+wzv.addEventListener('touchstart', e=>{ const t = e.touches[0]; tx = e.touches.length===1 ? t.clientX : null; ty = t.clientY; }, {passive:true});
+wzv.addEventListener('touchend', e=>{
+  if (tx===null || !phone.matches) return;
+  const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty; tx = null;
+  if (Math.abs(dx) > 60 && Math.abs(dx) > 1.5*Math.abs(dy) && !e.target.closest('input,textarea')) go(step + (dx<0 ? 1 : -1));
+}, {passive:true});
+// 메인 바로가기(?p=…)·설계 링크로 들어오면 고른 채로 설계안부터, 그냥 들어오면 첫 단계부터
+go(['p','model','type','t','b','s','e','co','cpa','h'].some(k=> q.has(k)) ? 4 : 0, true);
+
 // 링크 복사 · 종이로 저장
 $('copy').addEventListener('click', async ()=>{
   const qs = share(sel), url = location.origin + location.pathname + (qs ? '?' + qs : ''), m = $('ownmsg');
   try { await navigator.clipboard.writeText(url); m.textContent = `링크를 복사했어요. ${T(sel)==='법인' ? '회사' : '가게'} 이름은 링크에 넣지 않아요.`; }
   catch { m.textContent = '복사가 안 돼서 링크를 여기에 둘게요: ' + url; }
 });
-$('print').addEventListener('click', ()=>{ if (sheet.open) sheet.close(); window.print(); });
+$('print').addEventListener('click', ()=> window.print());
 
-// 휴대폰: 띠의 금액을 누르면 설계안을 아래에서 올려 보여 줌
-const sheet = $('sheet'), rc = $('rc'), rcHome = rc.parentNode, rcNext = rc.nextElementSibling, phone = matchMedia('(max-width:720px)');
-$('bprice').addEventListener('click', ()=>{
-  if (phone.matches){ $('sheetbody').append(rc); sheet.showModal(); }
-  else rc.scrollIntoView({block:'start'});
-});
-sheet.addEventListener('close', ()=> rcHome.insertBefore(rc, rcNext));
-sheet.querySelector('[data-close-sheet]').addEventListener('click', ()=> sheet.close());
-sheet.addEventListener('click', e=>{ if (e.target === sheet) sheet.close(); });
-phone.addEventListener('change', e=>{ if (!e.matches && sheet.open) sheet.close(); });
+// 띠의 금액을 누르면 설계안으로(휴대폰에서는 띠 대신 위 '내 상황'을 누름)
+const rc = $('rc');
+$('bprice').addEventListener('click', ()=> rc.scrollIntoView({block:'start'}));
 // 넓은 화면(1025px~): 오른쪽 설계안이 화면에 보이면 아래 띠를 내림 — 질문·설계안을 가리지 않음
 const bar = document.querySelector('.bar'), wide = matchMedia('(min-width:1025px)');
 let rcSeen = false;
-const setBar = () => bar.classList.toggle('away', wide.matches && rcSeen && !sheet.open);
+const setBar = () => bar.classList.toggle('away', wide.matches && rcSeen);
 new IntersectionObserver(([e])=>{ rcSeen = e.isIntersecting; setBar(); }).observe(rc);
 wide.addEventListener('change', setBar);
 
@@ -871,14 +985,14 @@ wide.addEventListener('change', setBar);
   const now = new Date();
   $('startm').innerHTML = '<option value="">아직 몰라요</option>' + [0,1,2,3].map(k=>{ const t = new Date(now.getFullYear(), now.getMonth()+k, 1); return `<option>${t.getFullYear()}년 ${t.getMonth()+1}월</option>`; }).join('');
   let from = null;
+  const sendBtn = f.querySelector('[type=submit]'), sendT = sendBtn.textContent;
   const esc = t => t.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const req = [...f.elements].filter(el=> el.required);
   const why = el => el.name==='tel' ? (el.value.trim() ? '연락처를 숫자로 적어 주세요. 예: 010-1234-5678' : '연락처를 적어 주세요.') : el.name==='agree' ? '동의에 체크해 주세요.' : '이름 또는 상호를 적어 주세요.';
   const mark = (el, show) => { const bad = !el.checkValidity(); if (!bad || show){ el.setAttribute('aria-invalid', bad); $('e-'+el.name).textContent = bad ? why(el) : ''; } };
   f.addEventListener('input', e=>{ if (req.includes(e.target)){ mark(e.target, e.target.getAttribute('aria-invalid')==='true'); msg.textContent = ''; } }); // 고치는 즉시 오류 글을 지움
   document.querySelectorAll('[data-lead]').forEach(b=> b.addEventListener('click', ()=>{
-    from = sheet.open ? $('bprice') : b; if (sheet.open) sheet.close();
-    msg.textContent = ''; req.forEach(el=>{ el.removeAttribute('aria-invalid'); $('e-'+el.name).textContent = ''; });
+    from = b; msg.textContent = ''; msg.classList.remove('ok'); sendBtn.disabled = false; sendBtn.textContent = sendT; req.forEach(el=>{ el.removeAttribute('aria-invalid'); $('e-'+el.name).textContent = ''; });
     const h = HELP.filter(x=>sel.help[x[0]]).map(x=>x[1]), r = est(sel), corp = T(sel)==='법인';
     // 화면의 설계안과 같은 줄: 기본·보고서·구간·서비스(+부가 설명)·신고 수수료 안내
     $('leadrc').innerHTML = `<b>${esc($('rcttl').textContent)}</b>`
@@ -895,12 +1009,39 @@ wide.addEventListener('change', setBar);
   f.querySelector('[data-close]').addEventListener('click', ()=> d.close());
   d.addEventListener('close', ()=>{ if (from) from.focus(); });
   d.addEventListener('click', e=>{ if (e.target === d) d.close(); }); // 바깥을 누르면 닫힘
-  f.addEventListener('submit', e=>{
+  // 보내는 설계안 글(화면의 설계안과 같은 줄)
+  const lines = () => [$('rcttl').textContent, summary() || '아직 고른 게 없어요',
+    ...R.filter(x=>!x.hint && !x.off).flatMap(x=>[`${x.l} · ${x.v || (x.base ? x.p + '만원' : '+' + x.p + '만원')}${x.sub ? ' (' + x.sub + ')' : ''}`, ...(x.base ? ['월별 매출 보고서 · 기본 포함'] : [])]),
+    `${T(sel)==='법인' ? '법인세 신고' : '종합소득세 신고'} · 신고 전 금액 안내`, `예상 월 기장료 · ${$('bt').textContent} (부가세 별도)`];
+  const FALLBACK = '카톡이나 전화(0507-1428-6446)로 상담받아 주세요.';
+  f.addEventListener('submit', async e=>{
     e.preventDefault();
     req.forEach(el=> mark(el, true));
     const bad = req.find(el=> !el.checkValidity());
     if (bad){ bad.focus(); return; }
-    msg.textContent = '시안이라 아직 접수되지 않아요. 지금은 카톡으로 상담받아 주세요.';
+    const L = window.TaxminLead;
+    if (!L || typeof L.send!=='function'){ msg.textContent = '시안이라 아직 접수되지 않아요. 지금은 ' + FALLBACK; return; }
+    const el = f.elements, utm = {};
+    new URLSearchParams(location.search).forEach((v,k)=>{ if (k.startsWith('utm_')) utm[k] = v; });
+    sendBtn.disabled = true; sendBtn.textContent = '보내는 중…'; msg.classList.remove('ok'); msg.textContent = '';
+    let res;
+    // js/lead.js 가 읽는 칸(tel·agree·when·startMonth·current·message·plan·ind·rev·emp·tier·price)과 처음 정한 칸(phone·consent·summary·choices·extras…)을 함께 보냄
+    const help = HELP.filter(x=>sel.help[x[0]]).map(x=>x[1]), ask = el.ask.value.trim(), sum = lines(), r = est(sel);
+    try {
+      res = await L.send({name: el.name.value.trim(), phone: el.tel.value.trim(), tel: el.tel.value.trim(), consent: el.agree.checked, agree: el.agree.checked, adConsent: !!(el.adConsent && el.adConsent.checked),
+        summary: sum, plan: sum.join(' / '), choices: share(sel),
+        extras: {when: el.when.value, start: el.start.value, now: el.now.value, ask, help},
+        when: el.when.value, startMonth: el.start.value, current: el.now.value,
+        message: [ask, help.length && '상담 때 같이 물어볼 것: ' + help.join(', ')].filter(Boolean).join(' · '),
+        ind: sel.biz!=null ? bizName(sel.biz) : '', rev: sel.sales!=null ? SALES[sel.sales][0] : '', emp: sel.staff!=null ? (sel.staff ? `${sel.staff}명` : '없음') : '',
+        tier: r.open ? '' : SIZE[r.m][0], price: $('bt').textContent,
+        page: 'build', ua: navigator.userAgent, ref: document.referrer, utm});
+    } catch { res = null; }
+    const ok = !!(res && res.ok), fe = !ok && res && res.field && f.elements[res.field];
+    if (fe){ fe.setAttribute('aria-invalid', true); $('e-'+res.field).textContent = res.message; fe.focus(); }
+    msg.textContent = fe ? '' : (res && res.message) ||(ok ? '보냈어요. 평일 10:00~17:30 사이에 먼저 연락드려요.' : '보내지 못했어요. ' + FALLBACK);
+    msg.classList.toggle('ok', ok);
+    sendBtn.textContent = ok ? '보냈어요' : sendT; sendBtn.disabled = ok; // 보낸 뒤에는 두 번 보내지 않게
   });
 })();
 </script>

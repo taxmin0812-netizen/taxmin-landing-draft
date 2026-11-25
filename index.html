@@ -57,6 +57,11 @@ header.on .hd-r{color:var(--sub)}
 html{scroll-padding-top:72px}
 .hd-btn{height:36px;padding:0 16px;border-radius:6px;display:inline-flex;align-items:center;background:#fff;color:var(--ink);font-weight:700}
 header.on .hd-btn{background:var(--ink);color:#fff}
+.hd-tel{display:inline-flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hd-tel svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linejoin:round}
+header.on .hd-tel{color:var(--ink)}
+@media (max-width:1180px){.hd-tel{width:36px;height:36px;justify-content:center;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line)}.hd-tel span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+.tel{font-weight:700;text-decoration:underline;text-underline-offset:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
 
 /* 1 첫 화면 — 장면 1(필요한 것만 고르는 기장) ↔ 장면 2(대표세무사 직접 상담) 7초마다. TAXMIN 글자·단추는 고정, 앞 장면이 사라진 뒤 다음이 나옴(겹침 없음) */
 .hero{position:relative;height:calc(100svh - 64px);margin-top:64px;min-height:580px;display:grid;place-items:center;text-align:center;color:#fff;overflow:hidden;background:#06080B}
@@ -85,16 +90,21 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .pz{width:32px;height:32px;border:1px solid rgba(255,255,255,.25);opacity:.7;border-radius:50%;display:grid;place-items:center}
 .pz::before{content:"";width:8px;height:10px;border-left:2px solid #fff;border-right:2px solid #fff}
 .pz.play::before{width:0;height:0;border:0;border-left:9px solid #fff;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px}
-/* 휴대폰: 가로 영상을 자르지 않고 위쪽에 통째로, 글은 바로 아래(가운데 빈 칸 없음) */
+/* 휴대폰(11/25 2차): 영상을 4:3으로 크게 위에, 그 아래는 검정 대신 '지금 장면' 그림을 흐리고 어둡게 깔아 한 장의 그림처럼.
+   흐린 바탕은 .bg 안에 있어 장면과 함께 바뀜(앞 장면이 사라진 뒤 다음 장면 — 겹침 없음). 장면마다 --pos 로 사람·손이 안 잘리게. */
 @media (max-width:700px){
-  .hero{height:auto;min-height:0;display:block;padding-top:56.25vw}
-  .hero .bg{inset:0 0 auto;height:56.25vw}
-  .hero .bg video{animation:none;filter:saturate(.95) brightness(.8)}
-  .hero::after{inset:0 0 auto;height:56.25vw;background:linear-gradient(180deg,rgba(6,8,11,0) 55%,#06080B)}
-  .hero .in{padding:20px 20px 52px}
+  .hero{height:auto;min-height:0;display:block;padding-top:75vw}
+  .hero .bg{inset:0;overflow:hidden}
+  .hero .bg::before{content:"";position:absolute;inset:-48px;background:var(--poster) center 30%/cover no-repeat;filter:blur(28px) saturate(1.2) brightness(.55)}
+  .hero .bg video{position:absolute;inset:0 0 auto;height:75vw;object-position:var(--pos,50% 50%);animation:none;filter:saturate(.95) brightness(.88);
+    -webkit-mask:linear-gradient(to top,transparent,#000 34%);mask:linear-gradient(to top,transparent,#000 34%)}
+  /* 휴대폰: 두 장면 모두 아래를 같은 방식으로 흐리게(네모·경계선 자국 없음). 2번 영상의 AI 표시는 파일에 그대로 있고 PC 에서는 그대로 보임 */
+  .hero::after{background:linear-gradient(180deg,rgba(6,8,11,0) calc(75vw - 8px),rgba(6,8,11,.42) calc(75vw + 72px),rgba(6,8,11,.6) 72%,rgba(6,8,11,.78))}
+  .hero .in{padding:8px 20px 52px;text-shadow:0 1px 14px rgba(0,0,0,.35)}
   .hero .kicker{font-size:16px}
   .nm{margin:8px auto 14px}
-  .pg{top:calc(56.25vw - 44px);bottom:auto;right:12px}
+  .pg{top:12px;bottom:auto;right:12px}
+  .pz{background:rgba(6,8,11,.35)}
 }
 
 /* 2 걱정 */
@@ -310,6 +320,11 @@ details p{padding:0 0 18px;font-size:15px;color:var(--sub);line-height:1.75}
 .ldg .lead-b button,.ldg .lead-b a{height:48px;border-radius:6px;font:inherit;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
 .ldg .b-line{background:#fff;color:#020617;border:0;box-shadow:inset 0 0 0 1px #C9CED6}
 .ldg .b-fill{background:#2554F0;color:#fff;border:0}
+.ldg .b-fill[aria-busy=true]{opacity:.7;cursor:progress}
+.ldg .agree small a{color:#2554F0;text-decoration:underline}
+.ldg form.done label,.ldg form.done .lead-s,.ldg form.done .lead-sum,.ldg form.done .b-fill,.ldg form.done #e-agree{display:none}
+.ldg form.done .lead-msg{color:#020617;font-size:16px;font-weight:500;line-height:1.7}
+.ldg form.done .lead-b{grid-template-columns:1fr}
 
 /* 8 바닥 */
 .end{position:relative;isolation:isolate;background:var(--black) url(img/end_night.jpg) center/cover no-repeat;color:#fff;padding:160px 0 140px;text-align:center}
@@ -319,7 +334,7 @@ details p{padding:0 0 18px;font-size:15px;color:var(--sub);line-height:1.75}
 .end-b{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:40px}
 .end .go{display:inline-flex;align-items:center;height:52px;padding:0 30px;border-radius:6px;background:var(--blue);color:#fff;font-weight:700}
 .end .go2{display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);color:#fff;font-weight:700;transition:background .2s}
-.end .alt{margin-top:18px;font-size:14px;color:var(--black-sub)}
+.end .note{margin-top:18px;line-height:1.8;font-size:14px;color:var(--black-sub)}
 footer{background:#020304;color:rgba(255,255,255,.55);font-size:13px;padding:32px 0}
 footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a{text-decoration:underline}
@@ -406,15 +421,16 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
 <header id="hd" class="on">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="TAXMIN 처음으로"><b>TAX<span>MIN</span></b></a>
-    <div class="hd-r"><nav class="hd-nav" aria-label="바로가기"><a href="#about">회사 소개</a><a href="#svc">서비스</a><a href="#faq">자주 묻는 질문</a></nav><a class="txt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡 상담</a><a class="hd-btn" href="build.html">내 기장 설계</a></div>
+    <div class="hd-r"><nav class="hd-nav" aria-label="바로가기"><a href="#about">회사 소개</a><a href="#svc">서비스</a><a href="#faq">자주 묻는 질문</a></nav><a class="txt" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡 상담</a><a class="hd-tel" href="tel:050714286446" aria-label="전화 상담 0507-1428-6446"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.6l1.4 4-2 1.4a12 12 0 0 0 6.5 6.5l1.4-2 4 1.4v2.6a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2z"/></svg><span>0507-1428-6446</span></a><a class="hd-btn" href="build.html">내 기장 설계</a></div>
   </div>
 </header>
 
 <main id="top">
 <!-- 1 첫 화면 -->
 <section class="hero" aria-labelledby="h1">
-  <div class="bg on" aria-hidden="true"><video src="img/hero_meet.mp4" poster="img/hero_meet.jpg" muted loop playsinline preload="auto"></video></div>
-  <div class="bg" aria-hidden="true"><video src="img/hero_plan.mp4" poster="img/hero_plan.jpg" muted loop playsinline preload="metadata"></video></div>
+  <!-- --poster: 휴대폰에서 글 뒤에 흐리게 까는 그림 · --pos: 휴대폰 4:3 자를 때 위치(계획도 장면은 오른쪽 끝 — Veo 표시가 잘리지 않게) -->
+  <div class="bg on" aria-hidden="true" style="--poster:url(img/hero_meet.jpg);--pos:55% 50%"><video src="img/hero_meet.mp4" poster="img/hero_meet.jpg" muted loop playsinline preload="auto"></video></div>
+  <div class="bg veo" aria-hidden="true" style="--poster:url(img/hero_plan.jpg);--pos:100% 50%"><video src="img/hero_plan.mp4" poster="img/hero_plan.jpg" muted loop playsinline preload="metadata"></video></div>
   <div class="in">
     <div class="alt" data-alt><p class="kicker on">“필요한 것만 고르는” 신개념 기장 서비스</p><p class="kicker" aria-hidden="true">대표세무사 직접 상담</p></div>
     <svg class="nm" viewBox="70 4 460 104" aria-hidden="true"><defs><linearGradient id="nmg" x1="0" x2="1"><stop offset="0" stop-color="#7D9BFF" stop-opacity="0"/><stop offset=".5" stop-color="#6F8FFF"/><stop offset="1" stop-color="#7D9BFF" stop-opacity="0"/></linearGradient><clipPath id="nmc"><text x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text></clipPath></defs><text class="t" x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text><g clip-path="url(#nmc)"><rect class="sh" x="-220" y="0" width="180" height="124" fill="url(#nmg)"/></g></svg>
@@ -469,7 +485,7 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
     <!-- 누가 내 장부를 보나요: 이 페이지에 이미 있는 사실만 씀(세무사 2·직원 2·1:1 짝·대표세무사 이민기·첫 상담 대표세무사·그만둔 직원 없음).
          확인 필요(사무소가 정해 주면 넣기 — 지어내지 않음):
          [사진] 대표세무사·세무사·담당 직원 사진  [이름] 짝 2 세무사·두 전담 직원 이름(정해지면 짝 1·2 모두 '직함 이름' 같은 꼴로)
-         [전화] 대표 전화번호  [주소] 사무실 주소  [등록번호] 세무사 등록번호 -->
+         [주소] 사무실 주소  [등록번호] 세무사 등록번호 -->
     <div class="team" aria-labelledby="t-h">
       <div><h3 id="t-h">누가 내 장부를 보나요</h3><p>세무사 2명과 담당 직원 2명이 1:1로 짝을 이뤄요. 사장님 장부는 한 짝이 처음부터 맡아요.</p></div>
       <div>
@@ -583,7 +599,7 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
       <h3>담당자와 상담</h3>
       <details><summary>담당자는 어떤 사람이 맡나요?</summary><p>기장 경력이 있는 담당자가 맡고, 세무 판단이 필요한 질문은 세무사가 직접 답해요. 담당자 답변도 세무사가 검수해요.</p></details>
       <details><summary>담당자가 중간에 바뀌지 않나요?</summary><p>개업 후 지금까지 그만둔 직원이 없어요. 처음 담당자가 계속 맡아요.</p></details><!-- 확인 필요: [개업 연도] 정해지면 '20XX년 개업 후 지금까지'로 -->
-      <details><summary>사무실에 가야 하나요?</summary><p>아니요. 상담부터 자료 주고받기까지 카톡으로 끝나고, 필요하면 저희가 전화드려요.</p></details>
+      <details><summary>사무실에 가야 하나요?</summary><p>아니요. 상담부터 자료 주고받기까지 카톡으로 끝나고, 필요하면 저희가 전화드려요. 전화로 먼저 물어보셔도 돼요. <a class="tel" href="tel:050714286446">0507-1428-6446</a></p></details>
       <details><summary>다른 곳에서 옮겨 오기 어렵지 않나요?</summary><p>홈택스 수임 동의만 다시 해 주시면 돼요. 지난 장부를 받아 오는 일은 저희가 안내해 드려요.</p></details>
     </div>
   </div>
@@ -597,23 +613,24 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
       <a class="go2" href="https://pf.kakao.com/_Mxojqs/chat" target="_blank" rel="noopener">카톡으로 상담받기</a>
       <button type="button" class="go2" data-lead>연락처 남기기</button>
     </div>
-    <p class="alt">상담은 평일 10:00~17:30, 카톡으로 해요. 연락처를 남기시면 저희가 전화드려요.</p>
-    <!-- 확인 필요: [전화] 대표 전화번호가 정해지면 여기에 tel: 링크 · [상담 시간] 평일 10:00~17:30 확정 -->
+    <p class="note">상담 평일 10:00~17:30 · 카톡 또는 전화 <a class="tel" href="tel:050714286446">0507-1428-6446</a><br>연락처를 남기시면 저희가 전화드려요.</p>
+    <!-- 확인 필요: [상담 시간] 평일 10:00~17:30 확정 -->
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(대표세무사)</span><span>개인정보처리방침(준비 중)</span><!-- 공개 전에 꼭: [처리방침] 본문 · [주소] 사무소 주소 · [등록번호] 세무사 등록번호 --><!-- shortcut: 시안 표시. 금액 확정되면 이 줄을 지움 --><small class="draft">시안 · 금액은 초안</small></div></footer>
+<footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(대표세무사)</span><span>전화 <a class="tel" href="tel:050714286446">0507-1428-6446</a> · <a href="privacy.html">개인정보처리방침</a></span><!-- 공개 전에 꼭: [주소] 사무소 주소(taxminlp.com 바닥에 적힌 주소와 같은지 확인 뒤 넣기) · [등록번호] 세무사 등록번호 --><!-- shortcut: 시안 표시. 금액 확정되면 이 줄을 지움 --><small class="draft">시안 · 금액은 초안</small></div></footer>
 
-<!-- shortcut: 접수 연결 전 시안 — '남기기'를 눌러도 아무 곳에도 보내지 않고 안내만 함. 받는 곳(메일·구글 시트)이 정해지면 submit 에서 보내기 -->
+<!-- 접수: js/lead.js(taxminlp.com 전화 상담 예약과 같은 구글 Apps Script 접수처·같은 칸 이름)로 보냄. 시트의 '시안' 칸에 custom-main 으로 남음 -->
 <dialog class="ldg" id="lead" aria-labelledby="lead-h">
   <form id="leadf" novalidate>
     <h2 id="lead-h">연락처 남기기</h2>
-    <p class="lead-s">남겨 주시면 평일 10:00~17:30 사이에 먼저 연락드려요.</p>
+    <p class="lead-s">남겨 주시면 평일 10:00~17:30 사이에 먼저 연락드려요. 전화로 먼저 물어보셔도 돼요. <a class="tel" href="tel:050714286446">0507-1428-6446</a></p>
     <label>이름 또는 상호<input name="name" autocomplete="name" required aria-describedby="e-name"><small class="err" id="e-name"></small></label>
     <label>연락처<input name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required pattern="[0-9\- ]{9,14}" aria-describedby="e-tel"><small class="err" id="e-tel"></small></label>
     <label>편한 연락 시간<select name="when"><option>언제든 괜찮아요</option><option>오전(10~12시)</option><option>오후(13~17시)</option></select></label>
-    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간 · 쓰는 곳: 상담 연락 · 보관: 상담이 끝나면 지움 · 동의하지 않으셔도 카톡으로 상담받을 수 있어요</small></span></label>
+    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간 · 쓰는 곳: 상담 연락 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 카톡·전화로 상담받을 수 있어요 · <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a></small></span></label>
+    <label class="agree ad"><input type="checkbox" name="adConsent"><span>들어온 경로(광고·검색어)를 광고 효과 확인에 쓰는 데 동의해요 (선택)<small>받는 것: 들어온 경로·광고 이름 · 쓰는 곳: 광고 효과 확인 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 상담에는 아무 차이가 없어요</small></span></label>
     <small class="err" id="e-agree"></small>
     <p class="lead-sum"></p>
     <p class="lead-msg" role="status" aria-live="polite"></p>
@@ -621,6 +638,7 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
   </form>
 </dialog>
 
+<script src="js/lead.js"></script>
 <script>
 // 견적판 예시 — build.html 기준과 같은 숫자(만원/월, 부가세 별도):
 // 기본 4(일반 개인은 사업 규모 금액 없음) → 보고서 0 · 인건비 1 · 공동사업장 1 을 더하면 6 → 인건비·공동사업장을 빼면 4 (정확히 2만원)
@@ -781,7 +799,7 @@ FITS.forEach(m=>{ const im = new Image(); im.src = m.img || `img/v_${m.k}.jpg`; 
   const why = el => el.name==='tel' ? (el.value.trim() ? '연락처를 숫자로 적어 주세요. 예: 010-1234-5678' : '연락처를 적어 주세요.') : el.name==='agree' ? '동의에 체크해 주세요.' : '이름 또는 상호를 적어 주세요.';
   const mark = (el, show) => { const bad = !el.checkValidity(); if (!bad || show){ el.setAttribute('aria-invalid', bad); $('e-'+el.name).textContent = bad ? why(el) : ''; } };
   f.addEventListener('input', e=>{ if (req.includes(e.target)){ mark(e.target, e.target.getAttribute('aria-invalid')==='true'); msg.textContent = ''; } }); // 고치는 즉시 오류 글을 지움
-  document.querySelectorAll('[data-lead]').forEach(b=> b.addEventListener('click', ()=>{ from = b; msg.textContent = ''; req.forEach(el=>{ el.removeAttribute('aria-invalid'); $('e-'+el.name).textContent = ''; }); d.showModal(); f.elements.name.focus(); }));
+  document.querySelectorAll('[data-lead]').forEach(b=> b.addEventListener('click', ()=>{ from = b; msg.textContent = ''; f.classList.remove('done'); req.forEach(el=>{ el.removeAttribute('aria-invalid'); $('e-'+el.name).textContent = ''; }); d.showModal(); f.elements.name.focus(); }));
   f.querySelector('[data-close]').addEventListener('click', ()=> d.close());
   d.addEventListener('close', ()=>{ if (from) from.focus(); });
   d.addEventListener('click', e=>{ if (e.target === d) d.close(); }); // 바깥을 누르면 닫힘
@@ -790,7 +808,16 @@ FITS.forEach(m=>{ const im = new Image(); im.src = m.img || `img/v_${m.k}.jpg`; 
     req.forEach(el=> mark(el, true));
     const bad = req.find(el=> !el.checkValidity());
     if (bad){ msg.textContent = ''; bad.focus(); return; }
-    msg.textContent = '시안이라 아직 접수되지 않아요. 지금은 카톡으로 상담받아 주세요.';
+    const sb = f.querySelector('.b-fill');
+    if (sb.getAttribute('aria-busy') === 'true') return;
+    sb.setAttribute('aria-busy', 'true'); sb.textContent = '보내는 중…'; msg.textContent = '';
+    TaxminLead.send({ page:'main', name: f.elements.name.value, tel: f.elements.tel.value, when: f.elements.when.value, agree: f.elements.agree.checked, adConsent: f.elements.adConsent.checked, where:'메인 연락처 남기기 창' })
+      .then(r=>{
+        sb.removeAttribute('aria-busy'); sb.textContent = '남기기';
+        if (r.ok){ f.classList.add('done'); f.reset(); msg.textContent = r.message; f.querySelector('[data-close]').focus(); return; }
+        if (r.field === 'tel'){ const t = f.elements.tel; t.setAttribute('aria-invalid', 'true'); $('e-tel').textContent = r.message; t.focus(); return; }
+        msg.textContent = r.message;
+      });
   });
 })();
 </script>
