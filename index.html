@@ -488,7 +488,7 @@ footer a{text-decoration:underline}
   <div class="wrap">
     <div class="center">
       <h2 class="big" id="m-h">이런 사장님께<br>잘 맞아요.</h2>
-      <p class="lead">우리 가게 상황을 고르면, 무엇을 챙겨 드리고 견적에서 무엇을 고르면 되는지 보여 드려요.</p>
+      <p class="lead">우리 가게 상황을 고르면, 무엇을 챙겨 드리는지 보여 드려요.</p>
     </div>
     <div class="tabs" role="tablist" aria-label="사장님 상황" id="tabs"></div>
     <div class="panel" role="tabpanel" id="panel"></div>
@@ -661,9 +661,7 @@ function showModel(i){
   panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.h}</h3><p class="who">${m.who}</p>
     <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
     <a class="btn" href="build.html?p=${m.k}">이 상황으로 견적 내기</a></div>
-    <div class="fit-pic"><video class="lv" src="img/v_${m.k}.mp4" poster="img/v_${m.k}.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-      <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>견적에서 이렇게 골라요</span></p>
-      <ul>${m.pick.map(p=>`<li>${p[0]}<em>${p[1]}</em></li>`).join('')}</ul></div></div>`;
+    <div class="fit-pic"><video class="lv" src="img/v_${m.k}.mp4" poster="img/v_${m.k}.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>`;
 }
 tabs.addEventListener('click', e=>{ const b=e.target.closest('[role=tab]'); if(b) showModel(+b.dataset.i); });
 tabs.addEventListener('keydown', e=>{ const n0 = FITS.length, i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
