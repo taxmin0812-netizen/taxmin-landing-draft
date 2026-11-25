@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>택스민 | 필요한 것만 고르는 기장 서비스</title>
 <meta name="description" content="자동차 옵션 고르듯, 필요한 것만 콕. 쓰지 않는 서비스는 빼고 기장료를 정하는 택스민.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-:root{
+:root{--soft:#F6F7F9;
   --ink:#020617; --ink-2:#191B1F; --sub:#5B6270; --mute:#646B77; --line:#E6E8EC;
   --black:#050608; --black-line:rgba(255,255,255,.14); --black-sub:rgba(255,255,255,.6);
   --blue:#2554F0; --blue-on-dark:#7D9BFF; --warn:#E5484D; --save:#2FBF71;
@@ -132,11 +132,11 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .grid4 h3{font-size:20px;font-weight:600;line-height:1.35;letter-spacing:-.02em;color:var(--ink-2)}
 .grid4 p{font-size:15px;color:var(--sub);margin-top:12px;line-height:1.7}
 
-/* 4 견적 이야기(스크롤) */
-.story{height:340vh;background:var(--black);color:#fff}
-.story .stick{position:sticky;top:0;height:100svh;display:grid;grid-template-rows:1fr auto;padding-top:64px}
-.stage{display:grid;place-items:center;padding:24px var(--pad) 8px;min-height:0}
-.board{width:min(760px,100%);border:1px solid var(--black-line);border-radius:14px;padding:22px 26px;background:rgba(255,255,255,.02);font-size:14px}
+/* 4 견적 이야기(슬라이드) */
+.story{background:var(--black);color:#fff;padding:120px 0 112px;overflow:hidden}
+.st-in{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+.board{touch-action:pan-y}
+.board{width:100%;border:1px solid var(--black-line);border-radius:14px;padding:22px 26px;background:rgba(255,255,255,.02);font-size:14px}
 .bd-h{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--black-line);color:var(--black-sub);font-size:13px}
 .bd-h b{color:#fff;font-size:15px;font-weight:600}
 .models{display:flex;gap:8px;padding:18px 0;border-bottom:1px solid var(--black-line)}
@@ -162,19 +162,25 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .saved{color:var(--save);font-weight:700;font-size:15px;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s;text-align:right}
 .saved.on{opacity:1;transform:none}
 .saved i{display:block;font-style:normal;font-weight:500;font-size:12px;color:var(--black-sub)}
-.prog{padding:0 var(--pad) 48px;max-width:var(--w);margin:0 auto;width:100%}
-.track{position:relative;height:40px;margin-bottom:24px}
-.track::before{content:"";position:absolute;left:0;right:0;top:20px;height:1px;background:var(--black-line)}
-.track .fill{position:absolute;left:0;top:20px;height:1px;background:var(--blue-on-dark);width:100%;transform-origin:left;transform:scaleX(0)}
-.dots{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:center}
-.dots span{width:9px;height:9px;transform:rotate(45deg);background:#3a3d44;transition:background .3s}
-.dots span.on{background:var(--blue-on-dark)}
-.dots b{font-family:Manrope,sans-serif;font-size:40px;font-weight:300;color:var(--blue-on-dark);line-height:1;background:var(--black);padding:0 12px}
-.cap{display:grid;grid-template-columns:6fr 5fr;gap:60px;align-items:end;min-height:120px}
-.cap small{display:block;font-size:15px;font-weight:600;color:#fff;margin-bottom:8px}
-.cap h2{font-size:clamp(22px,2.2vw,32px);font-weight:600;line-height:1.4;letter-spacing:-.02em}
+.cap{min-height:236px}
+.cap-in{animation:capIn .55s cubic-bezier(.2,.7,.2,1)}
+.cap-in.back{animation-name:capBack}
+@keyframes capIn{from{opacity:0;transform:translateX(40px)}}
+@keyframes capBack{from{opacity:0;transform:translateX(-40px)}}
+.cap small{display:block;font-size:15px;font-weight:600;color:#fff;margin-bottom:10px}
+.cap h2{font-size:clamp(24px,2.2vw,32px);font-weight:600;line-height:1.4;letter-spacing:-.02em}
 .cap h2 em{font-style:normal;color:var(--blue-on-dark)}
-.cap p{font-size:15px;color:var(--black-sub);line-height:1.75}
+.cap p{font-size:15px;color:var(--black-sub);line-height:1.75;margin-top:16px}
+.peek{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:28px}
+.peek button{text-align:left;font-size:13px;line-height:1.45;color:var(--black-sub);padding-top:10px;border-top:1px solid var(--black-line)}
+.peek button[aria-current=step]{color:#fff;border-top:2px solid var(--blue-on-dark);padding-top:9px}
+.ctl{display:flex;align-items:center;gap:12px;margin-top:32px}
+.arw{width:48px;height:48px;border-radius:50%;border:1px solid var(--black-line);display:grid;place-items:center;color:#fff;transition:background .2s,border-color .2s}
+.arw svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.arw.next{background:#fff;color:var(--ink);border-color:#fff}
+.pips{font:600 15px Manrope,sans-serif;color:var(--black-sub);margin:0 4px 0 8px;font-variant-numeric:tabular-nums}
+.pips b{color:#fff}
+.ctl .pz{margin-left:auto}
 
 /* 5 약속 3단 */
 .promise{padding:180px 0 160px}
@@ -203,8 +209,16 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .inc li span{color:var(--blue);font-weight:600;font-size:13px;white-space:nowrap}
 .inc li.x{color:var(--mute)} .inc li.x span{color:var(--mute)}
 .panel .btn{display:inline-flex;align-items:center;height:50px;padding:0 26px;border-radius:6px;background:var(--ink);color:#fff;font-weight:700;margin-top:32px;transition:background .2s}
-.panel .pic{background:#EEF1F5;border-radius:12px;aspect-ratio:4/3;overflow:hidden}
-.panel .pic img{width:100%;height:100%;object-fit:cover}
+.slip{background:var(--soft);padding:36px 40px 32px;font-variant-numeric:tabular-nums}
+.slip-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13px;color:var(--mute);padding:14px 0 10px;border-top:3px solid var(--ink);border-bottom:1px dashed #CDD2DA}
+.slip-h b{font-family:Manrope,sans-serif;font-size:16px;font-weight:800;color:var(--ink)} .slip-h b span{font-weight:300}
+.slip ul{list-style:none;padding:6px 0}
+.slip li{display:flex;justify-content:space-between;gap:12px;font-size:16px;color:var(--sub);padding:12px 0}
+.slip li em{font-style:normal;color:var(--ink);font-weight:600;white-space:nowrap}
+.slip li.o em{color:var(--blue)}
+.slip-t{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid var(--ink);padding-top:16px;font-size:14px;color:var(--sub)}
+.slip-t b{font-family:Manrope,"Pretendard Variable",sans-serif;font-size:52px;font-weight:700;color:var(--ink);letter-spacing:-.03em;line-height:1;border-bottom:4px double var(--ink);padding-bottom:4px}
+.slip-t b small{font-family:var(--font);font-size:17px;font-weight:600;margin-left:3px}
 
 /* 7 FAQ */
 .faq{padding:160px 0}
@@ -231,6 +245,8 @@ footer a{text-decoration:underline}
 
 @media (hover:hover){
 .hero .go:hover{background:#1B44D6}
+.arw:hover{border-color:rgba(255,255,255,.5)}
+.arw.next:hover{background:#DDE3F0}
 .panel .btn:hover{background:#1c2333}
 }
 @media (max-width:1024px){
@@ -238,10 +254,10 @@ footer a{text-decoration:underline}
   .worry .wrap{grid-template-columns:1fr;gap:56px}
   .cols3{grid-template-columns:1fr;gap:44px;margin-top:56px}
   .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
-  .panel .pic{order:-1}
   .faq .wrap{grid-template-columns:1fr 1fr}
   .faq .intro{grid-column:1/-1}
-  .cap{grid-template-columns:1fr;gap:12px}
+  .st-in{grid-template-columns:1fr;gap:40px}
+  .cap{min-height:0}
 }
 @media (max-width:640px){
   :root{--pad:20px}
@@ -250,12 +266,11 @@ footer a{text-decoration:underline}
   .grid4{grid-template-columns:1fr;gap:40px}
   .board{padding:16px;font-size:13px}
   .bd-h span{display:none}
-  .stage{padding:8px var(--pad) 0;place-items:start center}
+  .story{padding:88px 0 80px}
   .models{padding:12px 0}
   .models span{padding:8px 2px;font-size:12px}
   .models span i{display:none}
   .rows li{grid-template-columns:1fr auto 60px;gap:10px;padding:7px 0}
-  .rows li:nth-child(2){display:none}
   .tg{width:32px;height:19px}
   .tg::after{width:11px;height:11px}
   .tg.on::after{transform:translateX(13px)}
@@ -263,45 +278,16 @@ footer a{text-decoration:underline}
   .bd-f .k{font-size:12px}
   .saved{font-size:13px}
   .total{font-size:30px}
-  .dots b{font-size:28px}
-  .prog{padding-bottom:28px}
-  .cap{min-height:150px}
-  .cap p{font-size:13px}
   .tabs{gap:18px}
   .tabs button{font-size:15px}
   .panel{padding:28px 20px}
   .panel h3{font-size:28px}
+  .slip{padding:24px 20px 20px}
+  .slip-t b{font-size:40px}
   .faq .wrap{grid-template-columns:1fr;gap:40px}
   .faq .big{font-size:44px}
 }
-@media (min-width:900px) and (max-height:860px){
-  .story .stick{grid-template-rows:none;grid-template-columns:minmax(0,1fr) minmax(300px,400px);align-items:center;gap:32px}
-  .stage{padding:16px 0 16px var(--pad)}
-  .prog{padding:0 var(--pad) 0 0;margin:0}
-  .cap{grid-template-columns:1fr;gap:14px;min-height:0}
-  .dots b{font-size:30px}
-  .models{display:none}
-}
-@media (min-width:900px) and (max-height:640px){
-  .bd-h,.rows li:first-child{display:none}
-  .rows li{padding:8px 0}
-}
-@media (max-height:520px){
-  .story{height:auto}
-  .story .stick{position:static;height:auto}
-}
-@media (max-height:720px) and (max-width:640px){
-  .bd-h,.models,.rows li:first-child,.rows li:last-child{display:none}
-  .cap small,.cap p{display:none}
-  .models{padding:10px 0}
-  .rows li{padding:6px 0}
-  .bd-f{padding-top:10px}
-  .total{font-size:28px}
-  .cap h2{font-size:19px}
-  .cap{min-height:120px}
-  .track{margin-bottom:10px}
-}
-@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}}
+@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}.cap-in{animation:none}}
 </style>
 </head>
 <body>
@@ -339,15 +325,15 @@ footer a{text-decoration:underline}
         </ul>
       </div>
       <div class="pn quote">
-        <p class="pt">내 기장 견적<span>택스민 라이트</span></p>
+        <p class="pt">내 기장 견적<span>음식점·카페 · 개인</span></p>
         <ul>
-          <li><span>월 매출·매입 관리 · 부가세 신고</span><em>기본</em></li>
-          <li><span>전담 담당자 · 세무사 상담·검수</span><em>기본</em></li>
-          <li><span>인건비 신고 4~5명</span><em>+1만원</em><i class="tg"></i></li>
-          <li><span>일용직·프리랜서 신고</span><em>+1만원</em><i class="tg"></i></li>
-          <li id="cutrow"><span>매달 손익 리포트</span><em>+2만원</em><i class="tg" id="cuttg"></i></li>
+          <li><span>기본 4가지 · 장부·부가세·담당자·세무사</span><em>4만원</em></li>
+          <li><span>사업 규모 · 일반 개인</span><em>+1만원</em></li>
+          <li><span>월별 매출 보고서</span><em>0원</em><i class="tg"></i></li>
+          <li id="cutrow2"><span>인건비 신고 (4대보험 포함)</span><em>+1만원</em><i class="tg" id="cuttg2"></i></li>
+          <li id="cutrow"><span>공동사업장</span><em>+1만원</em><i class="tg" id="cuttg"></i></li>
         </ul>
-        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">9</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
+        <div class="qt"><small>예상 월 기장료 · 부가세 별도</small><b><span id="qn">7</span>만원</b><p id="qsave">같은 서비스, 월 2만원 줄었어요</p></div>
       </div>
       <div class="pn bars">
         <p class="pt">월별 매출<span>2026년</span></p>
@@ -395,20 +381,24 @@ footer a{text-decoration:underline}
 </section>
 
 
-<!-- 4 견적 이야기 -->
-<section class="story" id="story" aria-label="택스민 견적이 정해지는 과정">
-  <div class="stick">
-    <div class="stage">
-      <div class="board" id="board" aria-hidden="true">
-        <div class="bd-h"><b>우리 가게 기장 견적</b><span>음식점·카페 · 개인사업자</span></div>
-        <div class="models" id="mods"><span data-m="lite">택스민 라이트<i>월 5만원</i></span><span data-m="std">택스민<i>월 7만원부터</i></span><span data-m="corp">택스민 법인<i>월 10만원부터</i></span></div>
-        <ul class="rows" id="rows"></ul>
-        <div class="bd-f"><div><p class="k">예상 월 기장료 · 부가세 별도</p><p class="total" id="total">5<small>만원</small></p></div><p class="saved" id="saved">같은 서비스, 월 2만원 줄었어요<i>예시 계산</i></p></div>
-      </div>
+<!-- 4 견적 이야기(슬라이드) -->
+<section class="story" id="story" aria-labelledby="st-h">
+  <h2 class="sr-only" id="st-h">택스민 견적이 정해지는 과정</h2>
+  <div class="wrap st-in">
+    <div class="board" id="board" aria-hidden="true">
+      <div class="bd-h"><b>우리 가게 기장 견적</b><span>음식점·카페 · 개인사업자</span></div>
+      <ul class="rows" id="rows"></ul>
+      <div class="bd-f"><div><p class="k">예상 월 기장료 · 부가세 별도</p><p class="total" id="total">5<small>만원</small></p></div><p class="saved" id="saved">같은 서비스, 월 2만원 줄었어요<i>예시 계산</i></p></div>
     </div>
-    <div class="prog">
-      <div class="track"><span class="fill" id="fill"></span><div class="dots" id="dots"></div></div>
+    <div class="st-r">
       <div class="cap" id="cap" aria-hidden="true"></div>
+      <div class="peek" id="peek"></div>
+      <div class="ctl">
+        <button type="button" class="arw" id="prev" aria-label="이전 장면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="arw next" id="next" aria-label="다음 장면"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        <p class="pips" id="pips" aria-hidden="true"></p>
+        <button type="button" class="pz" id="stpz" aria-label="자동 넘김 멈추기"></button>
+      </div>
     </div>
   </div>
 </section>
@@ -430,7 +420,7 @@ footer a{text-decoration:underline}
   <div class="wrap">
     <div class="center">
       <h2 class="big" id="m-h">우리 가게에 맞는<br>모델을 고르세요.</h2>
-      <p class="lead">작년 매출과 사업자 형태에 따라 해야 할 일이 달라요. 모델을 고른 뒤 필요한 옵션만 더하면 됩니다.</p>
+      <p class="lead">모든 모델은 기본 4만원에서 시작하고, 작년 매출과 사업자 형태에 따라 사업 규모 금액이 더해져요. 필요한 서비스만 더하면 됩니다.</p>
     </div>
     <div class="tabs" role="tablist" aria-label="모델" id="tabs"></div>
     <div class="panel" role="tabpanel" id="panel"></div>
@@ -444,10 +434,10 @@ footer a{text-decoration:underline}
     <div>
       <h3>기장료와 모델</h3>
       <details><summary>견적 금액이 실제 기장료와 같나요?</summary><p>예상 금액이에요. 장부 양이나 업종 특성에 따라 상담 때 달라질 수 있고, 달라지면 까닭을 먼저 말씀드려요. 모든 금액은 부가세 별도예요.</p></details>
-      <details><summary>모델은 어떻게 정해지나요?</summary><p>개인사업자는 작년 매출이 업종 기본 구간 이하면 택스민 라이트, 넘으면 택스민이에요. 법인은 택스민 법인이에요.</p></details>
+      <details><summary>모델은 어떻게 정해지나요?</summary><p>모든 견적은 기본 4만원에서 시작해요. 개인사업자는 작년 매출이 업종 기본 구간 이하면 택스민 라이트(+1만원, 월 5만원부터), 넘으면 택스민(+3만원, 월 7만원부터)이에요. 법인은 택스민 법인(+6만원, 월 10만원부터)이에요.</p></details>
       <details><summary>한 번 모델을 고르면 끝나나요?</summary><p>아니요. AI가 매달 매출을 모아 연말 매출을 예상하고, 복식부기 의무나 성실신고 확인 기준에 가까워지면 담당자가 먼저 확인해요. 달라지는 의무와 절세 방법, 법인 전환까지 세무사가 설명하고, 사장님이 동의하신 경우에만 서비스와 기장료를 바꿔요.</p></details>
       <details><summary>종합소득세·법인세 신고도 해 주나요?</summary><p>네. 신고 수수료는 기장료와 따로이고, 신고 전에 금액을 먼저 알려 드려요.</p></details>
-      <details><summary>중간에 직원이 늘면 어떻게 되나요?</summary><p>옵션만 바뀌어요. 바뀌는 달 전에 금액을 먼저 알려 드려요.</p></details>
+      <details><summary>중간에 직원이 늘면 어떻게 되나요?</summary><p>인건비 신고(4대보험 포함)는 직원 5명까지 월 1만원이고, 6명부터는 상담 때 정해요. 바뀌는 달 전에 금액을 먼저 알려 드려요.</p></details>
     </div>
     <div>
       <h3>담당자와 상담</h3>
@@ -468,55 +458,49 @@ footer a{text-decoration:underline}
 </section>
 </main>
 
-<footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(세무사)</span><span>개인정보처리방침(준비 중)</span></div></footer>
+<footer><div class="wrap"><span>사무소명 세무회계 민 · 사업자번호 546-54-00533 · 대표자 이민기(대표세무사)</span><span>개인정보처리방침(준비 중)</span></div></footer>
 
 <script>
 // 견적판 예시 — build.html 기준과 같은 숫자(만원/월, 부가세 별도):
-// 택스민 라이트 5 + 인건비 4~5명 1 + 일용직·프리랜서 1 + 매달 손익 리포트 2 = 9 → 손익 리포트를 빼면 7 (정확히 2만원)
+// 기본 4 + 사업 규모(일반 개인) 1 = 5 → 보고서 0 · 인건비 1 · 공동사업장 1 을 더하면 7 → 인건비·공동사업장을 빼면 5 (정확히 2만원)
 const ROWS = [
-  {n:'월 매출·매입 관리 · 부가세 신고', p:'기본', lock:true},
-  {n:'전담 담당자 · 세무사 상담·검수', p:'기본', lock:true},
-  {n:'인건비 신고 4~5명', v:1},
-  {n:'일용직·프리랜서 신고', v:1},
-  {n:'매달 손익 리포트', v:2, cut:true},
+  {n:'기본 4가지 · 장부·부가세·담당자·세무사', v:4, lock:true, first:true},
+  {n:'사업 규모 · 일반 개인', v:1, lock:true},
+  {n:'월별 매출 보고서', v:0},
+  {n:'인건비 신고 (4대보험 포함)', v:1, cut:true},
+  {n:'공동사업장', v:1, cut:true},
   {n:'종합소득세 신고', p:'수수료 별도', lock:true},
 ];
-const BASE = 5, FULL = BASE + ROWS.reduce((s,r)=>s+(r.v||0),0);
-console.assert(FULL===9 && FULL-2===7, '예시 9만원 → 7만원');
+const BASE = 5, FULL = ROWS.reduce((s,r)=>s+(r.v||0),0);
+console.assert(FULL===7 && FULL-2===BASE, '예시 7만원 → 5만원');
 const $ = id => document.getElementById(id);
-$('rows').innerHTML = ROWS.map((r,i)=>`<li><span class="n">${r.n}</span><span class="tg ${r.lock?'lock':'on'}"></span><span class="p">${r.v?'+'+r.v+'만원':r.p}</span></li>`).join('');
+$('rows').innerHTML = ROWS.map(r=>`<li><span class="n">${r.n}</span><span class="tg ${r.lock?'lock':'on'}"></span><span class="p">${r.first ? r.v+'만원' : r.v ? '+'+r.v+'만원' : r.v===0 ? '0원' : r.p}</span></li>`).join('');
 
 const CAPS = [
-  {s:'모델을 고릅니다', h:'작년 매출과 사업자 형태로 <em>우리 가게 모델</em>이 정해집니다.', p:'음식점·카페 개인사업자, 작년 매출이 기본 구간 이하라면 택스민 라이트. 장부·부가세 신고·인건비 신고(3명까지)·전담 담당자·세무사 상담이 기본으로 들어 있어요.'},
-  {s:'옵션을 콕 고릅니다', h:'자동차 옵션처럼, <em>필요한 것만</em> 더하고 나머지는 뺍니다.', p:'직원이 4~5명이면 인건비 신고, 일용직이 있으면 일용직·프리랜서 신고를 더해요. 매달 손익 리포트처럼 당장 필요 없는 건 빼면 됩니다.'},
-  {s:'같은 서비스, 낮아진 기장료', h:'필요 없는 옵션을 뺐더니 <em>기장료가 2만원 줄었어요.</em>', p:'장부와 신고, 담당자와 세무사 검수는 그대로예요. 쓰지 않는 옵션 값만 빠졌어요. 위 금액은 예시 계산이며 모든 금액은 부가세 별도입니다.'},
+  {s:'기본 4만원에서 시작', h:'모든 견적은 <em>기본 4만원</em>에서 시작합니다.', p:'장부·부가세 신고·전담 담당자·세무사 상담 네 가지가 기본이에요. 음식점·카페 개인사업자로 작년 매출이 기본 구간 이하라면 사업 규모 1만원을 더해 월 5만원이에요.'},
+  {s:'옵션을 콕 고릅니다', h:'자동차 옵션처럼, <em>필요한 것만</em> 더합니다.', p:'월별 매출 보고서는 0원이에요. 직원이 있으면 인건비 신고(4대보험 포함), 대표가 둘 이상이면 공동사업장을 더해요.'},
+  {s:'같은 서비스, 낮아진 기장료', h:'필요 없는 옵션을 뺐더니 <em>기장료가 2만원 줄었어요.</em>', p:'직원 없이 혼자 하는 가게라면 인건비·공동사업장은 빼면 돼요. 장부와 신고, 담당자와 세무사 검수는 그대로예요. 위 금액은 예시 계산이며 모든 금액은 부가세 별도입니다.'},
 ];
-$('story').insertAdjacentHTML('afterbegin', '<ol class="sr-only">' + CAPS.map((c,i)=>`<li><h3>0${i+1} · ${c.s}</h3><p>${c.h.replace(/<\/?em>/g,'')} ${c.p}</p></li>`).join('') + '</ol>');
-const rowsEl = [...$('rows').children], modsEl = [...$('mods').children];
-let step = -1;
-function drawDots(s){ $('dots').innerHTML = CAPS.map((_,i)=> i===s ? `<b>0${i+1}</b>` : `<span class="${i<s?'on':''}"></span>`).join(''); }
-const totalEl = $('total'), fillEl = $('fill'), endEl = document.querySelector('.end');
-function setStep(s, t){
-  modsEl.forEach(m=> m.classList.toggle('on', m.dataset.m==='lite'));
-  const opt = s>=1, cut = s>=2 || (s===1 && t>.6);
+$('st-h').insertAdjacentHTML('afterend', '<ol class="sr-only">' + CAPS.map((c,i)=>`<li><h3>0${i+1} · ${c.s}</h3><p>${c.h.replace(/<\/?em>/g,'')} ${c.p}</p></li>`).join('') + '</ol>');
+$('peek').innerHTML = CAPS.map((c,i)=>`<button type="button" data-i="${i}">0${i+1} ${c.s}</button>`).join('');
+const rowsEl = [...$('rows').children], peekEl = [...$('peek').children];
+const totalEl = $('total');
+function setStep(s){
+  const opt = s>=1, cut = s>=2;
   rowsEl.forEach((li,i)=>{ const r = ROWS[i];
     li.classList.toggle('dim', !r.lock && !opt);
-    if (r.cut){ li.classList.toggle('off', cut); li.querySelector('.tg').classList.toggle('on', !cut); } });
+    if (r.cut) li.classList.toggle('off', cut);
+    if (!r.lock) li.querySelector('.tg').classList.toggle('on', opt && !(r.cut && cut)); });
   const tv = (!opt ? BASE : cut ? FULL-2 : FULL) + '<small>만원</small>';
   if (totalEl.innerHTML !== tv) totalEl.innerHTML = tv;
-  $('saved').classList.toggle('on', s>=2);
-  if (s!==step){
-    step = s; drawDots(s);
-    const c = CAPS[s];
-    $('cap').innerHTML = `<div><small>0${s+1} · ${c.s}</small><h2>${c.h}</h2></div><div><p>${c.p}</p></div>`;
-  }
+  $('saved').classList.toggle('on', cut);
 }
 
-const story = $('story'), hd = $('hd');
+const hd = $('hd');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (() => {
 // 첫 화면: 두 장면이 번갈아 나옴.
-// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 손익 리포트를 꺼서 기장료 9→7만원)
+// ① 뒤 = 택스민 화면이 계산하는 모션(매출 숫자 오름 → AI 거래 분류 → 커서가 공동사업장·인건비를 꺼서 기장료 7→5만원)
 // ② 뒤 = 상담 실사 영상(Pexels 7844855, 무료 사용 허락) 어둡게
 // 모든 움직임은 장면 시계(elapsed) 하나로 그림 — 멈춤 단추를 누르면 시계가 서서 다 같이 멈춤
 const hero = document.querySelector('.hero'), dash = $('dash'), vid = $('vid');
@@ -528,8 +512,8 @@ const eo = x => 1 - Math.pow(1 - clamp(x), 3);
 const eio = x => { x = clamp(x); return x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3)/2; };
 const won = n => Math.round(n).toLocaleString('ko-KR');
 const nums = [...dash.querySelectorAll('.k b')], rows = [...dash.querySelectorAll('#tx li')], bars = [...dash.querySelectorAll('#bars i')];
-const cutRow = $('cutrow'), cutTg = $('cuttg'), qn = $('qn'), qsave = $('qsave'), cur = $('cur'), ring = $('ring');
-let cur0 = [0, 0], cur1 = [0, 0], ds = 1, dx = 0, raf = 0, seen = true, last = 0, elapsed = 0, curSlide = 0, paused = reduce;
+const cutRow = $('cutrow'), cutTg = $('cuttg'), cutRow2 = $('cutrow2'), cutTg2 = $('cuttg2'), qn = $('qn'), qsave = $('qsave'), cur = $('cur'), ring = $('ring');
+let cur0 = [0, 0], cur1 = [0, 0], cur2 = [0, 0], ds = 1, dx = 0, raf = 0, seen = true, last = 0, elapsed = 0, curSlide = 0, paused = reduce;
 
 const off = (el) => { let x = 0, y = 0; while (el && el !== dash) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; } return [x, y]; };
 function layout(){
@@ -538,6 +522,7 @@ function layout(){
   if (w >= 700) { ds = Math.min(w*.94/1280, h*.92/dh); dx = 0; }
   else { ds = h*.78/dh; dx = -(qd.offsetLeft + qd.offsetWidth/2 - 640); } // 휴대폰: 견적 칸을 가운데로
   const t = off(cutTg); cur1 = [t[0] + 15, t[1] + 9];
+  const t2 = off(cutTg2); cur2 = [t2[0] + 15, t2[1] + 9];
   const q = off(dash.querySelector('.quote')); cur0 = [q[0] + 60, q[1] + 40];
   drawDash(reduce ? 1e5 : elapsed);
 }
@@ -552,17 +537,19 @@ function drawDash(t){
     if (c.classList.contains('ok') !== done) { c.classList.toggle('ok', done); c.textContent = done ? c.dataset.c : '분류 중'; }
   });
   bars.forEach((b, i) => b.style.transform = `scaleY(${eo((t - 900 - i*60)/700)})`);
-  // 커서: 3.4초부터 손익 리포트 칸으로 가서 4.4초에 누름
-  const m = eio((t - 3400)/1000), on = t > 3200 && t < 6400;
+  // 커서: 3.4초부터 공동사업장 스위치로 가서 4.3초에 끄고, 인건비 스위치로 올라가 5.2초에 끔
+  const m1 = eio((t - 3400)/800), m2 = eio((t - 4550)/550), on = t > 3200 && t < 6400;
+  const px = cur0[0] + (cur1[0] - cur0[0])*m1 + (cur2[0] - cur1[0])*m2, py = cur0[1] + (cur1[1] - cur0[1])*m1 + (cur2[1] - cur1[1])*m2;
   cur.style.opacity = on ? 1 : 0;
-  cur.style.transform = `translate(${cur0[0] + (cur1[0] - cur0[0])*m}px,${cur0[1] + (cur1[1] - cur0[1])*m}px)`;
-  const r = clamp((t - 4400)/450);
-  ring.style.opacity = t > 4400 && r < 1 ? 1 - r : 0;
-  ring.style.transform = `translate(${cur1[0]}px,${cur1[1]}px) scale(${.4 + r})`;
-  const cut = t > 4400;
+  cur.style.transform = `translate(${px}px,${py}px)`;
+  const c2 = t > 5200, k2 = clamp(((c2 ? t - 5200 : t - 4300))/450), rp = c2 ? cur2 : cur1;
+  ring.style.opacity = t > 4300 && k2 < 1 ? 1 - k2 : 0;
+  ring.style.transform = `translate(${rp[0]}px,${rp[1]}px) scale(${.4 + k2})`;
+  const cut = t > 4300;
   cutTg.classList.toggle('off', cut); cutRow.classList.toggle('cut', cut);
-  const q = String(Math.round(9 - 2*eo((t - 4450)/600))); if (qn.textContent !== q) qn.textContent = q;
-  qsave.classList.toggle('on', t > 4900);
+  cutTg2.classList.toggle('off', c2); cutRow2.classList.toggle('cut', c2);
+  const q = String(Math.round(7 - eo((t - 4350)/400) - eo((t - 5250)/400))); if (qn.textContent !== q) qn.textContent = q;
+  qsave.classList.toggle('on', t > 5700);
 }
 function frame(now){
   raf = 0;
@@ -602,27 +589,57 @@ layout();
 console.assert(eio(0) === 0 && eio(1) === 1 && eo(1) === 1, '모션 곡선 끝값');
 })();
 
-function onScroll(){
-  const r = story.getBoundingClientRect();
-  const span = r.height - innerHeight;
-  const p = span > 0 ? Math.min(.999, Math.max(0, -r.top / span)) : .999;
-  const s = Math.floor(p*3);
-  setStep(s, p*3 - s);
-  fillEl.style.transform = `scaleX(${p})`;
-}
-let sq = 0; const queue = () => { if (!sq) sq = requestAnimationFrame(() => { sq = 0; onScroll(); }); };
-addEventListener('scroll', queue, {passive:true}); addEventListener('resize', queue);
-onScroll();
+// 견적 이야기 슬라이드: 화살표·장면 이름·밀어 넘기기, 화면에 보이면 6초마다 저절로 넘어감(멈춤 단추로 끔)
+(() => {
+  let cur = -1, timer = 0, inView = false, stPaused = reduce, cutT = 0, hov = false, foc = false;
+  const pz = $('stpz');
+  function go(i, dir){
+    i = (i + 3) % 3; if (i === cur) return;
+    const back = dir < 0, from = cur; cur = i;
+    const c = CAPS[i];
+    $('cap').innerHTML = `<div class="cap-in${back ? ' back' : ''}"><small>0${i+1} · ${c.s}</small><h2>${c.h}</h2><p>${c.p}</p></div>`;
+    $('pips').innerHTML = `<b>0${i+1}</b> / 03`;
+    peekEl.forEach((b,j)=> b.setAttribute('aria-current', j===i ? 'step' : 'false'));
+    clearTimeout(cutT);
+    if (i === 2 && from === 1 && !reduce){ setStep(1); cutT = setTimeout(()=> setStep(2), 500); } // 켜진 옵션이 꺼지는 순간을 보여 줌
+    else setStep(i);
+    arm();
+  }
+  function arm(){ clearTimeout(timer); if (inView && !stPaused && !hov && !foc) timer = setTimeout(()=> go(cur + 1, 1), 6000); }
+  function setP(v){ stPaused = v; pz.classList.toggle('play', v); pz.setAttribute('aria-label', v ? '자동 넘김 다시 켜기' : '자동 넘김 멈추기'); arm(); }
+  $('prev').addEventListener('click', ()=> go(cur - 1, -1));
+  $('next').addEventListener('click', ()=> go(cur + 1, 1));
+  $('peek').addEventListener('click', e=>{ const b = e.target.closest('button'); if (b) go(+b.dataset.i, +b.dataset.i - cur); });
+  pz.addEventListener('click', ()=> setP(!stPaused));
+  pz.hidden = reduce;
+  // 손가락으로 밀어 넘기기
+  let x0 = null;
+  const bd = $('board');
+  bd.addEventListener('pointerdown', e=>{ x0 = e.clientX; });
+  bd.addEventListener('pointerup', e=>{ if (x0 === null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); });
+  // 마우스를 올리거나 키보드로 들어오면 잠깐 멈춤
+  const sec = $('story');
+  sec.addEventListener('pointerenter', e=>{ if (e.pointerType === 'mouse'){ hov = true; clearTimeout(timer); } });
+  sec.addEventListener('pointerleave', e=>{ if (e.pointerType === 'mouse'){ hov = false; arm(); } });
+  sec.addEventListener('focusin', ()=>{ foc = true; clearTimeout(timer); });
+  sec.addEventListener('focusout', e=>{ if (!sec.contains(e.relatedTarget)){ foc = false; arm(); } });
+  new IntersectionObserver(([e])=>{ inView = e.isIntersecting; if (inView) arm(); else clearTimeout(timer); }, {threshold:.45}).observe(sec);
+  setP(stPaused);
+  go(0, 1);
+})();
 
 // 모델 탭
+const BASIC4 = [['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['전담 담당자','기본'],['세무사 직접 상담·답변 검수','기본']];
+const ADDS = co => [['월별 매출 보고서','0원 · 선택'],['인건비 신고 (4대보험 포함)','+1만원 · 5명까지'], ...(co ? [['공동사업장','+1만원 · 선택']] : [])];
 const MODELS = [
-  {k:'lite', name:'택스민 라이트', tag:'BEST · 많이 선택한 통합형 기장 서비스', who:'작년 매출이 업종 기본 구간 이하인 개인사업자', price:'5', unit:'만원 / 월', img:'ledger_lite',
-   inc:[['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['전담 담당자','기본'],['세무사 직접 상담·답변 검수','기본'],['종합소득세 신고','수수료 별도',1]]},
-  {k:'std', name:'택스민', tag:'매출이 커진 가게', who:'작년 매출이 업종 기본 구간을 넘은 개인사업자', price:'7', unit:'만원부터 / 월', img:'ledger_std',
-   inc:[['월 매출·매입 관리','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['매달 손익 리포트','기본'],['전담 담당자 · 세무사 상담·검수','기본'],['종합소득세 신고','수수료 별도',1]]},
-  {k:'corp', name:'택스민 법인', tag:'법인사업자', who:'법인사업자 · 장부와 거래량을 보고 상담 때 확정', price:'10', unit:'만원부터 / 월', img:'ledger_corp',
-   inc:[['법인 장부','기본'],['부가가치세 신고','기본'],['인건비 신고(직원 3명까지)','기본'],['매달 손익 리포트','기본'],['전담 담당자 · 세무사 상담·검수','기본'],['법인세 신고','수수료 별도',1]]},
+  {k:'lite', name:'택스민 라이트', tag:'BEST · 많이 선택한 통합형 기장 서비스', who:'작년 매출이 업종 기본 구간 이하인 개인사업자', size:['일반 개인',1],
+   inc:[...BASIC4, ...ADDS(true), ['종합소득세 신고','수수료 별도',1]]},
+  {k:'std', name:'택스민', tag:'매출이 커진 가게', who:'작년 매출이 업종 기본 구간을 넘은 개인사업자', size:['매출 큰 개인',3],
+   inc:[...BASIC4, ...ADDS(true), ['종합소득세 신고','수수료 별도',1]]},
+  {k:'corp', name:'택스민 법인', tag:'법인사업자', who:'법인사업자 · 장부와 거래량을 보고 상담 때 확정', size:['법인',6],
+   inc:[['법인 장부','기본'], ...BASIC4.slice(1), ...ADDS(false), ['법인세 신고','수수료 별도',1]]},
 ];
+console.assert(MODELS.map(m=>4+m.size[1]).join()==='5,7,10', '기본 4 + 사업 규모 = 5·7·10');
 const tabs = $('tabs'), panel = $('panel');
 tabs.innerHTML = MODELS.map((m,i)=>`<button role="tab" id="tab-${m.k}" aria-controls="panel" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-i="${i}">${m.name}</button>`).join('');
 function showModel(i){
@@ -630,10 +647,12 @@ function showModel(i){
   [...tabs.children].forEach((b,j)=>{ b.setAttribute('aria-selected', j===i); b.tabIndex = j===i?0:-1; });
   panel.setAttribute('aria-labelledby', 'tab-'+m.k);
   panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.name}</h3><p class="who">${m.who}</p>
-    <p class="price"><b>${m.price}</b>${m.unit} · 부가세 별도</p>
+    <p class="price"><b>${4 + m.size[1]}</b>만원부터 / 월 · 부가세 별도</p>
     <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
-    <a class="btn" href="build.html?model=${m.k}#making">${m.name} 견적 내기</a></div>
-    <div class="pic"><img src="img/${m.img}.jpg" alt="${m.name} 장부 그림" loading="lazy"></div>`;
+    <a class="btn" href="build.html?model=${m.k}">${m.name} 견적 내기</a></div>
+    <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>예상 견적 · 월 · 부가세 별도</span></p>
+      <ul><li>기본 4가지<em>4만원</em></li><li>사업 규모 · ${m.size[0]}<em>+${m.size[1]}만원</em></li><li class="o">서비스 추가<em>필요한 것만</em></li></ul>
+      <p class="slip-t"><span>월 기장료</span><b>${4 + m.size[1]}<small>만원부터</small></b></p></div>`;
 }
 tabs.addEventListener('click', e=>{ const b=e.target.closest('[role=tab]'); if(b) showModel(+b.dataset.i); });
 tabs.addEventListener('keydown', e=>{ const i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
