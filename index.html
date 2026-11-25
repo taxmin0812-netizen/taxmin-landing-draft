@@ -216,11 +216,11 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .proof .head .lead{font-size:17px;color:var(--sub);line-height:1.75;max-width:560px}
 .pf-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:56px var(--edge) 12px;scrollbar-width:none}
 .pf-track::-webkit-scrollbar{display:none}
-.pf-track figure{flex:0 0 300px;margin:0;scroll-snap-align:start}
-.pf-img{width:300px;aspect-ratio:9/15;border-radius:16px;overflow:hidden;background:#E3E8EF;box-shadow:inset 0 0 0 1px var(--line)}
+.pf-track figure{flex:0 0 200px;margin:0;scroll-snap-align:start}
+.pf-img{display:block;width:200px;aspect-ratio:9/15;border-radius:12px;overflow:hidden;background:#E3E8EF;box-shadow:inset 0 0 0 1px var(--line)}
 .pf-img img{display:block;width:100%;height:100%;object-fit:contain;object-position:center top}
-.pf-track figcaption{font-size:14px;color:var(--sub);line-height:1.6;margin-top:14px}
-.pf-track figcaption b{display:block;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.pf-track figcaption{font-size:13px;color:var(--sub);line-height:1.55;margin-top:12px}
+.pf-track figcaption b{display:block;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
 
 /* 6 모델(탭) */
 .models-sec{padding:160px 0;background:#F6F7F9}
@@ -322,7 +322,8 @@ footer a{text-decoration:underline}
   .worry .wrap{grid-template-columns:1fr;gap:56px}
   .about .wrap,.svc .head,.proof .head{grid-template-columns:1fr;gap:28px}
   .svc-g{grid-template-columns:1fr;gap:44px;margin-top:48px}
-  .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
+  .panel{grid-template-columns:1fr;padding:40px 32px;gap:28px;overflow:hidden}
+  .fit-pic{order:-1;aspect-ratio:16/9;margin:-40px -32px 0;border-radius:0}
   .faq .wrap{grid-template-columns:1fr 1fr}
   .faq .intro{grid-column:1/-1}
   .st-slide{grid-template-columns:1fr;gap:28px}
@@ -335,7 +336,7 @@ footer a{text-decoration:underline}
   .facts{grid-template-columns:1fr}
   .proof{padding:24px 0 104px}
   .pf-track{gap:12px;padding-top:36px}
-  .pf-track figure{flex-basis:78%}
+  .pf-track figure{flex-basis:calc(50% - 6px)}
   .pf-img{width:100%}
   .facts li,.facts li + li{padding:24px 0;border-left:0;border-bottom:1px solid #DDE1E7}
   .facts b{font-size:44px}
@@ -367,7 +368,7 @@ footer a{text-decoration:underline}
   .slip{padding:24px 20px 20px}
   .a-pic{aspect-ratio:4/3;margin-top:32px}
   .svc-pic{aspect-ratio:16/9;margin-top:36px}
-  .fit-pic{aspect-ratio:4/5}
+  .fit-pic{aspect-ratio:16/10;margin:-28px -20px 0}
   .fit-pic .slip{left:12px;right:12px;bottom:12px;width:auto;padding:12px 16px 6px}
   .slip-t b{font-size:40px}
   .faq .wrap{grid-template-columns:1fr;gap:40px}
@@ -508,11 +509,11 @@ footer a{text-decoration:underline}
     <div class="head"><h2 class="big" id="pf-h">집 살 때, 대출받을 때도<br>먼저 연락 오는 사무실.</h2><p class="lead">청약·대출·정책자금처럼 사장님 생활에 걸린 일도 함께 알아봐요. 실제로 나눈 대화이고, 이름과 사진은 가렸어요.</p></div>
   </div>
   <div class="pf-track" id="pftrack" tabindex="0" role="region" aria-labelledby="pf-h">
-    <figure><div class="pf-img"><img src="img/proof_1.jpg" alt="보금자리론·디딤돌대출과 은행 대출의 차이를 설명한 대화" loading="lazy"></div><figcaption><b>정책대출 기준 안내</b>보금자리론·디딤돌대출과 은행 대출의 차이, 소득 신고 방향까지</figcaption></figure>
-    <figure><div class="pf-img"><img src="img/proof_2.jpg" alt="DSR과 DTI 기준을 설명한 대화" loading="lazy"></div><figcaption><b>DSR·DTI 미리 점검</b>어느 기준을 쓰느냐에 따라 필요한 소득이 달라져요</figcaption></figure>
-    <figure><div class="pf-img"><img src="img/proof_3.jpg" alt="중도금 대출을 잘 받았다는 고객의 감사 인사" loading="lazy"></div><figcaption><b>"중도금 대출 잘 받았어요"</b>상담 뒤 고객이 보내 준 인사</figcaption></figure>
-    <figure><div class="pf-img"><img src="img/proof_4.jpg" alt="오래 함께한 대표님의 감사 인사" loading="lazy"></div><figcaption><b>"항상 감사드려요"</b>오래 함께한 대표님의 인사</figcaption></figure>
-    <figure><div class="pf-img"><img src="img/proof_5.jpg" alt="소상공인 정책자금 접수 일정을 안내한 대화" loading="lazy"></div><figcaption><b>소상공인 정책자금 안내</b>접수 날짜와 업종에 따라 유리한 곳까지</figcaption></figure>
+    <figure><a class="pf-img" href="img/proof_1.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_1.jpg" alt="보금자리론·디딤돌대출과 은행 대출의 차이를 설명한 대화" loading="lazy"></a><figcaption><b>정책대출 기준 안내</b>보금자리론·디딤돌대출과 은행 대출의 차이, 소득 신고 방향까지</figcaption></figure>
+    <figure><a class="pf-img" href="img/proof_2.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_2.jpg" alt="DSR과 DTI 기준을 설명한 대화" loading="lazy"></a><figcaption><b>DSR·DTI 미리 점검</b>어느 기준을 쓰느냐에 따라 필요한 소득이 달라져요</figcaption></figure>
+    <figure><a class="pf-img" href="img/proof_3.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_3.jpg" alt="중도금 대출을 잘 받았다는 고객의 감사 인사" loading="lazy"></a><figcaption><b>"중도금 대출 잘 받았어요"</b>상담 뒤 고객이 보내 준 인사</figcaption></figure>
+    <figure><a class="pf-img" href="img/proof_4.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_4.jpg" alt="오래 함께한 대표님의 감사 인사" loading="lazy"></a><figcaption><b>"항상 감사드려요"</b>오래 함께한 대표님의 인사</figcaption></figure>
+    <figure><a class="pf-img" href="img/proof_5.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_5.jpg" alt="소상공인 정책자금 접수 일정을 안내한 대화" loading="lazy"></a><figcaption><b>소상공인 정책자금 안내</b>접수 날짜와 업종에 따라 유리한 곳까지</figcaption></figure>
   </div>
 </section>
 
