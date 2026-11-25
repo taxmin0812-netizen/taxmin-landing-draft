@@ -17,6 +17,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>택스민 | 필요한 것만 고르는 기장 서비스</title>
 <meta name="description" content="쓰는 서비스만 켜고, 안 쓰는 건 끄세요. 세무사와 담당자가 1:1로 장부를 보는 기장 서비스, 택스민.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap">
@@ -209,15 +210,28 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .sv-note{font-size:11px;color:var(--mute);margin-top:6px}
 .svc-g .best{font-style:normal;font-family:Manrope,sans-serif;font-size:11px;font-weight:800;color:var(--blue);margin-left:6px;vertical-align:1px}
 
+/* 5-2 실제 상담 기록 */
+.proof{padding:40px 0 160px;overflow:hidden;--edge:max(var(--pad),calc((100% - var(--w))/2 + var(--pad)))}
+.proof .head{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:end}
+.proof .head .lead{font-size:17px;color:var(--sub);line-height:1.75;max-width:560px}
+.pf-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:56px var(--edge) 12px;scrollbar-width:none}
+.pf-track::-webkit-scrollbar{display:none}
+.pf-track figure{flex:0 0 300px;margin:0;scroll-snap-align:start}
+.pf-img{width:300px;aspect-ratio:9/15;border-radius:16px;overflow:hidden;background:#E3E8EF;box-shadow:inset 0 0 0 1px var(--line)}
+.pf-img img{display:block;width:100%;height:100%;object-fit:contain;object-position:center top}
+.pf-track figcaption{font-size:14px;color:var(--sub);line-height:1.6;margin-top:14px}
+.pf-track figcaption b{display:block;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px}
+
 /* 6 모델(탭) */
 .models-sec{padding:160px 0;background:#F6F7F9}
 .center{text-align:center}
 .center .lead{font-size:17px;color:var(--sub);margin:24px auto 0;max-width:560px}
 .tabs{display:flex;justify-content:center;gap:12px 32px;margin-top:56px;flex-wrap:wrap}
-.tabs button{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;color:var(--mute);padding:6px 0}
-.tabs button::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:transparent;transition:background .2s}
+.tabs button{display:flex;align-items:center;font-size:17px;font-weight:600;color:var(--mute);padding:8px 0;box-shadow:inset 0 -2px 0 transparent;transition:color .2s,box-shadow .2s}
 .tabs button[aria-selected=true]{color:var(--ink)}
-.tabs button[aria-selected=true]::before{background:var(--blue)}
+.tabs button[aria-selected=true]{box-shadow:inset 0 -2px 0 var(--ink)}
+.panel > div{animation:fitIn .55s cubic-bezier(.2,.7,.2,1)}
+@keyframes fitIn{from{opacity:0;transform:translateX(28px)}}
 .panel{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:48px;background:#fff;border-radius:16px;padding:56px 64px}
 .panel .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--blue);margin-bottom:12px}
 .panel h3{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
@@ -306,7 +320,7 @@ footer a{text-decoration:underline}
   :root{--pad:28px}
   .hd-nav{gap:16px;padding-right:16px}
   .worry .wrap{grid-template-columns:1fr;gap:56px}
-  .about .wrap,.svc .head{grid-template-columns:1fr;gap:28px}
+  .about .wrap,.svc .head,.proof .head{grid-template-columns:1fr;gap:28px}
   .svc-g{grid-template-columns:1fr;gap:44px;margin-top:48px}
   .panel{grid-template-columns:1fr;padding:40px 32px;gap:36px}
   .faq .wrap{grid-template-columns:1fr 1fr}
@@ -319,6 +333,10 @@ footer a{text-decoration:underline}
   .hd-nav{display:none}
   .worry,.about,.svc,.models-sec,.faq{padding:104px 0}
   .facts{grid-template-columns:1fr}
+  .proof{padding:24px 0 104px}
+  .pf-track{gap:12px;padding-top:36px}
+  .pf-track figure{flex-basis:78%}
+  .pf-img{width:100%}
   .facts li,.facts li + li{padding:24px 0;border-left:0;border-bottom:1px solid #DDE1E7}
   .facts b{font-size:44px}
   .about .hook{font-size:19px}
@@ -355,7 +373,7 @@ footer a{text-decoration:underline}
   .faq .wrap{grid-template-columns:1fr;gap:40px}
   .faq .big{font-size:44px}
 }
-@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}}
+@media (prefers-reduced-motion:reduce){*{transition-property:opacity,color,background-color,border-color!important;scroll-behavior:auto!important}.ln>i{transform:none!important}.nm .t,.nm .sh,.slide .ink::after{animation:none!important}.slide .ink::after{clip-path:none}.panel > div{animation:none}}
 </style>
 </head>
 <body>
@@ -421,7 +439,7 @@ footer a{text-decoration:underline}
       <figure class="a-pic"><video class="lv" src="img/v_about.mp4" poster="img/v_about.jpg" muted loop playsinline preload="none" aria-label="서류를 한 줄씩 적어 가며 확인하는 손"></video></figure>
     </div>
     <div class="a-r">
-      <p><b>세무사 2명, 직원 2명. 1:1로 짝을 이룬, 작지만 강한 사무실이에요.</b>보통 세무사무소는 세무사 한 명이 직원 여러 명을 거느리고, 장부는 직원 선에서 끝나기 쉬워요. 택스민은 담당자 한 명마다 세무사 한 명이 짝을 이뤄, 장부 한 권 한 권을 손으로 보고 세무사가 직접 검증해요.</p>
+      <p><b>세무사 2명, 직원 2명. 1:1로 짝을 이룬, 작지만 강한 사무실이에요.</b>세무사와 담당자가 1:1로 일하는 사무실은 흔하지 않아요. 택스민은 담당자 한 명마다 세무사 한 명이 짝을 이뤄, 장부 한 권 한 권을 함께 보고 세무사가 직접 검증해요.</p>
       <p><b>그래서 아무나 받지 않아요.</b>담당자 한 명이 맡는 거래처 수를 정해 두고, 그 수가 차면 더 받지 않아요. 더 받으면 매출은 늘겠지만, 그만큼 사장님 장부를 들여다볼 시간이 줄어들어요. 우리는 시간 쪽을 택했어요.</p>
       <p><b>AI는 거들고, 판단은 사람이 해요.</b>홈택스 자료를 모으고 나누는 반복 일은 AI가 먼저 하고, 담당자가 확인한 뒤 세무사가 한 번 더 봐요. 그 덕에 작은 가게도 부담 없는 기장료로, 원래 하던 꼼꼼한 방식 그대로 관리받을 수 있게 됐어요.</p>
       <ul class="facts">
@@ -481,6 +499,20 @@ footer a{text-decoration:underline}
         <li><b>청약 · 대출 · 정책자금</b><p>청약 자격, 사업자 대출, 소상공인 정책자금까지 받을 수 있는지 함께 알아봐 드려요. 신청은 사장님이 직접 하시고, 중개는 하지 않아요.</p></li>
       </ul></div>
     </div>
+  </div>
+</section>
+
+<!-- 5-2 실제 상담 기록 -->
+<section class="proof" id="proof" aria-labelledby="pf-h">
+  <div class="wrap">
+    <div class="head"><h2 class="big" id="pf-h">기장 밖의 일도<br>이렇게 챙겨요.</h2><p class="lead">청약·대출·정책자금처럼 사장님 생활에 걸린 일도 함께 알아봐요. 실제로 나눈 대화이고, 이름과 사진은 가렸어요.</p></div>
+  </div>
+  <div class="pf-track" id="pftrack" tabindex="0" role="region" aria-labelledby="pf-h">
+    <figure><div class="pf-img"><img src="img/proof_1.jpg" alt="보금자리론·디딤돌대출과 은행 대출의 차이를 설명한 대화" loading="lazy"></div><figcaption><b>정책대출 기준 안내</b>보금자리론·디딤돌대출과 은행 대출의 차이, 소득 신고 방향까지</figcaption></figure>
+    <figure><div class="pf-img"><img src="img/proof_2.jpg" alt="DSR과 DTI 기준을 설명한 대화" loading="lazy"></div><figcaption><b>DSR·DTI 미리 점검</b>어느 기준을 쓰느냐에 따라 필요한 소득이 달라져요</figcaption></figure>
+    <figure><div class="pf-img"><img src="img/proof_3.jpg" alt="중도금 대출을 잘 받았다는 고객의 감사 인사" loading="lazy"></div><figcaption><b>"중도금 대출 잘 받았어요"</b>상담 뒤 고객이 보내 준 인사</figcaption></figure>
+    <figure><div class="pf-img"><img src="img/proof_4.jpg" alt="오래 함께한 대표님의 감사 인사" loading="lazy"></div><figcaption><b>"항상 감사드려요"</b>오래 함께한 대표님의 인사</figcaption></figure>
+    <figure><div class="pf-img"><img src="img/proof_5.jpg" alt="소상공인 정책자금 접수 일정을 안내한 대화" loading="lazy"></div><figcaption><b>소상공인 정책자금 안내</b>접수 날짜와 업종에 따라 유리한 곳까지</figcaption></figure>
   </div>
 </section>
 
@@ -673,6 +705,33 @@ showModel(0);
 const lvIO = new IntersectionObserver(es=> es.forEach(e=>{ const v = e.target; if (reduce) return; if (e.intersectionRatio > .4) v.play().catch(()=>{}); else v.pause(); }), {threshold:[0,.4,.6]});
 const watchLv = () => document.querySelectorAll('video.lv:not([data-w])').forEach(v=>{ v.dataset.w = 1; lvIO.observe(v); });
 watchLv(); new MutationObserver(watchLv).observe(panel, {childList:true});
+
+// 저절로 넘김 도우미: 보이는 동안만, 마우스를 올리거나 키보드 초점이 있으면 멈춤, 움직임 줄이기 설정이면 쓰지 않음
+function autoAdvance(box, ms, step){
+  if (reduce) return;
+  let t = 0, seen = false, hov = false, foc = false;
+  const arm = () => { clearInterval(t); if (seen && !hov && !foc) t = setInterval(step, ms); };
+  new IntersectionObserver(([e]) => { seen = e.isIntersecting; arm(); }, {threshold:.35}).observe(box);
+  box.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse'){ hov = true; arm(); } });
+  box.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse'){ hov = false; arm(); } });
+  box.addEventListener('focusin', () => { foc = true; arm(); });
+  box.addEventListener('focusout', e => { if (!box.contains(e.relatedTarget)){ foc = false; arm(); } });
+  box.addEventListener('pointerdown', arm); // 손으로 넘기면 그때부터 다시 셈
+  return arm;
+}
+// 이런 사장님께: 6초마다 다음 상황으로
+const fitBox = document.querySelector('.models-sec .wrap');
+const fitArm = autoAdvance(fitBox, 6000, () => { const i = [...tabs.children].findIndex(b => b.getAttribute('aria-selected') === 'true'); showModel((i + 1) % FITS.length); });
+tabs.addEventListener('click', () => fitArm && fitArm());
+// 옆으로 넘기는 줄(견적 이야기 카드·상담 기록): 다음 칸으로, 끝이면 처음으로
+function slideNext(track){
+  const items = [...track.children].filter(el => el.offsetWidth);
+  const gap = items[1].offsetLeft - items[0].offsetLeft, max = track.scrollWidth - track.clientWidth;
+  const next = track.scrollLeft + gap > max + 4 ? 0 : Math.min(max, Math.round(track.scrollLeft / gap + 1) * gap);
+  track.scrollTo({left: next, behavior: 'smooth'});
+}
+autoAdvance($('track'), 5000, () => slideNext($('track')));
+autoAdvance($('pftrack'), 3500, () => slideNext($('pftrack')));
 FITS.forEach(m=>{ const im = new Image(); im.src = `img/v_${m.k}.jpg`; }); // 탭 바꿀 때 첫 장면이 바로 뜨게 미리 받음
 // 연락처 남기기 창
 (() => {
