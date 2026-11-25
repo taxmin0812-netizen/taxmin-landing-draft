@@ -210,6 +210,16 @@ header.on .hd-btn{background:var(--ink);color:#fff}
 .slip-t b{font-family:Manrope,"Pretendard Variable",sans-serif;font-size:52px;font-weight:700;color:var(--ink);letter-spacing:-.03em;line-height:1;border-bottom:4px double var(--ink);padding-bottom:4px}
 .slip-t b small{font-family:var(--font);font-size:17px;font-weight:600;margin-left:3px}
 
+.a-pic{margin-top:48px;aspect-ratio:4/5;overflow:hidden;border-radius:6px;background:#E6E9EE}
+.a-pic img,.svc-pic img,.fit-pic > img{display:block;width:100%;height:100%;object-fit:cover}
+.svc-pic{margin-top:56px;aspect-ratio:16/6;overflow:hidden;border-radius:6px;background:#E6E9EE}
+.fit-pic{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:12px;background:#E6E9EE}
+.fit-pic .slip{position:absolute;left:20px;bottom:20px;width:min(320px,calc(100% - 40px));background:#fff;padding:14px 20px 8px;box-shadow:0 14px 40px rgba(2,6,23,.22)}
+.fit-pic .slip-h{font-size:12px;padding:10px 0 8px}
+.fit-pic .slip-h b{font-size:14px}
+.fit-pic .slip ul{padding:2px 0}
+.fit-pic .slip li{font-size:14px;padding:8px 0}
+
 /* 7 FAQ */
 .faq{padding:160px 0}
 .faq .wrap{display:grid;grid-template-columns:4fr 4fr 4fr;gap:56px}
@@ -244,7 +254,8 @@ details p{padding:0 0 18px;font-size:15px;color:var(--sub);line-height:1.75}
 .ldg .b-fill{background:#2554F0;color:#fff;border:0}
 
 /* 8 바닥 */
-.end{background:var(--black);color:#fff;padding:140px 0 120px;text-align:center}
+.end{position:relative;isolation:isolate;background:var(--black) url(img/end_night.jpg) center/cover no-repeat;color:#fff;padding:160px 0 140px;text-align:center}
+.end::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,6,8,.82),rgba(5,6,8,.66) 50%,rgba(5,6,8,.86))}
 .end h2{font-size:clamp(30px,3.4vw,48px);font-weight:600;letter-spacing:-.02em;line-height:1.3}
 .end h2 em{font-style:normal;color:var(--blue-on-dark)}
 .end-b{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:40px}
@@ -306,6 +317,10 @@ footer a{text-decoration:underline}
   .panel{padding:28px 20px}
   .panel h3{font-size:28px}
   .slip{padding:24px 20px 20px}
+  .a-pic{aspect-ratio:4/3;margin-top:32px}
+  .svc-pic{aspect-ratio:16/9;margin-top:36px}
+  .fit-pic{aspect-ratio:4/5}
+  .fit-pic .slip{left:12px;right:12px;bottom:12px;width:auto;padding:12px 16px 6px}
   .slip-t b{font-size:40px}
   .faq .wrap{grid-template-columns:1fr;gap:40px}
   .faq .big{font-size:44px}
@@ -371,11 +386,12 @@ footer a{text-decoration:underline}
 <section class="about" id="about" aria-labelledby="a-h">
   <div class="wrap">
     <div class="a-l">
-      <h2 class="big" id="a-h">가내수공업<br>세무사무소.</h2>
+      <h2 class="big" id="a-h">공방처럼 짓는<br>세무사무소.</h2>
       <p class="hook">가격은 낮게, 서비스는 높게.<br>맛집처럼, 하루 정량만 받습니다.</p>
+      <figure class="a-pic"><img src="img/a_hands.jpg" alt="만년필로 장부를 한 줄씩 확인하는 손" loading="lazy" width="1000" height="1250"></figure>
     </div>
     <div class="a-r">
-      <p><b>세무사 2명, 직원 2명. 1:1로 짝을 이룬 작은 특공대예요.</b>보통 세무사무소는 세무사 한 명이 직원 여러 명을 거느리고, 장부는 직원 선에서 끝나기 쉬워요. 택스민은 담당자 한 명마다 세무사 한 명이 짝을 이뤄, 장부 한 권 한 권을 손으로 보고 세무사가 직접 검증해요.</p>
+      <p><b>세무사 2명, 직원 2명. 1:1로 짝을 이룬, 작지만 강한 사무실이에요.</b>보통 세무사무소는 세무사 한 명이 직원 여러 명을 거느리고, 장부는 직원 선에서 끝나기 쉬워요. 택스민은 담당자 한 명마다 세무사 한 명이 짝을 이뤄, 장부 한 권 한 권을 손으로 보고 세무사가 직접 검증해요.</p>
       <p><b>그래서 아무나 받지 않아요.</b>담당자 한 명이 맡는 거래처 수를 정해 두고, 그 수가 차면 더 받지 않아요. 줄 서는 맛집이 하루 정량만 파는 것과 같은 까닭이에요. 많이 받는 것보다 제대로 보는 게 먼저예요.</p>
       <p><b>AI는 거들고, 판단은 사람이 해요.</b>홈택스 자료를 모으고 나누는 반복 일은 AI가 먼저 하고, 담당자가 확인한 뒤 세무사가 한 번 더 봐요. 그 덕에 작은 가게도 부담 없는 기장료로, 원래 하던 꼼꼼한 방식 그대로 관리받을 수 있게 됐어요.</p>
     </div>
@@ -397,6 +413,7 @@ footer a{text-decoration:underline}
 <section class="svc" id="svc" aria-labelledby="s-h">
   <div class="wrap">
     <div class="head"><h2 class="big" id="s-h">작은 팀이 하는 일,<br>빠짐없이 적어 둘게요.</h2><p class="lead">기본 4가지는 늘 들어 있고, 나머지는 필요한 것만 고르면 돼요. 기장 밖의 일도 한 곳에서 시작할 수 있어요.</p></div>
+    <figure class="svc-pic"><img src="img/svc_desk.jpg" alt="" loading="lazy" width="1600" height="900"></figure>
     <div class="svc-g">
       <div><h3>기본으로 들어 있어요</h3><ul>
         <li><b>월 매출·매입 관리<em>기본</em></b><p>홈택스의 카드·현금영수증·세금계산서를 모아 장부로 정리해요.</p></li>
@@ -598,13 +615,15 @@ function showModel(i){
   panel.innerHTML = `<div><span class="tag">${m.tag}</span><h3>${m.h}</h3><p class="who">${m.who}</p>
     <ul class="inc">${m.inc.map(x=>`<li class="${x[2]?'x':''}">${x[0]}<span>${x[1]}</span></li>`).join('')}</ul>
     <a class="btn" href="build.html?p=${m.k}">이 상황으로 견적 내기</a></div>
-    <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>견적에서 이렇게 골라요</span></p>
-      <ul>${m.pick.map(p=>`<li>${p[0]}<em>${p[1]}</em></li>`).join('')}</ul></div>`;
+    <div class="fit-pic"><img src="img/fit_${m.k}.jpg" alt="" width="1200" height="900">
+      <div class="slip" aria-hidden="true"><p class="slip-h"><b>TAX<span>MIN</span></b><span>견적에서 이렇게 골라요</span></p>
+      <ul>${m.pick.map(p=>`<li>${p[0]}<em>${p[1]}</em></li>`).join('')}</ul></div></div>`;
 }
 tabs.addEventListener('click', e=>{ const b=e.target.closest('[role=tab]'); if(b) showModel(+b.dataset.i); });
 tabs.addEventListener('keydown', e=>{ const n0 = FITS.length, i=[...tabs.children].findIndex(b=>b.getAttribute('aria-selected')==='true');
   const n = e.key==='ArrowRight' ? (i+1)%n0 : e.key==='ArrowLeft' ? (i+n0-1)%n0 : e.key==='Home' ? 0 : e.key==='End' ? n0-1 : -1; if(n<0) return; e.preventDefault(); showModel(n); tabs.children[n].focus(); });
 showModel(0);
+FITS.forEach(m=>{ const im = new Image(); im.src = `img/fit_${m.k}.jpg`; }); // 탭 바꿀 때 바로 뜨게 미리 받음
 // 연락처 남기기 창
 (() => {
   const d = document.getElementById('lead'), f = document.getElementById('leadf'), msg = f.querySelector('.lead-msg');
