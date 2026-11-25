@@ -584,7 +584,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
     </ol>
   </div>
   <!-- shortcut: 시안 표시. 금액·품목 확정되면 이 줄을 지움 -->
-  <p class="foot">시안 · 금액은 초안이에요. · 전화 상담 <a href="tel:050714286446">0507-1428-6446</a> · <a href="privacy.html">개인정보처리방침</a></p>
+  <p class="foot">시안 · 금액은 초안이에요. · 전화 상담 <a href="tel:050714457729">0507-1445-7729</a> · <a href="privacy.html">개인정보처리방침</a></p>
   </div>
 </section>
 </main>
@@ -613,7 +613,7 @@ h1{font-size:32px;font-weight:700;letter-spacing:-.02em;color:#021A2C;line-heigh
     </div>
     <label><span>꼭 물어볼 것 <small>(선택)</small></span><textarea name="ask" rows="2" maxlength="300" placeholder="예: 직원 4대보험을 처음 신고해요"></textarea></label>
     </div></details>
-    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간(적으신 경우 시작 희망 달·맡긴 곳 여부·물어볼 것과 이 설계안) · 쓰는 곳: 상담 연락 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 카톡이나 전화(<a href="tel:050714286446">0507-1428-6446</a>)로 상담받을 수 있어요 · <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a></small></span></label>
+    <label class="agree"><input type="checkbox" name="agree" required aria-describedby="e-agree"><span>상담 연락을 위해 이름·연락처를 받는 데 동의해요 (필수)<small>받는 것: 이름 또는 상호·연락처·연락 시간(적으신 경우 시작 희망 달·맡긴 곳 여부·물어볼 것과 이 설계안) · 쓰는 곳: 상담 연락 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 카톡이나 전화(<a href="tel:050714457729">0507-1445-7729</a>)로 상담받을 수 있어요 · <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a></small></span></label>
     <label class="agree ad"><input type="checkbox" name="adConsent"><span>들어온 경로(광고·검색어)를 광고 효과 확인에 쓰는 데 동의해요 (선택)<small>받는 것: 들어온 경로·광고 이름 · 쓰는 곳: 광고 효과 확인 · 보관: 마지막 상담일부터 1년 · 동의하지 않으셔도 상담에는 아무 차이가 없어요</small></span></label>
     <small class="err" id="e-agree"></small>
     <p class="lead-msg" role="status" aria-live="polite"></p>
@@ -1013,7 +1013,7 @@ wide.addEventListener('change', setBar);
   const lines = () => [$('rcttl').textContent, summary() || '아직 고른 게 없어요',
     ...R.filter(x=>!x.hint && !x.off).flatMap(x=>[`${x.l} · ${x.v || (x.base ? x.p + '만원' : '+' + x.p + '만원')}${x.sub ? ' (' + x.sub + ')' : ''}`, ...(x.base ? ['월별 매출 보고서 · 기본 포함'] : [])]),
     `${T(sel)==='법인' ? '법인세 신고' : '종합소득세 신고'} · 신고 전 금액 안내`, `예상 월 기장료 · ${$('bt').textContent} (부가세 별도)`];
-  const FALLBACK = '카톡이나 전화(0507-1428-6446)로 상담받아 주세요.';
+  const FALLBACK = '카톡이나 전화(0507-1445-7729)로 상담받아 주세요.';
   f.addEventListener('submit', async e=>{
     e.preventDefault();
     req.forEach(el=> mark(el, true));

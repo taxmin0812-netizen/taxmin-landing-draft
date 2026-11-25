@@ -20,7 +20,7 @@
 (function () {
   'use strict';
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxk6_zDmGd_aj9bfhUwitYn-3rVxdYVI9JQ9tuUpjGZn5TlRgt86-tV7uZ88HVkZmpt4A/exec';
-  var TEL = '0507-1428-6446';
+  var TEL = '0507-1445-7729';
   var TIMEOUT = 20000;
   var OTHER = '전화(' + TEL + ')나 카톡으로 연락 주세요.';
 
@@ -113,7 +113,7 @@
       });
   }
 
-  console.assert(okTel('010-1234-5678') && okTel('+82 10-1234-5678') && okTel('011-123-4567') && !okTel('02-123-4567') && !okTel('0507-1428-6446') && !okTel('010-123-456'), 'lead: 휴대폰 번호 검사');
+  console.assert(okTel('010-1234-5678') && okTel('+82 10-1234-5678') && okTel('011-123-4567') && !okTel('02-123-4567') && !okTel('0507-1445-7729') && !okTel('010-123-456'), 'lead: 휴대폰 번호 검사');
   console.assert(pretty('01012345678') === '010-1234-5678' && pretty('0111234567') === '011-123-4567', 'lead: 번호 모양');
   window.TaxminLead = { send: send, toData: toData };
 })();
