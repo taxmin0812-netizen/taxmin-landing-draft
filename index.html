@@ -401,7 +401,7 @@ footer a{text-decoration:underline}
 <main id="top">
 <!-- 1 첫 화면 -->
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 우리 가게에 필요한 만큼만, 기장료도 딱 그만큼만. 이제, 기장도 필요한 것만 골라 쓸 차례입니다.</h1>
+  <h1 id="h1" class="sr-only">택스민, 필요한 것만 고르는 신개념 기장 서비스. 우리 가게에 필요한 만큼만, 기장료도 딱 그만큼만.</h1>
   <div class="bg on" aria-hidden="true"><video id="vid" src="img/hero_meet.mp4" poster="img/hero_meet.jpg" muted loop playsinline preload="auto"></video></div>
   <div class="in">
     <div class="stack" aria-hidden="true">
@@ -410,10 +410,6 @@ footer a{text-decoration:underline}
         <p class="name ln" aria-hidden="true"><i><svg class="nm" viewBox="70 4 460 104"><defs><linearGradient id="nmg" x1="0" x2="1"><stop offset="0" stop-color="#7D9BFF" stop-opacity="0"/><stop offset=".5" stop-color="#6F8FFF"/><stop offset="1" stop-color="#7D9BFF" stop-opacity="0"/></linearGradient><clipPath id="nmc"><text x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text></clipPath></defs><text class="t" x="300" y="100" text-anchor="middle"><tspan font-weight="800">TAX</tspan><tspan font-weight="300">MIN</tspan></text><g clip-path="url(#nmc)"><rect class="sh" x="-220" y="0" width="180" height="124" fill="url(#nmg)"/></g></svg></i></p>
         <p class="h1"><span class="ln"><i>우리 가게에 필요한 만큼만.</i></span><span class="ln"><i>기장료도 딱 그만큼만.</i></span></p>
         <p class="sub"><span class="ln"><i>안 쓰는 서비스까지 묶어 내던 기장료, 이제 고르세요.</i></span><span class="ln"><i>장부와 신고는 담당자가, 마지막 확인은 세무사가 해요.</i></span></p>
-      </div>
-      <div class="slide">
-        <p class="big2"><span class="ln"><i>이제, 기장도</i></span><span class="ln"><i><span class="ink" data-text="필요한 것만 골라">필요한 것만 골라</span> 쓸 차례입니다.</i></span></p>
-        <p class="sub"><span class="ln"><i>쓰지 않는 서비스는 빼고,</i></span><span class="ln"><i>꼭 필요한 관리는 그대로 받으세요.</i></span></p>
       </div>
     </div>
     <a class="go" href="build.html">내 기장 견적 내기</a>
@@ -630,7 +626,7 @@ function setStep(card, s){
 const hd = $('hd');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (() => {
-// 첫 화면: 실사 AI 영상(제미나이 Veo — 한국인 세무사·법인 대표 상의 장면, 이음매 없이 반복. 옛 판 img/hero_ai.mp4) 위에서 두 문구가 7초마다 번갈아 나옴.
+// 첫 화면: 실사 AI 영상(Flow Veo — 흰 미팅룸에서 대표가 상담받는 장면, 원본 그대로 반복 · 섞는 처리 없음) 위에 문구 하나 고정(11/25 사용자: 전환·잔상 싫음).
 // 멈춤 단추를 누르면 영상과 문구 넘김이 함께 멈춤. 움직임 줄임 설정이면 영상은 첫 장면 그림만.
 const hero = document.querySelector('.hero'), vid = $('vid'), slides = [...hero.querySelectorAll('.slide')], pz = $('pz');
 const DUR = 7000;
