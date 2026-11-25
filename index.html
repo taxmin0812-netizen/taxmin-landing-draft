@@ -234,6 +234,7 @@ header.on .hd-tel{color:var(--ink)}
 .proof{padding:40px 0 160px;overflow:hidden;--edge:max(var(--pad),calc((100% - var(--w))/2 + var(--pad)))}
 .proof .head{display:grid;grid-template-columns:5fr 7fr;gap:72px;align-items:end}
 .proof .head .lead{font-size:17px;color:var(--sub);line-height:1.75;max-width:560px}
+.pf-note{max-width:var(--w);margin:14px auto 0;padding:0 var(--pad);font-size:12px;color:var(--mute)}
 .pf-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:56px var(--edge) 12px;scrollbar-width:none}
 .pf-track::-webkit-scrollbar{display:none}
 .pf-track figure{flex:0 0 260px;margin:0;scroll-snap-align:start}
@@ -570,7 +571,7 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
 <!-- 5-2 실제 상담 기록 -->
 <section class="proof" id="proof" aria-labelledby="pf-h">
   <div class="wrap">
-    <div class="head"><h2 class="big" id="pf-h">세무 밖의 일도<br>함께 챙겨 드려요.</h2><p class="lead">대출이 필요할 때 어떤 상품이 있는지 안내하고 필요한 정보를 드려요. 은행이 사장님 소득을 어떻게 보는지, 장부의 소득 구조를 어떻게 정리하면 되는지도 사장님 장부를 기준으로 짚어 드려요. 실제로 나눈 대화이고, 이름과 사진은 가렸어요.</p></div>
+    <div class="head"><h2 class="big" id="pf-h">세무 밖의 일도<br>함께 챙겨 드려요.</h2><p class="lead">대출이 필요할 때 어떤 상품이 있는지 안내하고 필요한 정보를 드려요. 은행이 사장님 소득을 어떻게 보는지, 장부의 소득 구조를 어떻게 정리하면 되는지도 사장님 장부를 기준으로 짚어 드려요.</p></div>
   </div>
   <div class="pf-track" id="pftrack" tabindex="0" role="region" aria-labelledby="pf-h">
     <figure><a class="pf-img" href="img/proof_1c.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_1c.jpg" alt="보금자리론·디딤돌대출과 은행 대출의 차이를 설명한 대화" loading="lazy"></a><figcaption><b>정책대출 기준 안내</b>보금자리론·디딤돌대출과 은행 대출의 차이, 소득 신고 방향까지</figcaption></figure>
@@ -579,6 +580,8 @@ footer .draft{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.4)}
     <figure><a class="pf-img" href="img/proof_4.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_4.jpg" alt="오래 함께한 대표님의 감사 인사" loading="lazy"></a><figcaption><b>"항상 감사드려요"</b>오래 함께한 대표님의 인사</figcaption></figure>
     <figure><a class="pf-img" href="img/proof_5.jpg" target="_blank" rel="noopener" aria-label="크게 보기"><img src="img/proof_5.jpg" alt="소상공인 정책자금 접수 일정을 안내한 대화" loading="lazy"></a><figcaption><b>소상공인 정책자금 안내</b>접수 날짜와 업종에 따라 유리한 곳까지</figcaption></figure>
   </div>
+  <p class="pf-note">실제로 나눈 대화예요 · 이름과 사진은 가렸어요</p>
+
 </section>
 
 <!-- 7 FAQ -->
